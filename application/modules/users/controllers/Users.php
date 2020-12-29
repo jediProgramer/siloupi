@@ -201,14 +201,14 @@ class Users extends CI_Controller {
 			$institution= $row->faculty;
 			$idinstitution=$this->input->post('idinstitution');
 		}
-		else if($jobs=="Manajemen Prodi")
+		else if($jobs=="Manajemen Departemen")
 		{
 			$queryinstitution = $this->db->query("SELECT departement FROM ".$this->db->dbprefix('departement')." WHERE iddepartement='".$this->input->post('idinstitution')."'");
 			$row = $queryinstitution->row();
 			$institution= $row->departement;
 			$idinstitution=$this->input->post('idinstitution');
 		}
-		else if($jobs=="Tenaga Pengajar")
+		else if(($jobs=="Manajemen Prodi") || ($jobs=="Tenaga Pengajar"))
 		{
 			$queryinstitution = $this->db->query("SELECT programe FROM ".$this->db->dbprefix('programe')." WHERE idprograme='".$this->input->post('idinstitution')."'");
 			$row = $queryinstitution->row();

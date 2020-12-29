@@ -154,4 +154,12 @@ $lang['login_time']='Waktu Masuk';
 $lang['last_login_time']='Waktu Masuk Terakhir';
 $lang['logout_time']='Waktu Keluar';
 
+//============================= Entri Data Learning Outcomes =======================
+$lang['plo_hallo'] = 'Entri data Program learning outcomes';
+$lang['plo'] = 'PLO';
+$lang['detail_plo'] = 'Detail PLO';
+$lang['activate_plo'] = 'Aktifkan PLO';
+$lang['add_plo'] = 'Tambah Data Program Learning Outcome';
+$lang['plo_error_msg'] = 'Isi PLO';
+
 ?>

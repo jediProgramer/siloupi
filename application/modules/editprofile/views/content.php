@@ -41,9 +41,9 @@
 											?>
                                             <form id="webprofileaccountForm" >
                                                 <div class="form-group row">
-                                                    <label for="fullname" class="col-sm-2 col-form-label"><?php echo lang('nip');?></label>
+                                                    <label for="nip" class="col-sm-2 col-form-label"><?php echo lang('nip');?></label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" name="fullname" id="fullname" placeholder="<?php echo lang('nip');?>" value="<?php echo $du["nip"];?>" disabled>
+                                                        <input type="text" class="form-control" name="nip" id="nip" placeholder="<?php echo lang('nip');?>" value="<?php echo $du["nip"];?>" disabled>
                                                     </div>
                                                 </div>
 												<div class="form-group row">

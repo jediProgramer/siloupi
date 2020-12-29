@@ -81,7 +81,7 @@
 													</div>
 													<?php
 													}
-													else if($du["jobs"]=="Manajemen Prodi")
+													else if($du["jobs"]=="Manajemen Departemen")
 													{
 													?>
 													<div class="form-group row">
@@ -110,7 +110,7 @@
 													</div>
 													<?php
 													}													
-													else if($du["jobs"]=="Tenaga Pengajar")
+													else if(($du["jobs"]=="Manajemen Prodi") || ($du["jobs"]=="Tenaga Pengajar"))
 													{
 													?>
 													<div class="form-group row">
@@ -120,7 +120,7 @@
 																<?php 
 																foreach($dataprograme as $dp)
 																{ 
-																	if($dp["idprogramme"]==$du["idinstitution"])
+																	if($dp["idprograme"]==$du["idinstitution"])
 																	{
 																?>
 																		<option value="<?php echo $dp["idprograme"]; ?>" selected ><?php echo $dp["idprograme"];?> - <?php echo $dp["programe"];?></option>
@@ -129,7 +129,7 @@
 																	else
 																	{
 																?>
-																		<option value="<?php echo $dp["idprograme"]; ?>" ><?php echo $dp["idprograme"];?> - <?php echo $dp["programe"];?></option>
+																		<option value="<?php echo $dp["idprograme"]; ?>" ><?php echo $dp["idprograme"];?> <?php echo $du["idinstitution"];?> - <?php echo $dp["programe"];?></option>
 																<?php
 																	}
 																}

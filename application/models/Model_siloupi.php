@@ -79,6 +79,17 @@
 			}
 			return $row;
 		}
+
+		public function ambildataOrderById($tabel,$order,$idfield,$isi)
+		{
+			$row=array();
+			$sql=$this->db->query("SELECT * FROM $tabel WHERE $idfield='".$isi."' ORDER BY $order");
+			if($sql->num_rows()>0)
+			{
+				$row=$sql->result_array();
+			}
+			return $row;
+		}
 		
 		function selectbox($tabel,$order)
 		{

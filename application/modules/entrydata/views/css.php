@@ -14,7 +14,10 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/vendors/fontawesome/css/all.min.css">
 <!-- END: Page CSS-->
 
+<!-- summernote -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/summernote/summernote-bs4.css">
+<!-- END: Custom CSS-->  
+
 <!-- START: Custom CSS-->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/main.css">
 <!-- END: Custom CSS-->
-   

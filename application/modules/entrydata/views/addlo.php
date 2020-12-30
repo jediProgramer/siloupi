@@ -5,10 +5,10 @@
 		<div class="row">
 			<div class="col-12  align-self-center">
 				<div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
-					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang('add_plo');?></p></div>
+					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang('add_lo');?></p></div>
 
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item"><a href="<?php echo base_url();?>entrydata/plo"><?php echo lang('plo_hallo');?></a></li>
+						<li class="breadcrumb-item"><a href="<?php echo base_url();?>entrydata/detailplo/<?php echo $idplo;?>"><?php echo lang('lo_hallo');?></a></li>
 						<li class="breadcrumb-item active"><?php echo $menuname;?></li>
 					</ol>
 				</div>
@@ -28,33 +28,26 @@
                                 <div class="card-body">
                                     <div class="row">                                           
                                         <div class="col-12">
-											<?php
-												foreach($datauser as $du)
-												{
-											?>
-                                            <form id="addPLO">
+                                            <form id="addLO">
 													<div class="form-group row">
-														<label for="fullname" class="col-sm-2 col-form-label"><?php echo lang('institution');?></label>
+														<label for="idlo" class="col-sm-2 col-form-label"><?php echo lang('lo_code');?></label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="institution" id="institution" placeholder="<?php echo lang('institution');?>" value="<?php echo $du["institution"];?>" disabled>
+															<input type="text" class="form-control" name="idlo" id="idlo" placeholder="<?php echo lang('lo_code');?>">
+														</div>
+													</div>	
+													<div class="form-group row">
+														<label for="lo" class="col-sm-2 col-form-label"><?php echo lang('lo');?></label>
+														<div class="col-sm-10">
+															<textarea class="textarea" placeholder="<?php echo lang('lo');?>" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" id="lo" name="lo"></textarea>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label for="menu" class="col-sm-2 col-form-label"><?php echo lang('plo');?></label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="plo" id="plo" placeholder="<?php echo lang('plo');?>" required>
+															<input type="hidden" class="form-control" id="idplo" name="idplo" value="<?php echo $idplo;?>">
+															<button type="submit" class="btn btn-primary"><?php echo lang('submit');?></button>
 														</div>
-													</div>											
-                                                <div class="form-group row">
-                                                    <div class="col-sm-10">
-													    <input type="hidden" class="form-control" id="idinstitution" name="idinstitution" value="<?php echo $du["idinstitution"];?>">
-                                                        <button type="submit" class="btn btn-primary"><?php echo lang('submit');?></button>
-                                                    </div>
-                                                </div>
+													</div>
                                             </form>
-											<?php
-												}
-											?>
                                         </div>
                                     </div>
                                 </div>

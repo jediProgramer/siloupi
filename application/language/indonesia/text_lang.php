@@ -155,11 +155,28 @@ $lang['last_login_time']='Waktu Masuk Terakhir';
 $lang['logout_time']='Waktu Keluar';
 
 //============================= Entri Data Learning Outcomes =======================
-$lang['plo_hallo'] = 'Entri data Program learning outcomes';
+$lang['plo_hallo'] = 'Entri data Program Learning Outcomes';
+$lang['lo_hallo'] = 'Entri data Learning Outcomes';
+$lang['plo_detail_hallo'] = 'Detail Program learning outcomes';
 $lang['plo'] = 'PLO';
+$lang['lo_code'] = 'Kode LO';
+$lang['lo'] = 'LO';
 $lang['detail_plo'] = 'Detail PLO';
 $lang['activate_plo'] = 'Aktifkan PLO';
+$lang['deactive_plo'] = 'Nonaktifkan PLO';
 $lang['add_plo'] = 'Tambah Data Program Learning Outcome';
+$lang['add_lo'] = 'Tambah Data Learning Outcome';
+$lang['edit_lo'] = 'Edit Data Learning Outcome';
+$lang['success_message_active_plo'] = 'Program Learning Outcome telah aktif';
+$lang['success_message_deactive_plo'] = 'Program Learning Outcome telah dinonaktifkan';
+$lang['edit_plo'] = 'Edit Data Program Learning Outcome';
+$lang['delete_lo'] = 'Hapus LO';
 $lang['plo_error_msg'] = 'Isi PLO';
-
+$lang['codelo_error_msg'] = 'Isi Kode LO';
+$lang['chosefile_csv'] = 'Pilih File CSV';
+$lang['file_csv'] = 'File CSV';
+$lang['add_csv'] = 'Tambah CSV';
+$lang['error_message_csv'] = 'Bukan format CSV';
+$lang['csv_error_msg'] = 'Isi file csv';
+$lang['upload_csv_lo_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
 ?>

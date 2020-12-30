@@ -61,7 +61,7 @@ class Roles extends CI_Controller {
 	
 	public function editroles($idroles)
 	{
-		$data['menuname'] = "Tambah Peran";
+		$data['menuname'] = "Edit Peran";
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['idroles'] = $idroles;
 		$data['fullname'] = $this->session->userdata('fullname');

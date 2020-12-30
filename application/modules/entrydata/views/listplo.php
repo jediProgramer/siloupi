@@ -29,7 +29,7 @@
 							<table id="data" class="display table dataTable table-striped table-bordered" >
 								<thead >
 									<tr>
-										<th><?php echo lang('no');?></th>
+										<th><?php echo lang('lo_code');?></th>
 										<th><?php echo lang('plo');?></th>
 										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
@@ -45,7 +45,22 @@
 									  <td><?php echo $i;?></td>
 									  <td><?php echo $d["plo"];?></td>
 									  <td style="text-align:center">
-									  <a class="btn btn-primary btn-sm" href="<?php echo base_url()?>entrydata/addlo/<?php echo $d["idplo"];?>"><i class="fa fa-eye">&nbsp;</i><?php echo lang('detail_plo');?></a>&nbsp; | &nbsp;<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-check">&nbsp;</i><?php echo lang('activate_plo');?></a></td>
+									  <a class="btn btn-primary btn-sm" href="<?php echo base_url()?>entrydata/editplo/<?php echo $d["idplo"];?>"><i class="fa fa-pencil-alt">&nbsp;</i><?php echo lang('edit');?></a> &nbsp; 
+									  | &nbsp; <a class="btn btn-info btn-sm" href="<?php echo base_url()?>entrydata/detailplo/<?php echo $d["idplo"];?>"><i class="fa fa-eye">&nbsp;</i><?php echo lang('detail_plo');?></a>&nbsp; 
+									  <?php 
+										  if($d["active"]==0)
+										  {
+									  ?>
+									  | &nbsp;<a class="btn btn-danger btn-sm activePLO" href="#" data-toggle="modal" data-id="<?php echo $d["idplo"];?>"><i class="fa fa-check">&nbsp;</i><?php echo lang('activate_plo');?></a></td>
+									  <?php 
+										  }
+										  else
+										  {
+									  ?>
+									  | &nbsp;<a class="btn btn-info btn-sm activePLO" href="#" data-toggle="modal" data-id="<?php echo $d["idplo"];?>"><i class="fa fa-check">&nbsp;</i><?php echo lang('deactive_plo');?></a></td>
+									  <?php 
+										  }
+									  ?>   	
 									</tr>
 									
 								<?php

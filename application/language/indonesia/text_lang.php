@@ -154,9 +154,11 @@ $lang['login_time']='Waktu Masuk';
 $lang['last_login_time']='Waktu Masuk Terakhir';
 $lang['logout_time']='Waktu Keluar';
 
-//============================= Entri Data Learning Outcomes =======================
-$lang['plo_hallo'] = 'Entri data Program Learning Outcomes';
-$lang['lo_hallo'] = 'Entri data Learning Outcomes';
+//======================== Entri Program Data Learning Outcomes ====================
+$lang['plo_hallo'] = 'Entri Data Program Learning Outcomes';
+$lang['plo_mapping_hallo'] = 'Pemetaan Data Learning Outcomes';
+$lang['plo_add_mapping_hallo'] = 'Tambah Pemetaan data Learning Outcomes';
+$lang['lo_hallo'] = 'Entri Data Learning Outcomes';
 $lang['plo_detail_hallo'] = 'Detail Program learning outcomes';
 $lang['plo'] = 'PLO';
 $lang['lo_code'] = 'Kode LO';
@@ -165,6 +167,7 @@ $lang['detail_plo'] = 'Detail PLO';
 $lang['activate_plo'] = 'Aktifkan PLO';
 $lang['deactive_plo'] = 'Nonaktifkan PLO';
 $lang['add_plo'] = 'Tambah Data Program Learning Outcome';
+$lang['add_mapping_plo'] = 'Tambah Pemetaaan Data Program Learning Outcome';
 $lang['add_lo'] = 'Tambah Data Learning Outcome';
 $lang['edit_lo'] = 'Edit Data Learning Outcome';
 $lang['success_message_active_plo'] = 'Program Learning Outcome telah aktif';
@@ -179,4 +182,13 @@ $lang['add_csv'] = 'Tambah CSV';
 $lang['error_message_csv'] = 'Bukan format CSV';
 $lang['csv_error_msg'] = 'Isi file csv';
 $lang['upload_csv_lo_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
+$lang['curriculum_code'] = 'Kode Kurikulum';
+$lang['level'] = 'Strata';
+$lang['curriculum'] = 'Kurikulum';
+$lang['mapping'] = 'Petakan';
+$lang['courses_code'] = 'Kode';
+$lang['courses'] = 'Mata Kuliah';
+$lang['credit'] = 'SKS';
+$lang['credit_total'] = 'Jumlah SKS';
+$lang['learning_outcomes'] = 'Learning Outcomes';
 ?>

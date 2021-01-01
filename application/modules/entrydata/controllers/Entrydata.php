@@ -22,6 +22,7 @@ class Entrydata extends CI_Controller {
 		$data['menuname'] = "Entri Data Program Learning Outcomes";
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['fullname'] = $this->session->userdata('fullname');
+		$data['idplo'] = "";
 		// Tampilkan Profile Picture
 		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
@@ -38,13 +39,42 @@ class Entrydata extends CI_Controller {
 		$this->load->view('template/template',$data);
 	}
 	
+	public function mappingplo()
+	{
+		$data['menuname'] = "Pemetaan Data Program Learning Outcomes";
+		$data['idusers'] = $this->session->userdata('idusers');
+		$data['fullname'] = $this->session->userdata('fullname');
+		$data['idplo'] = "";
+		// Tampilkan Profile Picture
+		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$row = $queryimg->row();
+		$data['profilepicture'] = $row->profilepicture;
+		$data['idinstitution'] = $row->idinstitution;
+		// End
+		//Tampilkan Total LO
+		$queryplo = $this->db->query("SELECT COUNT(*)AS totalplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND active=1");
+		$rowplo = $queryplo->row();
+		$data['totalplo'] = $rowplo->totalplo;
+		// End
+		$data['nip'] = $this->session->userdata('nip');
+		$data['roles'] = $this->session->userdata('roles');
+		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
+		$data['datacurriculum']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme',$data['idinstitution']);
+		$data['content'] = 'entrydata/listmappingplo';
+		$data['meta'] = 'entrydata/meta';
+		$data['css'] = 'entrydata/css';
+		$data['js'] = 'entrydata/js';
+		$this->load->view('template/template',$data);
+	}
+
 	public function addplo()
 	{
 		$data['menuname'] = "Tambah Program Learning Outcomes";
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['fullname'] = $this->session->userdata('fullname');
+		$data['idplo'] = "";
 		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$queryimg = $this->db->query("SELECT profilepictureFROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
 		$data['profilepicture'] = $row->profilepicture;
 		// End
@@ -52,6 +82,44 @@ class Entrydata extends CI_Controller {
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
 		$data['content'] = 'entrydata/addplo';
+		$data['meta'] = 'entrydata/meta';
+		$data['css'] = 'entrydata/css';
+		$data['js'] = 'entrydata/js';
+		$this->load->view('template/template',$data);
+	}
+
+	public function addmappingplo()
+	{
+		$data['menuname'] = "Tambah Pemetaan Data Learning Outcomes";
+		$data['idusers'] = $this->session->userdata('idusers');
+		$data['fullname'] = $this->session->userdata('fullname');
+		// Tampilkan Profile Picture
+		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$row = $queryimg->row();
+		$data['profilepicture'] = $row->profilepicture;
+		$data['idinstitution'] = $row->idinstitution;
+		// End
+		//Tampilkan PLO
+		$queryplo = $this->db->query("SELECT idplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND active=1");
+		$rowplo = $queryplo->row();
+		$data['idplo'] = $rowplo->idplo;
+		//End
+		//Tampilkan Total LO
+		$querylo = $this->db->query("SELECT COUNT(*)AS totallo FROM ".$this->db->dbprefix('lo')." WHERE idplo='".$data['idplo']."'");
+		$rowlo = $querylo->row();
+		$data['totallo'] = $rowlo->totallo;
+		//End
+		$data['nip'] = $this->session->userdata('nip');
+		$data['roles'] = $this->session->userdata('roles');
+		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
+		//Tampilkan ID Curriculum
+		$queryc = $this->db->query("SELECT idcurriculum FROM ".$this->db->dbprefix('curriculum')." WHERE idprograme='".$data['idinstitution']."'");
+		$rowc = $queryc->row();
+		$data['idcurriculum'] = $rowc->idcurriculum;
+		//End
+		$data['datalo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('lo'),'idlo','idplo',$data['idplo']);
+
+		$data['content'] = 'entrydata/addmappingplo';
 		$data['meta'] = 'entrydata/meta';
 		$data['css'] = 'entrydata/css';
 		$data['js'] = 'entrydata/js';

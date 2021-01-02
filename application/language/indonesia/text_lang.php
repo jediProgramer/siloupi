@@ -156,6 +156,7 @@ $lang['logout_time']='Waktu Keluar';
 
 //======================== Entri Program Data Learning Outcomes ====================
 $lang['plo_hallo'] = 'Entri Data Program Learning Outcomes';
+$lang['plo_mapping'] = 'Pemetaan Data Learning Outcomes';
 $lang['plo_mapping_hallo'] = 'Pemetaan Data Learning Outcomes';
 $lang['plo_add_mapping_hallo'] = 'Tambah Pemetaan data Learning Outcomes';
 $lang['lo_hallo'] = 'Entri Data Learning Outcomes';

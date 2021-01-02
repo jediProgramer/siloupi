@@ -313,6 +313,38 @@ class Entrydata extends CI_Controller {
 		}
 	}
 
+	public function savemappingplo()
+    {
+		//echo "<pre>";
+		//print_r($_POST);
+		//print_r(array_count_values($_POST));
+		//echo "</pre>";
+		//exit();
+		$idcurriculum=$this->input->post('idcurriculum');
+		$query = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcurriculum='".$idcurriculum."'");
+		if ($query->num_rows() >= 1)
+		{
+			$this->db->where('idcurriculum', $idcurriculum);
+       		$this->db->delete($this->db->dbprefix('mappingplo'));
+		}
+		$datalo=$this->input->post("lo");
+		foreach ($datalo as $dlo)
+		{
+			$pieces= explode("-",$dlo);
+				$data=array(	
+					'idcourses'=>$pieces[0],
+					'idlo'=>$pieces[1],
+					'idcurriculum'=>$idcurriculum
+				);
+				$this->model_siloupi->simpandata($this->db->dbprefix('mappingplo'),$data);
+		}
+		$msg=array(	
+			'msg'=>'true',
+			'msg_success'=>lang('success_message_save')
+		);
+		echo json_encode($msg);	
+	}
+
 	public function updateplo()
     {
 		$idplo=$this->input->post('idplo');

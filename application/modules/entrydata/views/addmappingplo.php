@@ -28,6 +28,7 @@
                                 <div class="card-body">
                                     <div class="row">                                           
                                         <div class="col-12">
+										<form class="form-horizontal" method="post" enctype="multipart/form-data" >
 										<table class="table table-bordered">
 											<?php
 											//Query Courses Category
@@ -79,7 +80,10 @@
 															{
 														?>
 															<td align="center">
-															<input type="checkbox" id="<?php echo $y;?>lo<?php echo $dlo["idlo"];?>" name="<?php echo $y;?>lo<?php echo $dlo["idlo"];?>" value="1" >
+															<?php	
+															$querymp = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcourses='".$dcourses->idcourses."' AND idlo='".$dlo["idlo"]."'");
+															?>
+															<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcourses->idcourses;?>-<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
 															</td>
 														<?php
 															}
@@ -156,7 +160,10 @@
 															{
 														?>
 															<td align="center">
-															<input type="checkbox" id="<?php echo $z;?>lo<?php echo $dlo["idlo"];?>" name="<?php echo $y;?>lo<?php echo $dlo["idlo"];?>" value="1" >
+															<?php	
+															$querymp = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcourses='".$dcoursessc->idcourses."' AND idlo='".$dlo["idlo"]."'");
+															?>
+															<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcoursessc->idcourses;?>-<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
 															</td>
 														<?php
 															}
@@ -215,10 +222,11 @@
 										</table>								
 											<div class="form-group row">
 												<div class="col-sm-10">
-													<input type="hidden" class="form-control" id="idinstitution" name="idinstitution" value="">
-													<button type="submit" class="btn btn-primary"><?php echo lang('submit');?></button>
+													<input type="hidden" class="form-control" id="idcurriculum" name="idcurriculum" value="<?php echo $idcurriculum; ?>">
+													<button type="submit" id="mappingploForm" class="btn btn-primary"><?php echo lang('submit');?></button>
 												</div>
-                                            </div>
+											</div>
+										</form>
                                         </div>
                                     </div>
                                 </div>

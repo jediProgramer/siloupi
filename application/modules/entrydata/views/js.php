@@ -492,5 +492,52 @@ $('.activePLO').on('click',function(){
 	}
 });	
 
+$('#mappingploForm').on('click',function(){
+	var idcurriculum = $('#idcurriculum').val();
+	var lo= [];
+	$('.lo:checked').each(function(){
+		lo .push($(this).val());
+	})
+	$.ajax({
+		type : "POST",
+		url  : "<?php echo site_url('entrydata/savemappingplo')?>",
+		dataType : "JSON",
+		beforeSend :function () {
+				swal({
+					title: "<?php echo lang('waiting');?>",
+					html: "<?php echo lang('data_prossecing');?>",
+					onOpen: () => {
+					  swal.showLoading()
+					}
+				  })      
+		},
+		data : {idcurriculum:idcurriculum, lo:lo},
+		success: function(value){
+			if (value.msg == 'true') {				
+				swal({
+				  type: "success",
+				  title: "<?php echo lang('plo_mapping');?>",
+				  text: value.msg_success,
+				  confirmButtonColor: '#1e3d73',
+				});
+				$('.swal2-confirm').click(function(){
+					window.location.reload();
+				});
+			}
+			else
+			{
+				swal({
+				  type: "error",
+				  title: "<?php echo lang('plo_mapping');?>",
+				  text: value.msg_error,
+				  confirmButtonColor: '#1e3d73',
+				});
+			}
+		}
+	});
+	return false;
+ });
+
+
 });
 </script>

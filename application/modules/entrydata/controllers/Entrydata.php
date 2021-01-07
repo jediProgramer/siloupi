@@ -74,7 +74,7 @@ class Entrydata extends CI_Controller {
 		$data['fullname'] = $this->session->userdata('fullname');
 		$data['idplo'] = "";
 		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepictureFROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
 		$data['profilepicture'] = $row->profilepicture;
 		// End

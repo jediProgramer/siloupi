@@ -48,7 +48,7 @@
 								?>	
 									<tr>
 									  <td><?php echo $d["idlo"];?></td>
-									  <td><?php echo strip_tags($d["lo"]);?></td>
+									  <td><?php echo substr($d["lo"],0,75);?> ......</td>
 									  <td style="text-align:center">
 									  <a class="btn btn-primary btn-sm" href="<?php echo base_url()?>entrydata/editlo/<?php echo $idplo;?>/<?php echo $d["idlo"];?>"><i class="fa fa-pencil-alt">&nbsp;</i><?php echo lang('edit');?></a>&nbsp; | &nbsp;<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
 									</tr>

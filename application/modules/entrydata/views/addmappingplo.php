@@ -63,7 +63,7 @@
 												<?php 
 													//Query Courses
 													$y=0;
-													$querycourses = $this->db->query("SELECT * FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcoursessubcategory IS NULL ORDER BY idcourses");
+													$querycourses = $this->db->query("SELECT * FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcurriculum='".$idcurriculum."' AND idcoursessubcategory IS NULL ORDER BY idcourses");
 													$datacourses=$querycourses->result();
 													foreach ($datacourses as $dcourses)
 													{
@@ -89,7 +89,7 @@
 															}
 															//End Query LO
 															//Total SKS Per Category
-															$quertotalsks = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcoursessubcategory IS NULL");
+															$quertotalsks = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcurriculum='".$idcurriculum."' AND idcoursessubcategory IS NULL");
 															$rowtotalsks = $quertotalsks->row();
 															$totalsks = $rowtotalsks->totalcredits;
 														?>
@@ -102,7 +102,7 @@
 													<td colspan="3" align="center"><b><?php echo strtoupper(lang('credit_total'));?></b></td>
 													<td><?php echo $totalsks;?></td>
 													<?php
-														for($i=1;$i<=$totallo;$i++)
+														for($lo=1;$lo<=$totallo;$lo++)
 														{
 													?>
 													<td></td>
@@ -112,7 +112,7 @@
 												</tr> 
 											<?php
 												//Cek Sub Category
-												$querycsc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursessubcategory')." WHERE idcoursescategory='$dcc->idcoursescategory' ORDER BY idcoursessubcategory");
+												$querycsc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursessubcategory')." WHERE idcoursescategory='$dcc->idcoursescategory' AND idcurriculum='".$idcurriculum."' ORDER BY idcoursessubcategory");
 												if ($querycsc->num_rows() >= 1)
 												{
 													//Query Sub Category
@@ -143,7 +143,7 @@
 												<?php 
 														//Query Courses
 														$z=0;
-														$querycoursessc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcoursessubcategory='".$dcsc->idcoursessubcategory."' ORDER BY idcourses");
+														$querycoursessc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcurriculum='".$idcurriculum."' AND idcoursessubcategory='".$dcsc->idcoursessubcategory."' ORDER BY idcourses");
 														$datacoursessc=$querycoursessc->result();
 														foreach ($datacoursessc as $dcoursessc)
 														{
@@ -174,7 +174,7 @@
 														}
 														//End Query Courses
 														//Total SKS Per SubCategory
-														$quertotalskssc = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcoursessubcategory='".$dcsc->idcoursessubcategory."'");
+														$quertotalskssc = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcurriculum='".$idcurriculum."' AND idcoursessubcategory='".$dcsc->idcoursessubcategory."'");
 														$rowtotalskssc = $quertotalskssc->row();
 														$totalskssc = $rowtotalskssc->totalcredits;
 												?>	
@@ -182,7 +182,7 @@
 													<td colspan="3" align="center"><b><?php echo strtoupper(lang('credit_total'));?></b></td>
 													<td><?php echo $totalskssc;?></td>
 													<?php
-														for($i=1;$i<=$totallo;$i++)
+														for($lo=1;$lo<=$totallo;$lo++)
 														{
 													?>
 													<td></td>
@@ -194,7 +194,7 @@
 													}
 													//End Query Sub Courses Category
 													//Total SKS Per Category
-													$quertotalsks = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."'");
+													$quertotalsks = $this->db->query("SELECT SUM(credit) AS totalcredits FROM ".$this->db->dbprefix('courses')." WHERE idcoursescategory='".$dcc->idcoursescategory."' AND idcurriculum='".$idcurriculum."'");
 													$rowtotalsks = $quertotalsks->row();
 													$totalsks = $rowtotalsks->totalcredits;
 												?>		
@@ -202,7 +202,7 @@
 													<td colspan="3" align="center"><b><?php echo strtoupper(lang('credit_total'));?></b></td>
 													<td><?php echo $totalsks;?></td>
 													<?php
-														for($i=1;$i<=$totallo;$i++)
+														for($lo=1;$lo<=$totallo;$lo++)
 														{
 													?>
 													<td></td>

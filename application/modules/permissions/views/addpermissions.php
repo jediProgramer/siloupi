@@ -90,7 +90,14 @@
 																{ 
 																	$queryuac = $this->db->query("SELECT users_access FROM ".$this->db->dbprefix('permissions')." WHERE idroles=".$drg["idroles"]." AND idnavigation = $dn->idnavigation AND idsubnavigation= $dsn->idsubnavigation");
 																	$row = $queryuac->row();
-																	$users_access=$row->users_access;	
+																	if(!empty($row->users_access))
+																	{
+																		$users_access=$row->users_access;	
+																	}	
+																	else
+																	{
+																		$users_access="";	
+																	}
 													?>		
 																<td>
 																<input type="hidden" id="permissionschild<?php echo $dsn->idsubnavigation;?>" name="permissionschild<?php echo $dsn->idsubnavigation;?>" value="0">

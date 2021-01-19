@@ -83,7 +83,7 @@
 		public function ambildataOrderById($tabel,$order,$idfield,$isi)
 		{
 			$row=array();
-			$sql=$this->db->query("SELECT * FROM $tabel WHERE $idfield='".$isi."' ORDER BY $order");
+			$sql=$this->db->query("SELECT * FROM $tabel WHERE $idfield='".$isi."' ORDER BY $order ASC");
 			if($sql->num_rows()>0)
 			{
 				$row=$sql->result_array();
@@ -105,9 +105,25 @@
 			return $q->result();
 		}
 		
-		public function insertFotos($data = array()){
+		public function insertFotos($data = array())
+		{
 			$insert = $this->db->insert_batch('filesfoto',$data);
 			return $insert?true:false;
 		}
+
+		function search_students($name)
+		{
+			$sqlss ="SELECT * FROM  ".$this->db->dbprefix('student')." WHERE name LIKE UPPER('%".$name."%') ORDER BY nim ASC LIMIT 10";
+			$qs = $this->db->query($sqlss);
+			return $qs->result();
+		}
+
+		function get_data($idvalue1,$idvalue2,$database,$idsql1,$idsql2)
+		{
+			$sqlss ="SELECT * FROM  ".$database." WHERE ".$idsql1."='".$idvalue1."' AND ".$idsql2."='".$idvalue2."'ORDER BY nim ASC";
+			$qs = $this->db->query($sqlss);
+			return $qs->result();
+		}
+
 	}
 ?>

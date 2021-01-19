@@ -22,6 +22,8 @@
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.flash.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.print.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url()?>assets/dist/vendors/select2/js/select2.full.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 
@@ -32,6 +34,11 @@
 
 <!-- bs-custom-file-input -->
 <script src="<?php echo base_url()?>assets/dist/vendors/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- END: Page Vendor JS-->
+
+<!-- START: Page Vendor JS-->
+<script src="<?php echo base_url()?>assets/dist/vendors/raphael/raphael.min.js"></script>
+<script src="<?php echo base_url()?>assets/dist/vendors/morris/morris.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- Script bs-custom-file-input -->
@@ -59,4 +66,94 @@ $(document).ready(function () {
 		 }	
 	});
   });
+</script>
+
+<!--Initialize Select2 Elements -->
+<script type="text/javascript">
+$('.select2').select2()
+
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
+})
+</script>
+
+<!-- Script jquery -->
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#searchstudentname').autocomplete({
+        source: "<?php echo site_url('reports/searchlookupstudents');?>",
+     	select: function (event, ui) {
+             $('[name="searchstudentname"]').val(ui.item.label);
+        }
+	});
+	
+	$('#years').change(function(){ 
+		var years=$(this).val();
+		$.ajax({
+			url : "<?php echo site_url('reports/getstudents');?>",
+			method : "POST",
+			data : {years: years},
+			async : true,
+			dataType : 'json',
+			success: function(data){
+				 
+				var html = '';
+				var i;
+				for(i=0; i<data.length; i++){
+					html += '<option value='+data[i].nim+'>'+data[i].name+'</option>';
+				}
+				$('#studentnim').html(html);
+
+			}
+		});
+		return false;
+	}); 
+
+});
+</script>
+
+<!-- Script Chart Bar -->
+<script type="text/javascript">
+(function ($) {
+    "use strict";
+	var primarycolor = getComputedStyle(document.body).getPropertyValue('--primarycolor');
+	
+	if ($('#lo-bar').length > 0)
+    {
+        Morris.Bar({
+            element: 'lo-bar',
+            data: [
+              <?php
+              $i=1;
+              foreach($datalo as $d)
+              {
+                // Tampilkan Total Mapping LO ke Matkul
+                $queryjmlhlomatkul = $this->db->query("SELECT COUNT(idcourses) AS jmlhlomatkul FROM ".$this->db->dbprefix('mappingplo')." WHERE idlo='".$d['idlo']."' AND idcurriculum='".$idcurriculum."'");
+                $rowjmlhlomatkul = $queryjmlhlomatkul->row();
+                $jmlhlomatkul = $rowjmlhlomatkul->jmlhlomatkul;
+
+                // Tampilkan Total Mapping LO ke Nilai Matkul
+                $queryjmlhnilailomatkul = $this->db->query("SELECT SUM(a.quality) AS jmlhnilailomatkul FROM ".$this->db->dbprefix('contract')." a, ".$this->db->dbprefix('mappingplo')." b WHERE a.idcourses=b.idcourses AND a.nim='".$nim."' AND a.idprograme='".$idprograme."' AND b.idlo='".$d['idlo']."' AND b.idcurriculum='".$idcurriculum."'");
+                $rowjmlhnilailomatkul = $queryjmlhnilailomatkul->row();
+                $jmlhnilailomatkul = $rowjmlhnilailomatkul->jmlhnilailomatkul;
+
+                $totalplo = $jmlhnilailomatkul/$jmlhlomatkul;
+                $percentplo = ($totalplo/4)*100;
+              ?>
+                {lo: '<?php echo $d["idlo"]; ?>', percent: <?php echo number_format($percentplo, 2, '.', ''); ?>}<?php if($i==$totallo){ echo "";}else{echo ",";}?>
+              <?php
+                $i++;
+              }
+              ?>
+            ],
+            xkey: 'lo',
+            ykeys: ['percent'],
+            labels: ['Persentase Ketercapaian Learning Outcome'],
+            barRatio: 0.4,
+            xLabelAngle: 35,
+            hideHover: 'auto'
+        });
+    }
+
+})(jQuery);
 </script>

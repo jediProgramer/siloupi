@@ -192,4 +192,19 @@ $lang['courses'] = 'Mata Kuliah';
 $lang['credit'] = 'SKS';
 $lang['credit_total'] = 'Jumlah SKS';
 $lang['learning_outcomes'] = 'Learning Outcomes';
+
+//======================== Reports Learning Outcomes =======================
+$lang['lostudentprograme_hallo'] = 'Laporan Learning Outcomes Mahasiswa';
+$lang['loclassgenerationprograme_hallo'] = 'Laporan Learning Outcomes Perangkatan';
+$lang['class_generation'] = 'Angkatan';
+$lang['student_name'] = 'Nama Mahasiswa';
+$lang['search'] = 'Cari';
+$lang['chose_year'] = '-- Pilih Tahun --';
+$lang['barchartlo'] = 'Bar Chart Learning Outcome';
+$lang['barchartlocg'] = 'Bar Chart Learning Outcome Angkatan';
+$lang['nim'] = 'NIM';
+$lang['name'] = 'Nama';
+$lang['faculty'] = 'Fakultas';
+$lang['programe'] = 'Program Studi';
+$lang['status'] = 'Status';
 ?>

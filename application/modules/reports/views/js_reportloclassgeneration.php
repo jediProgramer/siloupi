@@ -22,6 +22,8 @@
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.flash.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.print.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url()?>assets/dist/vendors/select2/js/select2.full.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 
@@ -33,6 +35,15 @@
 <!-- bs-custom-file-input -->
 <script src="<?php echo base_url()?>assets/dist/vendors/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- END: Page Vendor JS-->
+
+<!-- START: Page Vendor JS-->
+<script src="<?php echo base_url()?>assets/dist/vendors/raphael/raphael.min.js"></script>
+<script src="<?php echo base_url()?>assets/dist/vendors/morris/morris.min.js"></script>
+<!-- END: Page Vendor JS-->
+
+<!-- START: Page Script JS-->
+<!--  <script src="assets/dist/js/morris.script.js"></script>-->
+<!-- END: Page Script JS-->
 
 <!-- Script bs-custom-file-input -->
 <script type="text/javascript">
@@ -59,4 +70,13 @@ $(document).ready(function () {
 		 }	
 	});
   });
+</script>
+
+<!--Initialize Select2 Elements -->
+<script type="text/javascript">
+$('.select2').select2()
+
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
+})
 </script>

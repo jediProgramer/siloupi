@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/vendors/fontawesome/css/all.min.css">
 <!-- Select2 -->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/select2/css/select2.min.css">
-<link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/select2/css/select2-bootstrap.min.css">
 <!-- START: Page CSS-->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/morris/morris.css">  
 <!-- END: Page CSS-->

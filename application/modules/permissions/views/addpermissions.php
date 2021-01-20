@@ -121,7 +121,14 @@
 																{
 																	$queryua = $this->db->query("SELECT users_access FROM ".$this->db->dbprefix('permissions')." WHERE idroles=".$drg["idroles"]." AND idnavigation=$dn->idnavigation");
 																	$row = $queryua->row();
-																	$users_access=$row->users_access;		
+																	if(!empty($row->users_access))
+																	{
+																		$users_access=$row->users_access;	
+																	}	
+																	else
+																	{
+																		$users_access="";	
+																	}		
 														?>		
 																<td>
 																<input type="hidden" id="permissionsparent<?php echo $dn->idnavigation;?>" name="permissionsparent<?php echo $dn->idnavigation;?>" value="0">

@@ -74,11 +74,18 @@ $(document).ready(function () {
 
 <!--Initialize Select2 Elements -->
 <script type="text/javascript">
-$('.select2').select2()
+(function ($) {
+    "use strict";
+   $('select').each(function () {
+    $(this).select2({
+      theme: 'bootstrap4',
+      width: 'style',
+      placeholder: $(this).attr('placeholder'),
+      allowClear: Boolean($(this).data('allow-clear')),
+    });
+  });
 
-$('.select2bs4').select2({
-  theme: 'bootstrap4'
-})
+})(jQuery);
 </script>
 
 <!-- Script jquery -->

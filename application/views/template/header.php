@@ -18,9 +18,9 @@
 			{
 		?>
 		<!-- START: Pre Loader-->
-        <div class="se-pre-con">
+        <!--<div class="se-pre-con">
             <div id="loader" class="loader"></div>
-        </div>
+        </div>-->
         <!-- END: Pre Loader-->
 		<?php 
 			}

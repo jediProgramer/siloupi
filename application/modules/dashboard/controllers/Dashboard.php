@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller {
 	
 	public function index()
 	{
+		//print_r($this->session->all_userdata());
 		$data['menuname'] = "Dashboard";
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['fullname'] = $this->session->userdata('fullname');

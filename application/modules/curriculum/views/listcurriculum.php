@@ -7,11 +7,9 @@
 				<div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
 					<div class="w-sm-100 mr-auto">
 						<h4 class="mb-0"><?php echo $menuname;?></h4> 
-						<p><?php echo lang('plo_detail_hallo');?></p>
 					</div>
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item"><a href="<?php echo base_url();?>entrydata/plo"><?php echo lang('plo_hallo');?></a></li>
-						<li class="breadcrumb-item active"><?php echo $menuname;?></li>
+						<li class="breadcrumb-item active"><?php echo lang('curriculum_hallo');?></li>
 					</ol>
 				</div>
 			</div>
@@ -25,8 +23,7 @@
                 <div class="card">
 					<div class="card-header "> 
 						<div align="right">
-							<a class="btn btn-primary btn-sm " href="<?php echo base_url()?>entrydata/addlo/<?php echo $idplo;?>"><i class="fa fa-plus">&nbsp;</i><?php echo lang('add');?></a>
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url()?>entrydata/addlocsv/<?php echo $idplo;?>"><i class="fas fa-file-csv">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<a class="btn btn-secondary btn-sm" href="<?php echo base_url()?>curriculum/addcurriculumcsv"><i class="fas fa-file-csv">&nbsp;</i><?php echo lang('add_csv');?></a>
 						</div>	
 					</div>
                     <div class="card-body">
@@ -34,23 +31,27 @@
 							<table id="data" class="display table dataTable table-striped table-bordered" >
 								<thead >
 									<tr>
-										<th><?php echo lang('lo_code');?></th>
-										<th><?php echo lang('lo');?></th>
+										<th><?php echo lang('curriculum_idcurriculum');?></th>
+										<th><?php echo lang('curriculum_idlevel');?></th>
+										<th><?php echo lang('curriculum_curriculum');?></th>
+										<th><?php echo lang('curriculum_idprograme');?></th>
 										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
 								</thead>
 								<tbody>
 								<?php
 									$i = 0;										
-									foreach($datalo as $d)
+									foreach($data as $d)
 									{ 
 									$i++;
 								?>	
 									<tr>
-									  <td><?php echo $d["idlo"];?></td>
-									  <td><?php echo substr($d["lo"],0,75);?> ......</td>
+									  <td><?php echo $d["idcurriculum"];?></td>
+									  <td><?php echo $d["idlevel"];?></td>
+									  <td><?php echo $d["curriculum"];?></td>
+									  <td><?php echo $d["idprograme"];?></td>
 									  <td style="text-align:center">
-									  <a class="btn btn-primary btn-sm" href="<?php echo base_url()?>entrydata/editlo/<?php echo $idplo;?>/<?php echo $d["idlo"];?>"><i class="fa fa-pencil-alt">&nbsp;</i><?php echo lang('edit');?></a>&nbsp; | &nbsp;<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
+									  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
 									</tr>
 
 									<!-- Modal -->

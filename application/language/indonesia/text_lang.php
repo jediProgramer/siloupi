@@ -44,6 +44,12 @@ $lang['success_message_delete'] = 'Data berhasil dihapus';
 $lang['delete_info']='Yakin akan menghapus data ';
 $lang['no']='No';
 
+$lang['chosefile_csv'] = 'Pilih File CSV';
+$lang['file_csv'] = 'File CSV';
+$lang['add_csv'] = 'Tambah CSV';
+$lang['error_message_csv'] = 'Bukan format CSV';
+$lang['csv_error_msg'] = 'Isi file csv';
+
 //============================= Lang Edit Profile ===============================
 $lang['edit_profile'] = 'Edit Profile';
 $lang['user_profile_hallo'] = 'Menu untuk melihat profil akun Anda';
@@ -177,11 +183,7 @@ $lang['edit_plo'] = 'Edit Data Program Learning Outcome';
 $lang['delete_lo'] = 'Hapus LO';
 $lang['plo_error_msg'] = 'Isi PLO';
 $lang['codelo_error_msg'] = 'Isi Kode LO';
-$lang['chosefile_csv'] = 'Pilih File CSV';
-$lang['file_csv'] = 'File CSV';
-$lang['add_csv'] = 'Tambah CSV';
-$lang['error_message_csv'] = 'Bukan format CSV';
-$lang['csv_error_msg'] = 'Isi file csv';
+
 $lang['upload_csv_lo_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
 $lang['curriculum_code'] = 'Kode Kurikulum';
 $lang['level'] = 'Strata';
@@ -192,6 +194,16 @@ $lang['courses'] = 'Mata Kuliah';
 $lang['credit'] = 'SKS';
 $lang['credit_total'] = 'Jumlah SKS';
 $lang['learning_outcomes'] = 'Learning Outcomes';
+
+//======================== Entri Data Kurikulum ====================
+$lang['curriculum_hallo'] = 'Entri Data Kurikulum';
+$lang['curriculum_add'] = 'Upload Data Kurikulum';
+$lang['curriculum_upload_csv_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
+
+$lang['curriculum_idcurriculum'] = 'Kode Kurikulum';
+$lang['curriculum_idlevel'] = 'Jenjang';
+$lang['curriculum_curriculum'] = 'Kurikulum';
+$lang['curriculum_idprograme'] = 'Kode Program Studi';
 
 //======================== Reports Learning Outcomes =======================
 $lang['lostudentprograme_hallo'] = 'Laporan Learning Outcomes Mahasiswa';

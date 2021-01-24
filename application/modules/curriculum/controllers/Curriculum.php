@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Curriculum extends CI_Controller {
 
 	function __construct()
@@ -9,6 +8,12 @@ class Curriculum extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('auth'));
 		}
+		$this->autoloader_psr4->register();
+		$this->autoloader_psr4->addNamespace('Psr\SimpleCache', APPPATH . 'third_party/SimpleCache');
+		$this->autoloader_psr4->addNamespace('MyCLabs\Enum', APPPATH . 'third_party/MyCLabs');
+		$this->autoloader_psr4->addNamespace('ZipStream', APPPATH . 'third_party/ZipStream');
+		$this->autoloader_psr4->addNamespace('PhpOffice\PhpSpreadsheet', APPPATH . 'third_party/PhpSpreadsheet');
+
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
 		$this->load->helper('text');
@@ -19,160 +24,8 @@ class Curriculum extends CI_Controller {
 	
 	public function index()
 	{
-		$data['menuname'] = "Entri Data Program Learning Outcomes";
+		$data['menuname'] = "Entri Data Kurikulum";
 		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		$data['idplo'] = "";
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['dataplo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('plo'),'idplo','idusers',$data['idusers']);
-		$data['content'] = 'curriculum/listplo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-	
-	public function mappingplo()
-	{
-		$data['menuname'] = "Pemetaan Data Program Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		$data['idplo'] = "";
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		$data['idinstitution'] = $row->idinstitution;
-		// End
-		//Tampilkan Total LO
-		$queryplo = $this->db->query("SELECT COUNT(*)AS totalplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND active=1");
-		$rowplo = $queryplo->row();
-		$data['totalplo'] = $rowplo->totalplo;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['datacurriculum']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme',$data['idinstitution']);
-		$data['content'] = 'curriculum/listmappingplo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-
-	public function addplo()
-	{
-		$data['menuname'] = "Tambah Program Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		$data['idplo'] = "";
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['content'] = 'curriculum/addplo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-
-	public function addmappingplo()
-	{
-		$data['menuname'] = "Tambah Pemetaan Data Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		$data['idinstitution'] = $row->idinstitution;
-		// End
-		//Tampilkan PLO
-		$queryplo = $this->db->query("SELECT idplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND active=1");
-		$rowplo = $queryplo->row();
-		$data['idplo'] = $rowplo->idplo;
-		//End
-		//Tampilkan Total LO
-		$querylo = $this->db->query("SELECT COUNT(*)AS totallo FROM ".$this->db->dbprefix('lo')." WHERE idplo='".$data['idplo']."'");
-		$rowlo = $querylo->row();
-		$data['totallo'] = $rowlo->totallo;
-		//End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		//Tampilkan ID Curriculum
-		$queryc = $this->db->query("SELECT idcurriculum FROM ".$this->db->dbprefix('curriculum')." WHERE idprograme='".$data['idinstitution']."'");
-		$rowc = $queryc->row();
-		$data['idcurriculum'] = $rowc->idcurriculum;
-		//End
-		$data['datalo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('lo'),'idlo','idplo',$data['idplo']);
-
-		$data['content'] = 'curriculum/addmappingplo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-
-	public function addlo($idplo)
-	{
-		$data['menuname'] = "Tambah Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		$data['idplo'] = $idplo;
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['content'] = 'curriculum/addlo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-
-	public function addlocsv($idplo)
-	{
-		$data['menuname'] = "Tambah Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		$data['idplo'] = $idplo;
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['content'] = 'curriculum/addlocsv';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-
-	public function editplo($idplo)
-	{
-		$data['menuname'] = "Edit Program Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['idplo'] = $idplo;
 		$data['fullname'] = $this->session->userdata('fullname');
 		// Tampilkan Profile Picture
 		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
@@ -182,20 +35,21 @@ class Curriculum extends CI_Controller {
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['dataplo']=$this->model_siloupi->ambildataById($this->db->dbprefix('plo'),'idplo',$data['idplo']);
-		$data['content'] = 'curriculum/editplo';
+		
+		$prodi = $data['datauser'][0]['idinstitution'];
+
+		$data['data'] = $this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme', $prodi);
+		$data['content'] = 'curriculum/listcurriculum';
 		$data['meta'] = 'curriculum/meta';
 		$data['css'] = 'curriculum/css';
 		$data['js'] = 'curriculum/js';
 		$this->load->view('template/template',$data);
 	}
 
-	public function editlo($idplo,$idlo)
+	public function addcurriculumcsv()
 	{
-		$data['menuname'] = "Edit Learning Outcomes";
+		$data['menuname'] = "Tambah Data Kurikulum";
 		$data['idusers'] = $this->session->userdata('idusers');
-		$data['idplo'] = $idplo;
-		$data['idlo'] = $idlo;
 		$data['fullname'] = $this->session->userdata('fullname');
 		// Tampilkan Profile Picture
 		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
@@ -205,74 +59,14 @@ class Curriculum extends CI_Controller {
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['datalo']=$this->model_siloupi->ambildataById($this->db->dbprefix('lo'),'idlo',$data['idlo']);
-		$data['content'] = 'curriculum/editlo';
+		$data['content'] = 'curriculum/addcurriculumcsv';
 		$data['meta'] = 'curriculum/meta';
 		$data['css'] = 'curriculum/css';
 		$data['js'] = 'curriculum/js';
 		$this->load->view('template/template',$data);
 	}
 
-	public function detailplo($idplo)
-	{
-		$data['menuname'] = "Detail Program Learning Outcomes";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['idplo'] = $idplo;
-		$data['fullname'] = $this->session->userdata('fullname');
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['datalo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('lo'),'idlo','idplo',$data['idplo']);
-		$data['content'] = 'curriculum/listlo';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
-		$this->load->view('template/template',$data);
-	}
-	
-	public function saveplo()
-    {
-		$tgl=date('y-m-d');
-		$pieces= explode("-",$tgl);
-		$rand = substr(md5(microtime()),rand(0,26),5);
-		$idplo="PLO".$pieces[0].$pieces[1].$rand;
-		$idusers = $this->session->userdata('idusers');
-		$data=array(	
-			'idplo'=>$idplo,
-			'idusers'=>$idusers,
-			'plo'=>$this->input->post('plo'),
-			'idprograme'=>$this->input->post('idinstitution'),
-			'active'=>0
-		);
-		$this->model_siloupi->simpandata($this->db->dbprefix('plo'),$data);
-		$msg=array(	
-				'msg'=>'true',
-				'msg_success'=>lang('success_message_save')
-		);
-		echo json_encode($msg);		
-	}	
-
-	public function savelo()
-    {
-		$data=array(	
-			'idlo'=>$this->input->post('idlo'),
-			'lo'=>strip_tags($this->input->post('lo')),
-			'idplo'=>$this->input->post('idplo')
-		);
-		$this->model_siloupi->simpandata($this->db->dbprefix('lo'),$data);
-		$msg=array(	
-				'msg'=>'true',
-				'msg_success'=>lang('success_message_save')
-		);
-		echo json_encode($msg);		
-	}
-	
-	public function savelocsv()
+	public function savecurriculumcsv()
     {
 		$max_row_size = 4096; 
 		$separator = ';'; 
@@ -313,107 +107,11 @@ class Curriculum extends CI_Controller {
 		}
 	}
 
-	public function savemappingplo()
+	function deletecurriculum()
     {
-		//echo "<pre>";
-		//print_r($_POST);
-		//print_r(array_count_values($_POST));
-		//echo "</pre>";
-		//exit();
-		$idcurriculum=$this->input->post('idcurriculum');
-		$query = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcurriculum='".$idcurriculum."'");
-		if ($query->num_rows() >= 1)
-		{
-			$this->db->where('idcurriculum', $idcurriculum);
-       		$this->db->delete($this->db->dbprefix('mappingplo'));
-		}
-		$datalo=$this->input->post("lo");
-		foreach ($datalo as $dlo)
-		{
-			$pieces= explode("-",$dlo);
-				$data=array(	
-					'idcourses'=>$pieces[0],
-					'idlo'=>$pieces[1],
-					'idcurriculum'=>$idcurriculum
-				);
-				$this->model_siloupi->simpandata($this->db->dbprefix('mappingplo'),$data);
-		}
-		$msg=array(	
-			'msg'=>'true',
-			'msg_success'=>lang('success_message_save')
-		);
-		echo json_encode($msg);	
-	}
-
-	public function updateplo()
-    {
-		$idplo=$this->input->post('idplo');
-		$data=array(	
-			'plo'=>$this->input->post('plo')
-		);
-		$clause=array('idplo'=>$idplo);
-		$this->model_siloupi->update($this->db->dbprefix('plo'),$data,$clause);
-		$msg=array(	
-				'msg'=>'true',
-				'msg_success'=>lang('success_message_edit')
-		);	
-		echo json_encode($msg);
-	}
-
-	public function updatelo()
-    {
-		$idlo=$this->input->post('idlo');
-		$data=array(	
-			'lo'=>strip_tags($this->input->post('lo'))
-		);
-		$clause=array('idlo'=>$idlo);
-		$this->model_siloupi->update($this->db->dbprefix('lo'),$data,$clause);
-		$msg=array(	
-				'msg'=>'true',
-				'msg_success'=>lang('success_message_edit')
-		);	
-		echo json_encode($msg);
-	}
-
-	public function activeplo()
-    {
-		$idplo=$this->input->post('idplo');
-		$query = $this->db->query("SELECT active FROM ".$this->db->dbprefix('plo')." WHERE idplo='".$idplo."'");
-		$row = $query->row();
-		$active = $row->active;
-		if($active==1)
-		{	
-			$data=array(	
-				'active'=>0
-			);
-			$clause=array('idplo'=>$idplo);
-			$this->model_siloupi->update($this->db->dbprefix('plo'),$data,$clause);
-			$msg=array(	
-					'msg'=>'true',
-					'msg_success'=>lang('success_message_deactive_plo')
-			);	
-			echo json_encode($msg);
-		}
-		else
-		{
-			$data=array(	
-				'active'=>1
-			);
-			$clause=array('idplo'=>$idplo);
-			$this->model_siloupi->update($this->db->dbprefix('plo'),$data,$clause);
-			$msg=array(	
-					'msg'=>'true',
-					'msg_success'=>lang('success_message_active_plo')
-			);	
-			echo json_encode($msg);
-		}
-	}
-
-	function deletelo()
-    {
-        $idlo=$this->input->post('idlo');
-		$this->db->where('idlo', $idlo);
-        $this->db->delete($this->db->dbprefix('lo'));
+        $idcurriculum = $this->input->post('idcurriculum');
+		$this->db->where('idcurriculum', $idcurriculum);
+        $this->db->delete($this->db->dbprefix('curriculum'));
         $msg=array(	
 				'msg'=>'true',
 				'msg_success'=>lang('success_message_delete')
@@ -421,4 +119,56 @@ class Curriculum extends CI_Controller {
 		echo json_encode($msg);
     }	
 
+	function export()
+	{
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet(); // instantiate Spreadsheet
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // manually set table data value
+        $sheet->setCellValue('A1', 'Gipsy Danger'); 
+        $sheet->setCellValue('A2', 'Gipsy Avenger');
+        $sheet->setCellValue('A3', 'Striker Eureka');
+        
+        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
+ 
+        $filename = 'list-of-jaegers'; // set filename for excel file to be exported
+ 
+        header('Content-Type: application/vnd.ms-excel'); // generate excel file
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        
+        $writer->save('php://output');	// download file 
+	}
+	
+	function import(){
+		$inputFileName = (APPPATH) . '/01simple.xlsx';
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+		// method two
+		$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+		echo json_encode($sheetData);
+		// $this->dumper->dd($sheetData);
+	}
+
+	function debug(){
+		$data = $this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme', 'D055');
+		echo json_encode($data);
+	}
+
+	function cek(){
+		$file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		if(isset($_FILES['filelo']['name']) && in_array($_FILES['filelo']['type'], $file_mimes)) {
+			$arr_file = explode('.', $_FILES['filelo']['name']);
+			$extension = end($arr_file);
+			if('csv' == $extension){
+				$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+			} else {
+				$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+			}
+			$spreadsheet = $reader->load($_FILES['filelo']['tmp_name']);
+			$sheetData = $spreadsheet->getActiveSheet()->toArray();
+			// array_push($sheetData,['Data 1' => $sheetData[0][1], 'Data 2' => $sheetData[1][0] ]);
+			echo json_encode($sheetData);
+		}
+	}
 }

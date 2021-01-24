@@ -439,7 +439,7 @@ $('.activePLO').on('click',function(){
 		var formData = new FormData(form);
 		$.ajax({
 			type : "POST",
-			url  : "<?php echo site_url('entrydata/savelocsv')?>",
+			url  : "<?php echo site_url('curriculum/cek')?>",
 			dataType : "JSON",
 			data: formData,
 			processData:false,

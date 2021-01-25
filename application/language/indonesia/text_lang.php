@@ -44,10 +44,11 @@ $lang['success_message_delete'] = 'Data berhasil dihapus';
 $lang['delete_info']='Yakin akan menghapus data ';
 $lang['no']='No';
 
-$lang['chosefile_csv'] = 'Pilih File CSV';
-$lang['file_csv'] = 'File CSV';
-$lang['add_csv'] = 'Tambah CSV';
-$lang['error_message_csv'] = 'Bukan format CSV';
+$lang['export'] = 'Expor File';
+$lang['chosefile_csv'] = 'Pilih File';
+$lang['file_csv'] = 'File';
+$lang['add_csv'] = 'Impor File';
+$lang['error_message_csv'] = 'Bukan format yang sesuai';
 $lang['csv_error_msg'] = 'Isi file csv';
 $lang['error_message_format'] = 'Format Impor Tidak Sesuai';
 

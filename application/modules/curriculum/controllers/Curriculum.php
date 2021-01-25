@@ -104,7 +104,7 @@ class Curriculum extends CI_Controller {
         
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
-        $filename = 'template_curriculum'; // set filename for excel file to be exported
+        $filename = 'curriculum'; // set filename for excel file to be exported
  
         header('Content-Type: application/excel'); // generate excel file
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 

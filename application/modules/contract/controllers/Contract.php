@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Coursessubcategory extends CI_Controller {
-	private $namespace = 'coursessubcategory';
-	private $model_name = 'coursessubcategory_model'; 
+class Contract extends CI_Controller {
+	private $namespace = 'contract';
+	private $model_name = 'contract_model'; 
 
 	function __construct()
 	{
@@ -43,7 +43,7 @@ class Coursessubcategory extends CI_Controller {
 	
 	public function index()
 	{
-		$data = $this->initView("Entri Data Subkategori Mata Kuliah");
+		$data = $this->initView("Entri Data Transkrip");
 		$data['datauser'] = $this->model->getUserData($data['idusers']);
 		
 		$prodi = $data['datauser'][0]['idinstitution'];
@@ -58,7 +58,7 @@ class Coursessubcategory extends CI_Controller {
 
 	public function addcsv()
 	{
-		$data = $this->initView("Impor Data Subkategori Mata Kuliah");
+		$data = $this->initView("Impor Data Transkrip");
 		$data['datauser'] = $this->model->getUserData($data['idusers']);
 
 		$data['content'] = $this->namespace.'/import';
@@ -71,7 +71,9 @@ class Coursessubcategory extends CI_Controller {
 	function delete()
     {
         $id = $this->input->post('id');
-		$this->model->deleteById($id);
+        $idc = $this->input->post('idc');
+        $idb = $this->input->post('idb');
+		$this->model->delete('idcourses',$id, 'nim', $idb, 'idcurriculum',$idc);
 
         $msg=array(	
 			'msg'=>'true',
@@ -92,17 +94,21 @@ class Coursessubcategory extends CI_Controller {
         $sheet = $spreadsheet->getActiveSheet();
 
         // manually set table data value
-        $sheet->setCellValue('A1', 'idcoursessubcategory'); 
-        $sheet->setCellValue('B1', 'idcoursescategory'); 
-        $sheet->setCellValue('C1', 'coursescategory');
-        $sheet->setCellValue('D1', 'idcurriculum');
+        $sheet->setCellValue('A1', 'idcourses'); 
+        $sheet->setCellValue('B1', 'nim'); 
+        $sheet->setCellValue('C1', 'grade');
+        $sheet->setCellValue('D1', 'idprograme');
+        $sheet->setCellValue('E1', 'quality');
+        $sheet->setCellValue('F1', 'idcurriculum');
 
 		$i = 2;
 		foreach ($data as $d) {
-			$sheet->setCellValue('A'.$i, $d['idcoursessubcategory']); 
-			$sheet->setCellValue('B'.$i, $d['idcoursescategory']); 
-			$sheet->setCellValue('C'.$i, $d['coursessubcategory']);
-			$sheet->setCellValue('D'.$i, $d['idcurriculum']);
+			$sheet->setCellValue('A'.$i, $d['idcourses']); 
+			$sheet->setCellValue('B'.$i, $d['nim']); 
+			$sheet->setCellValue('C'.$i, $d['grade']);
+			$sheet->setCellValue('D'.$i, $d['idprograme']);
+			$sheet->setCellValue('E'.$i, $d['quality']);
+			$sheet->setCellValue('F'.$i, $d['idcurriculum']);
 			$i++;
 		}
         
@@ -123,10 +129,12 @@ class Coursessubcategory extends CI_Controller {
         $sheet = $spreadsheet->getActiveSheet();
 
         // manually set table data value
-        $sheet->setCellValue('A1', 'idcoursessubcategory'); 
-        $sheet->setCellValue('B1', 'idcoursescategory'); 
-        $sheet->setCellValue('C1', 'coursessubcategory');
-        $sheet->setCellValue('D1', 'idcurriculum');
+        $sheet->setCellValue('A1', 'idcourses'); 
+        $sheet->setCellValue('B1', 'nim'); 
+        $sheet->setCellValue('C1', 'grade');
+        $sheet->setCellValue('D1', 'idprograme');
+        $sheet->setCellValue('E1', 'quality');
+        $sheet->setCellValue('F1', 'idcurriculum');
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
@@ -152,13 +160,15 @@ class Coursessubcategory extends CI_Controller {
 			$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
 			$sheetData = $spreadsheet->getActiveSheet()->toArray();
 			
-			if($sheetData[0][0] == 'idcoursessubcategory'){
+			if($sheetData[0][0] == 'idcourses'){
 				for ($i=1; $i < count($sheetData); $i++) { 
 					$data=array(	
-						'idcoursessubcategory' => $sheetData[$i][0],
-						'idcoursescategory' => $sheetData[$i][1],
-						'coursessubcategory' => $sheetData[$i][2],
-						'idcurriculum' => $sheetData[$i][3],
+						'idcourses' => $sheetData[$i][0],
+						'nim' => $sheetData[$i][1],
+						'grade' => $sheetData[$i][2],
+						'idprograme' => $sheetData[$i][3],
+						'quality' => $sheetData[$i][4],
+						'idcurriculum' => $sheetData[$i][5],
 					);
 					$this->model->save($data);
 				}

@@ -128,7 +128,7 @@ class Coursescategory extends CI_Controller {
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
-        $filename = $this->namespace; // set filename for excel file to be exported
+        $filename = 'template_'.$this->namespace; // set filename for excel file to be exported
  
         header('Content-Type: application/excel'); // generate excel file
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 

@@ -208,6 +208,41 @@ $lang['curriculum_idlevel'] = 'Jenjang';
 $lang['curriculum_curriculum'] = 'Kurikulum';
 $lang['curriculum_idprograme'] = 'Kode Program Studi';
 
+//======================== Entri Data CourseCategory ====================
+$lang['coursescategory_hallo'] = 'Entri Data Kategori Mata Kuliah';
+$lang['coursescategory_add'] = 'Upload Data Kategori Mata Kuliah';
+$lang['coursescategory_delete'] = 'Hapus Data Kategori Mata Kuliah';
+$lang['coursescategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursescategory/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+
+$lang['coursescategory_idcurriculum'] = 'Kode Kurikulum';
+$lang['coursescategory_idcoursescategory'] = 'Kode Kategori';
+$lang['coursescategory_coursescategory'] = 'Deskripsi';
+
+//======================== Entri Data CourseSubCategory ====================
+$lang['coursessubcategory_hallo'] = 'Entri Data Sub Kategori Mata Kuliah';
+$lang['coursessubcategory_add'] = 'Upload Data Sub Kategori Mata Kuliah';
+$lang['coursessubcategory_delete'] = 'Hapus Data Sub Kategori Mata Kuliah';
+$lang['coursessubcategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursessubcategory/template').'"><b>disini</b></a>. Anda dapat menambah data.';
+
+$lang['coursessubcategory_idcurriculum'] = 'Kode Kurikulum';
+$lang['coursessubcategory_idcoursescategory'] = 'Kode Kategori';
+$lang['coursessubcategory_idcoursessubcategory'] = 'Kode Subkategori';
+$lang['coursessubcategory_coursessubcategory'] = 'Deskripsi';
+
+//======================== Entri Data Course ====================
+$lang['courses_hallo'] = 'Entri Data Mata Kuliah';
+$lang['courses_add'] = 'Upload Data Mata Kuliah';
+$lang['courses_delete'] = 'Hapus Data Mata Kuliah';
+$lang['courses_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('courses/template').'"><b>disini</b></a>. Anda dapat menambah, mengubah, atau menghapus dari data yang ada.';
+
+$lang['courses_idcourses'] = 'Kode Matkul';
+$lang['courses_idcurriculum'] = 'Kode Kurikulum';
+$lang['courses_idcoursescategory'] = 'Kode Kategori';
+$lang['courses_idcoursessubcategory'] = 'Kode Subkategori';
+$lang['courses_idsemester'] = 'Semester';
+$lang['courses_courses'] = 'Nama Matkul';
+$lang['courses_credit'] = 'Jumlah SKS';
+
 //======================== Reports Learning Outcomes =======================
 $lang['lostudentprograme_hallo'] = 'Laporan Learning Outcomes Mahasiswa';
 $lang['loclassgenerationprograme_hallo'] = 'Laporan Learning Outcomes Perangkatan';

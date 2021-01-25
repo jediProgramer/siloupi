@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Curriculum extends CI_Controller {
+	private $namespace = 'curriculum';
+	private $model_name = 'curriculum_model'; 
 
 	function __construct()
 	{
@@ -17,60 +19,60 @@ class Curriculum extends CI_Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
 		$this->load->helper('text');
-		$this->load->model('model_siloupi');
+		$this->load->model($this->model_name,'model');
 		// Load default language
 		$this->lang->load('text_lang', 'indonesia');
 	}
-	
-	public function index()
+
+	private function initView($menuname)
 	{
-		$data['menuname'] = "Entri Data Kurikulum";
+		$data['menuname'] = $menuname;
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['fullname'] = $this->session->userdata('fullname');
+		$data['nip'] = $this->session->userdata('nip');
+		$data['roles'] = $this->session->userdata('roles');
 		// Tampilkan Profile Picture
 		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
 		$data['profilepicture'] = $row->profilepicture;
 		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
+		$data['namespace'] = $this->namespace;
+
+		return $data;
+	}
+	
+	public function index()
+	{
+		$data = $this->initView("Entri Data Kurikulum");
+		$data['datauser'] = $this->model->getUserData($data['idusers']);
 		
 		$prodi = $data['datauser'][0]['idinstitution'];
 
-		$data['data'] = $this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme', $prodi);
-		$data['content'] = 'curriculum/list';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
+		$data['data'] = $this->model->getAllDataByProdi($prodi);
+		$data['content'] = $this->namespace.'/list';
+		$data['meta'] = $this->namespace.'/meta';
+		$data['css'] = $this->namespace.'/css';
+		$data['js'] = $this->namespace.'/js';
 		$this->load->view('template/template',$data);
 	}
 
 	public function addcsv()
 	{
-		$data['menuname'] = "Tambah Data Kurikulum";
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['fullname'] = $this->session->userdata('fullname');
-		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
-		$row = $queryimg->row();
-		$data['profilepicture'] = $row->profilepicture;
-		// End
-		$data['nip'] = $this->session->userdata('nip');
-		$data['roles'] = $this->session->userdata('roles');
-		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['content'] = 'curriculum/import';
-		$data['meta'] = 'curriculum/meta';
-		$data['css'] = 'curriculum/css';
-		$data['js'] = 'curriculum/js';
+		$data = $this->initView("Impor Data Kurikulum");
+		$data['datauser'] = $this->model->getUserData($data['idusers']);
+
+		$data['content'] = $this->namespace.'/import';
+		$data['meta'] = $this->namespace.'/meta';
+		$data['css'] = $this->namespace.'/css';
+		$data['js'] = $this->namespace.'/js';
 		$this->load->view('template/template',$data);
 	}
 
 	function delete()
     {
-        $idcurriculum = $this->input->post('id');
-		$this->db->where('idcurriculum', $idcurriculum);
-        $this->db->delete($this->db->dbprefix('curriculum'));
+        $id = $this->input->post('id');
+		$this->model->deleteById($id);
+
         $msg=array(	
 			'msg'=>'true',
 			'msg_success'=>lang('success_message_delete')
@@ -81,9 +83,10 @@ class Curriculum extends CI_Controller {
 	function export()
 	{
 		$idusers = $this->session->userdata('idusers');
-		$datauser = $this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$idusers);
+		$datauser = $this->model->getUserData($idusers);
 		$prodi = $datauser[0]['idinstitution'];
-		$data = $this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme', $prodi);
+
+		$data = $this->model->getAllDataByProdi($prodi);
 
 		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet(); // instantiate Spreadsheet
         $sheet = $spreadsheet->getActiveSheet();
@@ -104,7 +107,7 @@ class Curriculum extends CI_Controller {
         
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
-        $filename = 'curriculum'; // set filename for excel file to be exported
+        $filename = $this->namespace; // set filename for excel file to be exported
  
         header('Content-Type: application/excel'); // generate excel file
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
@@ -115,11 +118,11 @@ class Curriculum extends CI_Controller {
 	
 	function import(){
 		$idusers = $this->session->userdata('idusers');
-		$datauser = $this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$idusers);
+		$datauser = $this->model->getUserData($idusers);
+
 		$prodi = $datauser[0]['idinstitution'];
 
-		$this->db->where('idprograme', $prodi);
-        $this->db->delete($this->db->dbprefix('curriculum'));
+		$this->model->delete('idprograme', $prodi);
 
 		$file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		if(isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) {
@@ -141,7 +144,7 @@ class Curriculum extends CI_Controller {
 						'curriculum' => $sheetData[$i][2],
 						'idprograme' => $sheetData[$i][3]
 					);
-					$this->model_siloupi->simpandata($this->db->dbprefix('curriculum'),$data);
+					$this->model->save($data);
 				}
 				$msg=array(	
 					'msg'=>'true',

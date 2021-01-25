@@ -9,7 +9,7 @@
 						<h4 class="mb-0"><?php echo $menuname;?></h4> 
 					</div>
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item active"><?php echo lang('curriculum_hallo');?></li>
+						<li class="breadcrumb-item active"><?php echo lang($namespace.'_hallo');?></li>
 					</ol>
 				</div>
 			</div>
@@ -23,8 +23,8 @@
                 <div class="card">
 					<div class="card-header "> 
 						<div align="right">
-							<a class="btn btn-success btn-sm" href="<?php echo base_url()?>curriculum/export"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url()?>curriculum/addcsv"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
+							<a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
 						</div>	
 					</div>
                     <div class="card-body">
@@ -32,10 +32,10 @@
 							<table id="data" class="display table dataTable table-striped table-bordered" >
 								<thead >
 									<tr>
-										<th><?php echo lang('curriculum_idcurriculum');?></th>
-										<th><?php echo lang('curriculum_idlevel');?></th>
-										<th><?php echo lang('curriculum_curriculum');?></th>
-										<th><?php echo lang('curriculum_idprograme');?></th>
+										<th><?php echo lang($namespace.'_idcurriculum');?></th>
+										<th><?php echo lang($namespace.'_idlevel');?></th>
+										<th><?php echo lang($namespace.'_curriculum');?></th>
+										<th><?php echo lang($namespace.'_idprograme');?></th>
 										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
 								</thead>

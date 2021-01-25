@@ -5,10 +5,10 @@
 		<div class="row">
 			<div class="col-12  align-self-center">
 				<div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
-					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang('curriculum_add');?></p></div>
+					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang($namespace.'_add');?></p></div>
 
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item"><a href="<?php echo base_url();?>curriculum"><?php echo lang('curriculum_hallo');?></a></li>
+						<li class="breadcrumb-item"><a href="<?php echo base_url($namespace);?>"><?php echo lang($namespace.'_hallo');?></a></li>
 						<li class="breadcrumb-item active"><?php echo $menuname;?></li>
 					</ol>
 				</div>
@@ -17,7 +17,7 @@
 		<!-- END: Breadcrumbs-->
 
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<?php echo lang('curriculum_upload_info');?>
+			<?php echo lang($namespace.'_upload_info');?>
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">×</span>
 			</button>

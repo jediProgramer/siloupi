@@ -78,7 +78,7 @@ $(document).ready(function () {
 	$('.delete').on('click',function(){
 		$.ajax({
 			type : "POST",
-			url  : "<?php echo site_url('curriculum/delete')?>",
+			url  : "<?php echo site_url($namespace.'/delete')?>",
 			dataType : "JSON",
 			beforeSend :function () {
 					swal({
@@ -94,7 +94,7 @@ $(document).ready(function () {
 				if (value.msg == 'true') {				
 					swal({
 						type: "success",
-						title: "<?php echo lang('curriculum_delete');?>",
+						title: "<?php echo lang($namespace.'_delete');?>",
 						text: value.msg_success,
 						confirmButtonColor: '#1e3d73',
 					});
@@ -106,7 +106,7 @@ $(document).ready(function () {
 				{
 					swal({
 						type: "error",
-						title: "<?php echo lang('curriculum_delete');?>",
+						title: "<?php echo lang($namespace.'_delete');?>",
 						text: value.msg_error,
 						confirmButtonColor: '#1e3d73',
 					});
@@ -131,7 +131,7 @@ $(document).ready(function () {
 			var formData = new FormData(form);
 			$.ajax({
 				type : "POST",
-				url  : "<?php echo site_url('curriculum/import')?>",
+				url  : "<?php echo site_url($namespace.'/import')?>",
 				dataType : "JSON",
 				data: formData,
 				processData:false,
@@ -150,19 +150,19 @@ $(document).ready(function () {
 					if (data.msg == 'true') {
 						swal({
 						type: "success",
-						title: "<?php echo lang('curriculum_add');?>",
+						title: "<?php echo lang($namespace.'_add');?>",
 						text: data.msg_success,
 						confirmButtonColor: '#1e3d73',
 						});
 						$('.swal2-confirm').click(function(){
-							window.location.href = "<?php echo base_url()?>curriculum";
+							window.location.href = "<?php echo base_url($namespace)?>";
 						});
 					}
 					else
 					{
 						swal({
 						type: "error",
-						title: "<?php echo lang('curriculum_add');?>",
+						title: "<?php echo lang($namespace.'_add');?>",
 						text: data.msg_error,
 						confirmButtonColor: '#1e3d73',
 						});

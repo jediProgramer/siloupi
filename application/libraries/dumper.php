@@ -34,7 +34,7 @@ function d($data){
 function dnl($data){
 	echo d($data) . "<br>\n";
 }
-class dumper
+class Dumper
 {
 	public function dd($data){
 		echo dnl($data);

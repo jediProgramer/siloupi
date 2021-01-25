@@ -47,7 +47,7 @@ if (!defined('BASEPATH')) {
  *      <?php
  *      new \Foo\Bar\Qux\QuuxTest;
  */
-class autoloader_psr4
+class Autoloader_psr4
 {
 
     /**

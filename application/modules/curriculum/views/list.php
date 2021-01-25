@@ -23,7 +23,7 @@
                 <div class="card">
 					<div class="card-header "> 
 						<div align="right">
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url()?>curriculum/addcurriculumcsv"><i class="fas fa-file-csv">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<a class="btn btn-secondary btn-sm" href="<?php echo base_url()?>curriculum/addcsv"><i class="fas fa-file-csv">&nbsp;</i><?php echo lang('add_csv');?></a>
 						</div>	
 					</div>
                     <div class="card-body">
@@ -66,11 +66,11 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<?php echo lang('delete_info');?>, <?php echo $d["idlo"];?> - <?php echo strip_tags($d["lo"]);?> <?php echo lang('riddle');?>
+													<?php echo lang('delete_info');?>, <?php echo $d["idcurriculum"];?> - <?php echo strip_tags($d["curriculum"]);?> <?php echo lang('riddle');?>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo lang('close');?></button>
-													<button type="button" class="btn btn-primary deleteLO" data-id="<?php echo $d["idlo"];?>"><?php echo lang('delete');?></button>
+													<button type="button" class="btn btn-primary delete" data-id="<?php echo $d["idcurriculum"];?>"><?php echo lang('delete');?></button>
 												</div>
 											</div>
 										</div>

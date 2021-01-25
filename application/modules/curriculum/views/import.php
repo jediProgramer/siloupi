@@ -17,7 +17,7 @@
 		<!-- END: Breadcrumbs-->
 
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<?php echo lang('upload_csv_lo_info');?>
+			<?php echo lang('curriculum_upload_info');?>
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">×</span>
 			</button>
@@ -35,12 +35,12 @@
                                 <div class="card-body">
                                     <div class="row">                                           
                                         <div class="col-12">
-                                            <form id="addLOCSV">	
+                                            <form id="import">	
 													<div class="form-group row">
 														<label for="lo" class="col-sm-2 col-form-label"><?php echo lang('file_csv');?></label>
 														<div class="col-sm-10">
 															<div class="custom-file overflow-hidden">
-																<input id="filelo" name="filelo" type="file" class="custom-file-input">
+																<input id="file" name="file" type="file" class="custom-file-input">
 																<label for="csv" class="custom-file-label"><?php echo lang('chosefile_csv');?></label>
 															</div>
 														</div>

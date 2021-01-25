@@ -49,6 +49,7 @@ $lang['file_csv'] = 'File CSV';
 $lang['add_csv'] = 'Tambah CSV';
 $lang['error_message_csv'] = 'Bukan format CSV';
 $lang['csv_error_msg'] = 'Isi file csv';
+$lang['error_message_format'] = 'Format Impor Tidak Sesuai';
 
 //============================= Lang Edit Profile ===============================
 $lang['edit_profile'] = 'Edit Profile';
@@ -198,7 +199,8 @@ $lang['learning_outcomes'] = 'Learning Outcomes';
 //======================== Entri Data Kurikulum ====================
 $lang['curriculum_hallo'] = 'Entri Data Kurikulum';
 $lang['curriculum_add'] = 'Upload Data Kurikulum';
-$lang['curriculum_upload_csv_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
+$lang['curriculum_delete'] = 'Hapus Data Kurikulum';
+$lang['curriculum_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('curriculum/export').'"><b>disini</b></a>. Anda dapat menambah, mengubah, atau menghapus dari data yang ada.';
 
 $lang['curriculum_idcurriculum'] = 'Kode Kurikulum';
 $lang['curriculum_idlevel'] = 'Jenjang';

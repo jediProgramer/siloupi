@@ -34,6 +34,8 @@
 		public function getAllDataByProdi($prodi)
 		{
 			$curriculum = $this->getCurriculum($prodi);
+			if(count($curriculum) == 0) array_push($curriculum, "NULL");
+
 			$this->db->select('*');
 			$this->db->from($this->db->dbprefix($this->table));
 			$this->db->where_in('idcurriculum', $curriculum);

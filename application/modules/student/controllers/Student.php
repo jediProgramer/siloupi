@@ -206,6 +206,7 @@ class Student extends CI_Controller {
 	}
 
 	function getapi(){
+		header('X-Accel-Buffering: no');
 		set_time_limit(0);
 		// $cmd = "java -jar ETLMahasiswa.jar";
 		$cmd = "java -jar Debug.jar 7";

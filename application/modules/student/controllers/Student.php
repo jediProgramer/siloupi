@@ -248,4 +248,7 @@ class Student extends CI_Controller {
 		echo '<br><p id="success">Program Berhasil</p>';
 	}
 
+	function phpini(){
+		phpinfo();
+	}
 }

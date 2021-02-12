@@ -94,7 +94,7 @@ class Coursessubcategory extends CI_Controller {
         // manually set table data value
         $sheet->setCellValue('A1', 'idcoursessubcategory'); 
         $sheet->setCellValue('B1', 'idcoursescategory'); 
-        $sheet->setCellValue('C1', 'coursescategory');
+        $sheet->setCellValue('C1', 'coursessubcategory');
         $sheet->setCellValue('D1', 'idcurriculum');
 
 		$i = 2;

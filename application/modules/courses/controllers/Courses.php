@@ -100,6 +100,7 @@ class Courses extends CI_Controller {
         $sheet->setCellValue('E1', 'idsemester');
         $sheet->setCellValue('F1', 'courses');
         $sheet->setCellValue('G1', 'credit');
+        $sheet->setCellValue('H1', 'idprograme');
 
 		$i = 2;
 		foreach ($data as $d) {
@@ -110,6 +111,7 @@ class Courses extends CI_Controller {
 			$sheet->setCellValue('E'.$i, $d['idsemester']); 
 			$sheet->setCellValue('F'.$i, $d['courses']);
 			$sheet->setCellValue('G'.$i, $d['credit']);
+			$sheet->setCellValue('H'.$i, $d['idprograme']);
 			$i++;
 		}
         
@@ -137,6 +139,7 @@ class Courses extends CI_Controller {
         $sheet->setCellValue('E1', 'idsemester');
         $sheet->setCellValue('F1', 'courses');
         $sheet->setCellValue('G1', 'credit');
+        $sheet->setCellValue('H1', 'idprograme');
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
@@ -172,6 +175,7 @@ class Courses extends CI_Controller {
 						'idsemester' => $sheetData[$i][4],
 						'courses' => $sheetData[$i][5],
 						'credit' => $sheetData[$i][6],
+						'idprograme' => $sheetData[$i][7]
 					);
 					$this->model->createOrUpdate($data);
 				}

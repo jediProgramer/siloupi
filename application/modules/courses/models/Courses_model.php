@@ -49,9 +49,9 @@
 		}
 
 		public function createOrUpdate($data){
-			$sql = 'INSERT INTO siloupi_courses(idcourses, idcurriculum, idcoursescategory, idcoursessubcategory, idsemester, courses, credit) '.
+			$sql = 'INSERT INTO siloupi_courses(idcourses, idcurriculum, idcoursescategory, idcoursessubcategory, idsemester, courses, credit, idprograme) '.
 			'VALUES (?, ?, ?, ?, ?, ?, ?) '.
-			'ON CONFLICT(idcourses, idcurriculum) DO UPDATE SET '.
+			'ON CONFLICT(idcourses, idcurriculum, idprograme) DO UPDATE SET '.
 			'idcoursescategory=EXCLUDED.idcoursescategory, idcoursessubcategory=EXCLUDED.idcoursessubcategory, idsemester=EXCLUDED.idsemester, courses=EXCLUDED.courses, credit=EXCLUDED.credit';
 			$this->db->query($sql, $data);
 		}

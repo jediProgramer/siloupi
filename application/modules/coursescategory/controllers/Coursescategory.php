@@ -155,7 +155,7 @@ class Coursescategory extends CI_Controller {
 					$data=array(	
 						'idcoursescategory' => $sheetData[$i][0],
 						'idcurriculum' => $sheetData[$i][1],
-						'coursescategory' => $sheetData[$i][2],
+						'coursescategory' => $sheetData[$i][2]
 					);
 					$this->model->createOrUpdate($data);
 				}

@@ -30,10 +30,10 @@
 		}
 
 		public function createOrUpdate($data){
-			$sql = 'INSERT INTO siloupi_contract(idcourses, nim, grade, idprograme, quality, idcurriculum, courses) '.
-				   'VALUES (?, ?, ?, ?, ?, ?, ?) '.
+			$sql = 'INSERT INTO siloupi_contract(idcourses, nim, grade, idprograme, quality, courses) '.
+				   'VALUES (?, ?, ?, ?, ?, ?) '.
 				   'ON CONFLICT(idcourses, nim, courses) DO UPDATE SET '.
-				   'idprograme=EXCLUDED.idprograme, grade=EXCLUDED.grade, quality=EXCLUDED.quality, idcurriculum=EXCLUDED.idcurriculum';
+				   'idprograme=EXCLUDED.idprograme, grade=EXCLUDED.grade, quality=EXCLUDED.quality';
 			$this->db->query($sql, $data);
 		}
 

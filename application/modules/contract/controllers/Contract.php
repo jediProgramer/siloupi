@@ -99,7 +99,7 @@ class Contract extends CI_Controller {
         $sheet->setCellValue('C1', 'grade');
         $sheet->setCellValue('D1', 'idprograme');
         $sheet->setCellValue('E1', 'quality');
-        $sheet->setCellValue('F1', 'idcurriculum');
+        $sheet->setCellValue('F1', 'courses');
 
 		$i = 2;
 		foreach ($data as $d) {
@@ -108,7 +108,8 @@ class Contract extends CI_Controller {
 			$sheet->setCellValue('C'.$i, $d['grade']);
 			$sheet->setCellValue('D'.$i, $d['idprograme']);
 			$sheet->setCellValue('E'.$i, $d['quality']);
-			$sheet->setCellValue('F'.$i, $d['idcurriculum']);
+			$sheet->setCellValue('F'.$i, $d['courses']);
+			
 			$i++;
 		}
         
@@ -135,6 +136,7 @@ class Contract extends CI_Controller {
         $sheet->setCellValue('D1', 'idprograme');
         $sheet->setCellValue('E1', 'quality');
         $sheet->setCellValue('F1', 'idcurriculum');
+        $sheet->setCellValue('G1', 'courses');
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
@@ -170,6 +172,7 @@ class Contract extends CI_Controller {
 							'idprograme' => $sheetData[$i][3],
 							'quality' => $sheetData[$i][4],
 							'idcurriculum' => $sheetData[$i][5],
+							'courses' => $sheetData[$i][6],
 						);
 						$this->model->createOrUpdate($data);
 					}

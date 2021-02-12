@@ -228,24 +228,23 @@ class Student extends CI_Controller {
 			// echo "</pre>";
 		
 		// CARA 2
-			while (@ ob_end_flush()); // end all output buffers if any
+			// while (@ ob_end_flush()); // end all output buffers if any
 
-			$proc = popen($cmd, 'r');
-			echo '<pre>';
-			while (!feof($proc))
-			{
-				echo fread($proc, 4096);
-				@ flush();
-			}
-			echo '</pre>';
+			// $proc = popen($cmd, 'r');
+			// echo '<pre>';
+			// while (!feof($proc))
+			// {
+			// 	echo fread($proc, 4096);
+			// 	@ flush();
+			// }
+			// echo '</pre>';
 		// CARA 3 (SERVER ONLY)
-			// $result = $this->shell->liveExecuteCommand('ping 127.0.0.1');
-			// if($result['exit_status'] === 0){
-			// 	// do something if command execution succeeds
-			//  } else {
-			// 	 // do something on failure
-			//  }
-		echo '<br><p id="success">Program Berhasil</p>';
+			$result = $this->shell->liveExecuteCommand($cmd);
+			if($result['exit_status'] === 0){
+				echo '<br><p id="success">Program Berhasil</p>';
+			 } else {
+				echo '<br><p id="success">Program Tidak Berhasil</p>';
+			 }
 	}
 
 	function phpini(){

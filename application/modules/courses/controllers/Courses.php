@@ -173,7 +173,7 @@ class Courses extends CI_Controller {
 						'courses' => $sheetData[$i][5],
 						'credit' => $sheetData[$i][6],
 					);
-					$this->model->save($data);
+					$this->model->createOrUpdate($data);
 				}
 				$msg=array(	
 					'msg'=>'true',

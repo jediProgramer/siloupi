@@ -54,19 +54,71 @@ $(document).ready(function () {
 <!-- Script dataTables -->
 <script type="text/javascript">
   $(function () {
-    $("#data").DataTable({
-		 "language": {
-            "lengthMenu": "<?php echo lang('display');?> _MENU_ <?php echo lang('records_per_page');?>",
-            "zeroRecords": "<?php echo lang('zeroRecords');?>",
-            "info": "<?php echo lang('showing_page');?> _PAGE_ <?php echo lang('showing_page_of');?> _PAGES_",
-            "infoEmpty": "<?php echo lang('infoEmpty');?>",
-            "infoFiltered": "(<?php echo lang('infoFiltered_form');?> _MAX_ <?php echo lang('infoFiltered_record');?>)",
-			"search": "<?php echo lang('search');?>:",
-			"paginate": {
-				  "previous": "<?php echo lang('previous');?>",
-				  "next": "<?php echo lang('next');?>",
-				}
-		 }	
+	const baseUrl = '<?php echo base_url($namespace) ?>';
+
+	let table = $('#data').DataTable({
+		language : {
+            lengthMenu: "<?php echo lang('display');?> _MENU_ <?php echo lang('records_per_page');?>",
+            zeroRecords: "<?php echo lang('zeroRecords');?>",
+            info: "<?php echo lang('showing_page');?> _PAGE_ <?php echo lang('showing_page_of');?> _PAGES_",
+            infoEmpty: "<?php echo lang('infoEmpty');?>",
+            infoFiltered: "(<?php echo lang('infoFiltered_form');?> _MAX_ <?php echo lang('infoFiltered_record');?>)",
+			search: "<?php echo lang('search');?>:",
+			paginate: {
+				"previous": "<?php echo lang('previous');?>",
+				"next": "<?php echo lang('next');?>",
+			}
+		},
+		// processing: true,
+		// serverSide: true,
+		// ajax: 'kondisi-jalan/json',
+		// columns: [
+		// 	{'mRender': function (data, type, full,meta) {
+		// 		return +meta.row +1;  
+		// 		}
+		// 	},
+		// 	{ data: 'ruas_jalan', name: 'ruas_jalan' },
+		// 	{ data: 'nama_kota', name: 'nama_kota' },
+		// 	{ data: 'km_asal', name: 'km_asal' },
+		// 	{ data: 'panjang_km', name: 'panjang_km' },
+		// 	{ data: 'dari_km', name: 'dari_km' },
+		// 	{ data: 'sampai_km', name: 'sampai_km' },
+		// 	{ data: 'lebar_rata_rata', name: 'lebar_rata_rata' },
+		// 	// { data: 'dokumentasi', name: 'dokumentasi' },
+		// 	{'mRender': function (data, type, full) {
+		// 		return '<img class="img-fluid" style="max-width: 100px" src="'+`{{ url('storage/') }}` +'/'+full['foto_dokumentasi']+'" alt="" srcset="">';  
+		// 		}
+		// 	},
+		// 	{ data: 'action', name: 'action' },
+		// ]
+	});
+	// table.on( 'order.dt search.dt', function () {
+	// 	table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+	// 		cell.innerHTML = i+1;
+	// 	} );
+	// } ).draw();
+
+	$("#modal-api").on("show.bs.modal",function (ev) {
+	// 	var modal = $(this);
+	// 	var link = $(ev.relatedTarget);
+
+		var url = "<?php echo base_url($namespace.'/getapi')?>";
+		$('#getapi').attr('src',url);
+
+		// modal.find('.modal-body').load(url);
+	});
+
+	$(".closeModal").click(function () {
+		let msg = $("#getapi").contents().find('#success').text();
+		if(msg != "Program Berhasil"){
+			if (confirm('Hentikan Proses Ini ?')) {
+				$("#modal-api").modal('hide');
+			} else {
+	
+			}
+		}else{
+			window.location.href = baseUrl;
+		}
 	});
   });
 </script>

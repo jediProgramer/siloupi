@@ -25,6 +25,7 @@
 						<div align="right">
 							<a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
 							<a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<a class="btn btn-info btn-sm" data-toggle="modal" href="#modal-api" data-backdrop="static" data-keyboard="false"><i class="fas fa-file-import">&nbsp;</i><?php echo lang($namespace.'_api');?></a>
 						</div>	
 					</div>
                     <div class="card-body">
@@ -82,6 +83,27 @@
 											</div>
 										</div>
 										</form>
+									</div>		
+
+									<div class="modal fade" id="modal-api" tabindex="-1" role="dialog" aria-labelledby="modalApi" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="modalGetAPI"><?php echo lang($namespace.'_api');?></h5>
+													<button type="button" class="close closeModal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="frame">
+														<iframe id="getapi" src="" frameborder="0" style="width: 100%" height="400px"></iframe>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary closeModal"><?php echo lang('close');?></button>
+												</div>
+											</div>
+										</div>
 									</div>		
 
 								<?php

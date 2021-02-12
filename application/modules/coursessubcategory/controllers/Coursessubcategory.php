@@ -160,7 +160,7 @@ class Coursessubcategory extends CI_Controller {
 						'coursessubcategory' => $sheetData[$i][2],
 						'idcurriculum' => $sheetData[$i][3],
 					);
-					$this->model->save($data);
+					$this->model->createOrUpdate($data);
 				}
 				$msg=array(	
 					'msg'=>'true',

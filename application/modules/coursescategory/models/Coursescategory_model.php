@@ -48,6 +48,15 @@
 			parent::simpandata($this->db->dbprefix($this->table),$data);
 		}
 
+		public function createOrUpdate($data){
+			$sql = 'INSERT INTO siloupi_coursescategory(idcoursescategory, idcurriculum, coursescategory) '.
+			'VALUES (?, ?, ?) '.
+			'ON CONFLICT(idcoursescategory, idcurriculum) DO UPDATE SET '.
+			'coursescategory=EXCLUDED.coursescategory';
+			$this->db->query($sql, $data);
+		}
+
+
 		public function delete($key_1, $value_1, $key_2, $value_2)
 		{
 			$this->db->where($key_1, $value_1);

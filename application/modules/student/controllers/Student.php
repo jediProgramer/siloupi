@@ -99,6 +99,8 @@ class Student extends CI_Controller {
         $sheet->setCellValue('E1', 'class_generation');
         $sheet->setCellValue('F1', 'idlevel');
         $sheet->setCellValue('G1', 'idfaculty');
+        $sheet->setCellValue('H1', 'graduation_date');
+        $sheet->setCellValue('I1', 'gpa');
 
 		$i = 2;
 		foreach ($data as $d) {
@@ -109,6 +111,8 @@ class Student extends CI_Controller {
 			$sheet->setCellValue('E'.$i, $d['class_generation']);
 			$sheet->setCellValue('F'.$i, $d['idlevel']);
 			$sheet->setCellValue('G'.$i, $d['idfaculty']);
+			$sheet->setCellValue('H'.$i, $d['graduation_date']);
+			$sheet->setCellValue('I'.$i, $d['gpa']);
 			$i++;
 		}
         
@@ -160,32 +164,88 @@ class Student extends CI_Controller {
 			}
 			$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
 			$sheetData = $spreadsheet->getActiveSheet()->toArray();
-			
-			if($sheetData[0][0] == 'nim'){
-				for ($i=1; $i < count($sheetData); $i++) { 
-					$data=array(	
-						'nim' => $sheetData[$i][0],
-						'idprograme' => $sheetData[$i][1],
-						'name' => $sheetData[$i][2],
-						'status' => $sheetData[$i][3],
-						'class_generation' => $sheetData[$i][4],
-						'idlevel' => $sheetData[$i][5],
-						'idfaculty' => $sheetData[$i][6],
+
+			try{
+				if($sheetData[0][0] == 'nim'){
+					for ($i=1; $i < count($sheetData); $i++) { 
+						$data=array(	
+							'nim' => $sheetData[$i][0],
+							'idprograme' => $sheetData[$i][1],
+							'name' => $sheetData[$i][2],
+							'status' => $sheetData[$i][3],
+							'class_generation' => $sheetData[$i][4],
+							'idlevel' => $sheetData[$i][5],
+							'idfaculty' => $sheetData[$i][6],
+							'graduation_date' => $sheetData[$i][7],
+							'gpa' => $sheetData[$i][8]
+						);
+						$this->model->createOrUpdate($data);
+					}
+					$msg=array(	
+						'msg'=>'true',
+						'msg_success'=>lang('success_message_save')
 					);
-					$this->model->save($data);
+				}else{
+					$msg=array(	
+						'msg'=>'false',
+						'msg_error'=>lang('error_message_format')
+					);
 				}
-				$msg=array(	
-					'msg'=>'true',
-					'msg_success'=>lang('success_message_save')
-				);
-			}else{
+	
+				echo json_encode($msg);	
+			}catch(\Exception $th){
 				$msg=array(	
 					'msg'=>'false',
 					'msg_error'=>lang('error_message_format')
 				);
+				echo json_encode($msg);	
 			}
+			
 
-			echo json_encode($msg);	
 		}
 	}
+
+	function getapi(){
+		set_time_limit(0);
+		// $cmd = "java -jar ETLMahasiswa.jar";
+		$cmd = "java -jar Debug.jar 7";
+
+		// CARA 1 (SERVER ONLY)
+			// $descriptorspec = array(
+			//    0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
+			//    1 => array("pipe", "w"),   // stdout is a pipe that the child will write to
+			//    2 => array("pipe", "w")    // stderr is a pipe that the child will write to
+			// );
+			// flush();
+			// $process = proc_open($cmd, $descriptorspec, $pipes, realpath('./'), array());
+			// echo "<pre>";
+			// if (is_resource($process)) {
+			// 	while ($s = fgets($pipes[1])) {
+			// 		print $s;
+			// 		flush();
+			// 	}
+			// }
+			// echo "</pre>";
+		
+		// CARA 2
+			while (@ ob_end_flush()); // end all output buffers if any
+
+			$proc = popen($cmd, 'r');
+			echo '<pre>';
+			while (!feof($proc))
+			{
+				echo fread($proc, 4096);
+				@ flush();
+			}
+			echo '</pre>';
+		// CARA 3 (SERVER ONLY)
+			// $result = $this->shell->liveExecuteCommand('ping 127.0.0.1');
+			// if($result['exit_status'] === 0){
+			// 	// do something if command execution succeeds
+			//  } else {
+			// 	 // do something on failure
+			//  }
+		echo '<br><p id="success">Program Berhasil</p>';
+	}
+
 }

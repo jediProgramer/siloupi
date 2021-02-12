@@ -122,8 +122,6 @@ class Curriculum extends CI_Controller {
 
 		$prodi = $datauser[0]['idinstitution'];
 
-		$this->model->delete('idprograme', $prodi);
-
 		$file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		if(isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) {
 			$arr_file = explode('.', $_FILES['file']['name']);
@@ -144,7 +142,7 @@ class Curriculum extends CI_Controller {
 						'curriculum' => $sheetData[$i][2],
 						'idprograme' => $sheetData[$i][3]
 					);
-					$this->model->save($data);
+					$this->model->createOrUpdate($data);
 				}
 				$msg=array(	
 					'msg'=>'true',

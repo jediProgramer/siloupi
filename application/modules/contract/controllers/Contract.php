@@ -159,31 +159,40 @@ class Contract extends CI_Controller {
 			}
 			$spreadsheet = $reader->load($_FILES['file']['tmp_name']);
 			$sheetData = $spreadsheet->getActiveSheet()->toArray();
-			
-			if($sheetData[0][0] == 'idcourses'){
-				for ($i=1; $i < count($sheetData); $i++) { 
-					$data=array(	
-						'idcourses' => $sheetData[$i][0],
-						'nim' => $sheetData[$i][1],
-						'grade' => $sheetData[$i][2],
-						'idprograme' => $sheetData[$i][3],
-						'quality' => $sheetData[$i][4],
-						'idcurriculum' => $sheetData[$i][5],
+
+			try {
+				if($sheetData[0][0] == 'idcourses'){
+					for ($i=1; $i < count($sheetData); $i++) { 
+						$data=array(	
+							'idcourses' => $sheetData[$i][0],
+							'nim' => $sheetData[$i][1],
+							'grade' => $sheetData[$i][2],
+							'idprograme' => $sheetData[$i][3],
+							'quality' => $sheetData[$i][4],
+							'idcurriculum' => $sheetData[$i][5],
+						);
+						$this->model->createOrUpdate($data);
+					}
+					$msg=array(	
+						'msg'=>'true',
+						'msg_success'=>lang('success_message_save')
 					);
-					$this->model->save($data);
+				}else{
+					$msg=array(	
+						'msg'=>'false',
+						'msg_error'=>lang('error_message_format')
+					);
 				}
-				$msg=array(	
-					'msg'=>'true',
-					'msg_success'=>lang('success_message_save')
-				);
-			}else{
+				echo json_encode($msg);	
+			} catch (\Exception $th) {
 				$msg=array(	
 					'msg'=>'false',
 					'msg_error'=>lang('error_message_format')
 				);
+				echo json_encode($msg);	
 			}
+			
 
-			echo json_encode($msg);	
 		}
 	}
 }

@@ -34,6 +34,14 @@
 			$this->db->delete($this->db->dbprefix($this->table));
 		}
 
+		public function createOrUpdate($data){
+			$sql = 'INSERT INTO siloupi_curriculum(idcurriculum, idlevel, curriculum, idprograme) '.
+			'VALUES (?, ?, ?, ?) '.
+			'ON CONFLICT(idcurriculum) DO UPDATE SET '.
+			'idlevel=EXCLUDED.idlevel, curriculum=EXCLUDED.curriculum, idprograme=EXCLUDED.idprograme';
+			$this->db->query($sql, $data);
+		}
+
 		public function deleteById($id)
 		{
 			$this->delete($this->primary, $id);

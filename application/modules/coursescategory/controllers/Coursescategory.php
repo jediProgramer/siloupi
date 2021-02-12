@@ -157,7 +157,7 @@ class Coursescategory extends CI_Controller {
 						'idcurriculum' => $sheetData[$i][1],
 						'coursescategory' => $sheetData[$i][2],
 					);
-					$this->model->save($data);
+					$this->model->createOrUpdate($data);
 				}
 				$msg=array(	
 					'msg'=>'true',

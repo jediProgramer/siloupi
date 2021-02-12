@@ -29,6 +29,14 @@
 			parent::simpandata($this->db->dbprefix($this->table),$data);
 		}
 
+		public function createOrUpdate($data){
+			$sql = 'INSERT INTO siloupi_contract(idcourses, nim, grade, idprograme, quality, idcurriculum, courses) '.
+				   'VALUES (?, ?, ?, ?, ?, ?, ?) '.
+				   'ON CONFLICT(idcourses, nim, courses) DO UPDATE SET '.
+				   'idprograme=EXCLUDED.idprograme, grade=EXCLUDED.grade, quality=EXCLUDED.quality, idcurriculum=EXCLUDED.idcurriculum';
+			$this->db->query($sql, $data);
+		}
+
 		public function delete($key_1, $value_1, $key_2, $value_2, $key_3, $value_3)
 		{
 			$this->db->where($key_1, $value_1);

@@ -29,6 +29,14 @@
 			parent::simpandata($this->db->dbprefix($this->table),$data);
 		}
 
+		public function createOrUpdate($data){
+			$sql = 'INSERT INTO siloupi_student(nim, idprograme, "name", "status", class_generation, idlevel, idfaculty, graduation_date, gpa) '.
+				   'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) '.
+				   'ON CONFLICT(nim) DO UPDATE SET '.
+				   'idprograme=EXCLUDED.idprograme, "name"=EXCLUDED."name", "status"=EXCLUDED."status", class_generation=EXCLUDED.class_generation, idlevel = EXCLUDED.idlevel, idfaculty = EXCLUDED.idfaculty, graduation_date = EXCLUDED.graduation_date, gpa = EXCLUDED.gpa';
+			$this->db->query($sql, $data);
+		}
+
 		public function delete($key, $value)
 		{
 			$this->db->where($key, $value);

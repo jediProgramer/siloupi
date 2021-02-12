@@ -201,7 +201,7 @@ $lang['learning_outcomes'] = 'Learning Outcomes';
 $lang['curriculum_hallo'] = 'Entri Data Kurikulum';
 $lang['curriculum_add'] = 'Upload Data Kurikulum';
 $lang['curriculum_delete'] = 'Hapus Data Kurikulum';
-$lang['curriculum_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('curriculum/export').'"><b>disini</b></a>. Anda dapat menambah, mengubah, atau menghapus dari data yang ada.';
+$lang['curriculum_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('curriculum/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['curriculum_idcurriculum'] = 'Kode Kurikulum';
 $lang['curriculum_idlevel'] = 'Jenjang';
@@ -212,7 +212,7 @@ $lang['curriculum_idprograme'] = 'Kode Program Studi';
 $lang['coursescategory_hallo'] = 'Entri Data Kategori Mata Kuliah';
 $lang['coursescategory_add'] = 'Upload Data Kategori Mata Kuliah';
 $lang['coursescategory_delete'] = 'Hapus Data Kategori Mata Kuliah';
-$lang['coursescategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursescategory/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+$lang['coursescategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursescategory/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['coursescategory_idcurriculum'] = 'Kode Kurikulum';
 $lang['coursescategory_idcoursescategory'] = 'Kode Kategori';
@@ -222,7 +222,7 @@ $lang['coursescategory_coursescategory'] = 'Deskripsi';
 $lang['coursessubcategory_hallo'] = 'Entri Data Sub Kategori Mata Kuliah';
 $lang['coursessubcategory_add'] = 'Upload Data Sub Kategori Mata Kuliah';
 $lang['coursessubcategory_delete'] = 'Hapus Data Sub Kategori Mata Kuliah';
-$lang['coursessubcategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursessubcategory/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+$lang['coursessubcategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursessubcategory/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['coursessubcategory_idcurriculum'] = 'Kode Kurikulum';
 $lang['coursessubcategory_idcoursescategory'] = 'Kode Kategori';
@@ -233,7 +233,7 @@ $lang['coursessubcategory_coursessubcategory'] = 'Deskripsi';
 $lang['courses_hallo'] = 'Entri Data Mata Kuliah';
 $lang['courses_add'] = 'Upload Data Mata Kuliah';
 $lang['courses_delete'] = 'Hapus Data Mata Kuliah';
-$lang['courses_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('courses/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+$lang['courses_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('courses/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['courses_idcourses'] = 'Kode Matkul';
 $lang['courses_idcurriculum'] = 'Kode Kurikulum';
@@ -246,8 +246,9 @@ $lang['courses_credit'] = 'Jumlah SKS';
 //======================== Entri Data Student ====================
 $lang['student_hallo'] = 'Entri Data Mahasiswa';
 $lang['student_add'] = 'Upload Data Mahasiswa';
+$lang['student_api'] = 'Ambil Data dari Dirtik';
 $lang['student_delete'] = 'Hapus Data Mahasiswa';
-$lang['student_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('student/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+$lang['student_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('student/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['student_nim'] = 'NIM';
 $lang['student_idprograme'] = 'Kode Prodi';
@@ -261,7 +262,7 @@ $lang['student_idfaculty'] = 'Kode Fakultas';
 $lang['contract_hallo'] = 'Entri Data Transkrip';
 $lang['contract_add'] = 'Upload Data Transkrip';
 $lang['contract_delete'] = 'Hapus Data Transkrip';
-$lang['contract_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('contract/template').'"><b>disini</b></a>. Anda hanya dapat menambah data.';
+$lang['contract_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('contract/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
 
 $lang['contract_idcourses'] = 'Kode Matkul';
 $lang['contract_nim'] = 'NIM';

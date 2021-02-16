@@ -44,14 +44,6 @@ $lang['success_message_delete'] = 'Data berhasil dihapus';
 $lang['delete_info']='Yakin akan menghapus data ';
 $lang['no']='No';
 
-$lang['export'] = 'Expor File';
-$lang['chosefile_csv'] = 'Pilih File';
-$lang['file_csv'] = 'File';
-$lang['add_csv'] = 'Impor File';
-$lang['error_message_csv'] = 'Bukan format yang sesuai';
-$lang['csv_error_msg'] = 'Isi file csv';
-$lang['error_message_format'] = 'Format Impor Tidak Sesuai';
-
 //============================= Lang Edit Profile ===============================
 $lang['edit_profile'] = 'Edit Profile';
 $lang['user_profile_hallo'] = 'Menu untuk melihat profil akun Anda';
@@ -185,7 +177,11 @@ $lang['edit_plo'] = 'Edit Data Program Learning Outcome';
 $lang['delete_lo'] = 'Hapus LO';
 $lang['plo_error_msg'] = 'Isi PLO';
 $lang['codelo_error_msg'] = 'Isi Kode LO';
-
+$lang['chosefile_csv'] = 'Pilih File CSV';
+$lang['file_csv'] = 'File CSV';
+$lang['add_csv'] = 'Tambah CSV';
+$lang['error_message_csv'] = 'Bukan format CSV';
+$lang['csv_error_msg'] = 'Isi file csv';
 $lang['upload_csv_lo_info'] = 'File yang diupload harus dalam bentuk file format <b>CSV</b>, contoh template file csv bisa diunduh <a href="http://localhost/siloupi/assets/files/templatecsv/templatecsvlo.csv"><b>disini</b></a>. Pada kolom pertama isikan <b>Kode LO</b>, dan kolom kedua isikan <b>Nama LO</b>.';
 $lang['curriculum_code'] = 'Kode Kurikulum';
 $lang['level'] = 'Strata';
@@ -197,87 +193,17 @@ $lang['credit'] = 'SKS';
 $lang['credit_total'] = 'Jumlah SKS';
 $lang['learning_outcomes'] = 'Learning Outcomes';
 
-//======================== Entri Data Kurikulum ====================
-$lang['curriculum_hallo'] = 'Entri Data Kurikulum';
-$lang['curriculum_add'] = 'Upload Data Kurikulum';
-$lang['curriculum_delete'] = 'Hapus Data Kurikulum';
-$lang['curriculum_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('curriculum/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['curriculum_idcurriculum'] = 'Kode Kurikulum';
-$lang['curriculum_idlevel'] = 'Jenjang';
-$lang['curriculum_curriculum'] = 'Kurikulum';
-$lang['curriculum_idprograme'] = 'Kode Program Studi';
-
-//======================== Entri Data CourseCategory ====================
-$lang['coursescategory_hallo'] = 'Entri Data Kategori Mata Kuliah';
-$lang['coursescategory_add'] = 'Upload Data Kategori Mata Kuliah';
-$lang['coursescategory_delete'] = 'Hapus Data Kategori Mata Kuliah';
-$lang['coursescategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursescategory/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['coursescategory_idcurriculum'] = 'Kode Kurikulum';
-$lang['coursescategory_idcoursescategory'] = 'Kode Kategori';
-$lang['coursescategory_coursescategory'] = 'Deskripsi';
-
-//======================== Entri Data CourseSubCategory ====================
-$lang['coursessubcategory_hallo'] = 'Entri Data Sub Kategori Mata Kuliah';
-$lang['coursessubcategory_add'] = 'Upload Data Sub Kategori Mata Kuliah';
-$lang['coursessubcategory_delete'] = 'Hapus Data Sub Kategori Mata Kuliah';
-$lang['coursessubcategory_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('coursessubcategory/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['coursessubcategory_idcurriculum'] = 'Kode Kurikulum';
-$lang['coursessubcategory_idcoursescategory'] = 'Kode Kategori';
-$lang['coursessubcategory_idcoursessubcategory'] = 'Kode Subkategori';
-$lang['coursessubcategory_coursessubcategory'] = 'Deskripsi';
-
-//======================== Entri Data Course ====================
-$lang['courses_hallo'] = 'Entri Data Mata Kuliah';
-$lang['courses_add'] = 'Upload Data Mata Kuliah';
-$lang['courses_delete'] = 'Hapus Data Mata Kuliah';
-$lang['courses_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('courses/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['courses_idcourses'] = 'Kode Matkul';
-$lang['courses_idcurriculum'] = 'Kode Kurikulum';
-$lang['courses_idcoursescategory'] = 'Kode Kategori';
-$lang['courses_idcoursessubcategory'] = 'Kode Subkategori';
-$lang['courses_idsemester'] = 'Semester';
-$lang['courses_courses'] = 'Nama Matkul';
-$lang['courses_credit'] = 'Jumlah SKS';
-
-//======================== Entri Data Student ====================
-$lang['student_hallo'] = 'Entri Data Mahasiswa';
-$lang['student_add'] = 'Upload Data Mahasiswa';
-$lang['student_api'] = 'Ambil Data dari Dirtik';
-$lang['student_delete'] = 'Hapus Data Mahasiswa';
-$lang['student_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('student/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['student_nim'] = 'NIM';
-$lang['student_idprograme'] = 'Kode Prodi';
-$lang['student_name'] = 'Nama';
-$lang['student_status'] = 'Status';
-$lang['student_class_generation'] = 'Angkatan';
-$lang['student_idlevel'] = 'Jenjang';
-$lang['student_idfaculty'] = 'Kode Fakultas';
-
-//======================== Entri Data Contract ====================
-$lang['contract_hallo'] = 'Entri Data Transkrip';
-$lang['contract_add'] = 'Upload Data Transkrip';
-$lang['contract_delete'] = 'Hapus Data Transkrip';
-$lang['contract_upload_info'] = 'File yang diupload harus dalam bentuk file format <b>Yang Disediakan</b>, contoh template bisa diunduh <a href="'.site_url('contract/export').'"><b>disini</b></a>. Anda hanya dapat menambah dan mengubah data yang ada.';
-
-$lang['contract_idcourses'] = 'Kode Matkul';
-$lang['contract_nim'] = 'NIM';
-$lang['contract_grade'] = 'Nilai';
-$lang['contract_idprograme'] = 'Kode Prodi';
-$lang['contract_quality'] = 'Mutu';
-$lang['contract_idcurriculum'] = 'Kode Kurikulum';
-
 //======================== Reports Learning Outcomes =======================
 $lang['lostudentprograme_hallo'] = 'Laporan Learning Outcomes Mahasiswa';
 $lang['loclassgenerationprograme_hallo'] = 'Laporan Learning Outcomes Perangkatan';
 $lang['class_generation'] = 'Angkatan';
+$lang['graduate_generation'] = 'Tahun Wisuda';
+$lang['graduate_name'] = 'Periode Wisuda';
 $lang['student_name'] = 'Nama Mahasiswa';
 $lang['search'] = 'Cari';
 $lang['chose_year'] = '-- Pilih Tahun --';
+$lang['graduation_date'] = '-- Pilih Tahun Periode Wisuda --';
+$lang['graduation_name'] = '-- Pilih Periode Wisuda --';
 $lang['barchartlo'] = 'Bar Chart Learning Outcome';
 $lang['barchartlocg'] = 'Bar Chart Learning Outcome Angkatan';
 $lang['nim'] = 'NIM';

@@ -36,6 +36,7 @@ class Auth extends CI_Controller {
 				$idusers=$datalogin['idusers'];
 				$fullname=$datalogin['fullname'];
 				$nip=$datalogin['nip'];
+				$idinstitution=$datalogin['idinstitution'];
 				$email=$datalogin['email'];
 				$roles=$datalogin['roles'];
 				$profilepicture=$datalogin['profilepicture'];
@@ -70,6 +71,11 @@ class Auth extends CI_Controller {
 			);
 			$this->model_siloupi->update($this->db->dbprefix('users'),$data,$clause);
 			
+			$datainstitution=array(
+				'idinstitution'=>$idinstitution
+			);
+
+			$this->session->set_userdata($datainstitution);
 			$this->session->set_userdata($dlogin);
 			//redirect(site_url('dashboard'));
 			

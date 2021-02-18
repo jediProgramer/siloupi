@@ -97,7 +97,7 @@ class Laporan extends CI_Controller {
         $date = $this->input->post('graduation_name');
         $data['years'] = $this->graduation_year();
         if($date == 0 || $date == ""){
-			$this->session->set_flashdata('message', 'Pilih tahun terlebih dahulu!');
+			$this->session->set_flashdata('message', 'Pilih tahun dan periode wisuda terlebih dahulu!');
             redirect(site_url("laporan"));
         }else{
             $data['lo']=$this->model_laporan->seluruh_lo_mhs_by_date($date)->result();

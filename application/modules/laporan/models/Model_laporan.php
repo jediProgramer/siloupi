@@ -29,7 +29,8 @@
 
 		public function seluruh_lo_mhs_by_date($id_grad)
 		{
-			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where a.id_grad = '$id_grad' and a.id_grad = b.idgraduation");
+			$id_user = $this->session->userdata('idinstitution');
+			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where a.id_grad = '$id_grad' and a.id_grad = b.idgraduation and idprograme = '$id_user'");
 			return $query;
 		}
 		
@@ -40,14 +41,19 @@
 			return $query;
 		}
 		
-		public function nilai_lo($nim)
+		public function nilai_lo($nim, $idcurricullum)
 		{
 			$id_user = $this->session->userdata('idinstitution');
-			$query=$this->db->query("select idlo, ((avg(DISTINCT quality))*25) as nilai_lo from view_all_lo_crosstab_d055 where nim = '$nim' AND idprograme ='D055' AND idcurriculum = 'D05518' GROUP BY idlo ORDER BY idlo asc ");
+			$query=$this->db->query("select idlo, ((avg(DISTINCT quality))*25) as nilai_lo from view_all_lo_crosstab_d055 where nim = '$nim' AND idprograme ='$id_user' AND idcurriculum = '$idcurricullum' GROUP BY idlo ORDER BY idlo asc ");
 			return $query;
 		}
 
-		function hitung_quartil($date, $nim){
+		public function getcurriculum($idprogram){
+			$query=$this->db->query("select idcurriculum from siloupi_curriculum where idprograme = '$idprogram'");
+			return $query;
+		}
+
+		function hitung_quartil($date, $nim, $idcurricullum){
 			$count_lo = $this->model_laporan->show_lo()->num_rows();
 			$lo = $this->model_laporan->seluruh_lo_mhs_by_date($date)->result();
 			$rataarr = array();
@@ -55,7 +61,7 @@
 			foreach($lo as $d){
 				$jumlahlo = 0;
 				$j = 0;
-				$nilailo = $this->model_laporan->nilai_lo($d->nim)->result();
+				$nilailo = $this->model_laporan->nilai_lo($d->nim, $idcurricullum)->result();
 				$rata2lo = array();
 				foreach($nilailo as $e){ 
 					$nilai_lo = number_format($e->nilai_lo, 2, '.', '');

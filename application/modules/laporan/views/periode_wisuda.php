@@ -22,9 +22,15 @@
                     <div class="card-body">
                         <form class="form-horizontal" action="<?php echo base_url()?>laporan/periode_wisuda" method="post" id="filterloForm" name="filterloForm">
 						<div class="form-row">
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-6">
 								<label for="years"><?php echo lang('graduate_generation');?></label>
 								<?php echo $years;?>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="years"><?php echo lang('graduate_name');?></label>
+								<select id='id_grad' name='graduation_name' class='form-control'>
+									<option value='0'><?php echo lang('graduation_name');?></option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -44,4 +50,10 @@
 	</div>
 </main>
 <!-- END: Content-->
+
+<script>
+	function graduation_id(x){
+		$('#id_grad').load("<?php echo site_url('laporan/graduation_id')?>"+"/" + x);
+	}
+</script>
         

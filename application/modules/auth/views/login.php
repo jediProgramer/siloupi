@@ -67,7 +67,6 @@
                             <div class="form-group col-sm-12">
                                 <button class="btn btn-primary" type="submit"><?php echo lang('login');?></button>
                             </div>
-                            <div class="col-sm-10"><?php echo lang('dont_have_account');?> <a href="page-register.html"><?php echo lang('create_account');?></a></div>
                         </div>
                     </form>
                 </div>

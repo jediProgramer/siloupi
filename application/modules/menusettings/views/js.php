@@ -86,6 +86,7 @@ $('#addMenu').validate({
 	submitHandler: function (form) {
 		var menu = $('#menu').val();
 		var icon = $('#icon').val();
+		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
 			url  : "<?php echo site_url('menusettings/savenavkategori')?>",
@@ -99,7 +100,7 @@ $('#addMenu').validate({
 						}
 					  })      
 			},
-			data : {menu:menu, icon:icon},
+			data : {menu:menu, icon:icon, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -158,6 +159,7 @@ $('#editMenu').validate({
 	submitHandler: function (form) {
 		var menu = $('#menu').val();
 		var icon = $('#icon').val();
+		var short = $('#short').val();
 		var idnavcategory = $('#idnavcategory').val();
 		$.ajax({
 			type : "POST",
@@ -172,7 +174,7 @@ $('#editMenu').validate({
 						}
 					  })      
 			},
-			data : {menu:menu, icon:icon, idnavcategory:idnavcategory},
+			data : {menu:menu, icon:icon, short:short, idnavcategory:idnavcategory},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -274,6 +276,7 @@ $('.deleteMenu').on('click',function(){
 		var navigation = $('#navigation').val();
 		var icon = $('#icon').val();
 		var link = $('#link').val();
+		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
 			url  : "<?php echo site_url('menusettings/savenavigasi')?>",
@@ -287,7 +290,7 @@ $('.deleteMenu').on('click',function(){
 						}
 					  })      
 			},
-			data : {idnavcategory:idnavcategory, navigation:navigation, icon:icon, link:link},
+			data : {idnavcategory:idnavcategory, navigation:navigation, icon:icon, link:link, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -349,6 +352,7 @@ $('.deleteMenu').on('click',function(){
 		var navigation = $('#navigation').val();
 		var icon = $('#icon').val();
 		var link = $('#link').val();
+		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
 			url  : "<?php echo site_url('menusettings/updatenavigasi')?>",
@@ -362,7 +366,7 @@ $('.deleteMenu').on('click',function(){
 						}
 					  })      
 			},
-			data : {idnavigation:idnavigation, idnavcategory:idnavcategory, navigation:navigation, icon:icon, link:link},
+			data : {idnavigation:idnavigation, idnavcategory:idnavcategory, navigation:navigation, icon:icon, link:link, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -464,6 +468,7 @@ $('.deleteMenu').on('click',function(){
 		var subnavigation = $('#subnavigation').val();
 		var icon = $('#icon').val();
 		var link = $('#link').val();
+		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
 			url  : "<?php echo site_url('menusettings/savesubnavigasi')?>",
@@ -477,7 +482,7 @@ $('.deleteMenu').on('click',function(){
 						}
 					  })      
 			},
-			data : {idnavigation:idnavigation, subnavigation:subnavigation, icon:icon, link:link},
+			data : {idnavigation:idnavigation, subnavigation:subnavigation, icon:icon, link:link, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -539,6 +544,7 @@ $('.deleteMenu').on('click',function(){
 		var subnavigation = $('#subnavigation').val();
 		var icon = $('#icon').val();
 		var link = $('#link').val();
+		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
 			url  : "<?php echo site_url('menusettings/updatesubnavigasi')?>",
@@ -552,7 +558,7 @@ $('.deleteMenu').on('click',function(){
 						}
 					  })      
 			},
-			data : {idsubnavigation:idsubnavigation, idnavigation:idnavigation, subnavigation:subnavigation, icon:icon, link:link},
+			data : {idsubnavigation:idsubnavigation, idnavigation:idnavigation, subnavigation:subnavigation, icon:icon, link:link, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({

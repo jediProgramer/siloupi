@@ -103,6 +103,7 @@ $lang['menusecond_name']='Nama Menu Kedua';
 $lang['menuthird_name']='Nama Menu Ketiga';
 $lang['icon']='Ikon';
 $lang['link']='Tautan';
+$lang['short']='Urutan';
 $lang['menu_error_msg'] = 'Isi nama menu';
 $lang['menusecond_error_msg'] = 'Isi nama menu kedua';
 $lang['menuthird_error_msg'] = 'Isi nama menu ketiga';

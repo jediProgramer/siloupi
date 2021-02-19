@@ -62,7 +62,13 @@
 														<div class="col-sm-10">
 															<input type="text" class="form-control" name="link" id="link" placeholder="<?php echo lang('link');?>" >
 														</div>
-													</div>													
+													</div>
+													<div class="form-group row">
+														<label for="short" class="col-sm-2 col-form-label"><?php echo lang('short');?></label>
+														<div class="col-sm-10">
+															<input type="number" class="form-control" name="short" id="short" placeholder="<?php echo lang('short');?>" required>
+														</div>
+													</div>														
                                                 <div class="form-group row">
                                                     <div class="col-sm-10">
                                                         <button type="submit" class="btn btn-primary"><?php echo lang('submit');?></button>

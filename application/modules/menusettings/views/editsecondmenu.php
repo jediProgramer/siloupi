@@ -75,7 +75,13 @@
 														<div class="col-sm-10">
 															<input type="text" class="form-control" name="link" id="link" placeholder="<?php echo lang('link');?>" value="<?php echo $dn["link"];?>">
 														</div>
-													</div>													
+													</div>	
+													<div class="form-group row">
+														<label for="short" class="col-sm-2 col-form-label"><?php echo lang('short');?></label>
+														<div class="col-sm-10">
+															<input type="number" class="form-control" name="short" id="short" placeholder="<?php echo lang('short');?>" value="<?php echo $dn["short"];?>" required>
+														</div>
+													</div>												
                                                 <div class="form-group row">
                                                     <div class="col-sm-10">
 														<input type="hidden" class="form-control" id="idnavigation" name="idnavigation" value="<?php echo $dn["idnavigation"];?>">

@@ -216,7 +216,8 @@ class Menusettings extends CI_Controller {
 		$data=array(	
 			'idusers'=>$idusers,
 			'menu'=>$this->input->post('menu'),
-			'icon'=>$this->input->post('icon')
+			'icon'=>$this->input->post('icon'),
+			'short'=>$this->input->post('short')
 		);
 		$this->model_siloupi->simpandata($this->db->dbprefix('navcategory'),$data);
 		$msg=array(	
@@ -231,7 +232,8 @@ class Menusettings extends CI_Controller {
 		$idnavcategory=$this->input->post('idnavcategory');
 		$data=array(	
 			'menu'=>$this->input->post('menu'),
-			'icon'=>$this->input->post('icon')
+			'icon'=>$this->input->post('icon'),
+			'short'=>$this->input->post('short')
 		);
 		$clause=array('idnavcategory'=>$idnavcategory);
 		$this->model_siloupi->update($this->db->dbprefix('navcategory'),$data,$clause);
@@ -262,7 +264,8 @@ class Menusettings extends CI_Controller {
 			'idnavcategory '=>$this->input->post('idnavcategory'),
 			'navigation'=>$this->input->post('navigation'),
 			'icon'=>$this->input->post('icon'),
-			'link'=>$this->input->post('link')
+			'link'=>$this->input->post('link'),
+			'short'=>$this->input->post('short')
 		);
 		$this->model_siloupi->simpandata($this->db->dbprefix('navigation'),$data);
 		$msg=array(	
@@ -281,7 +284,8 @@ class Menusettings extends CI_Controller {
 			'idnavcategory '=>$this->input->post('idnavcategory'),
 			'navigation'=>$this->input->post('navigation'),
 			'icon'=>$this->input->post('icon'),
-			'link'=>$this->input->post('link')
+			'link'=>$this->input->post('link'),
+			'short'=>$this->input->post('short')
 		);
 		$clause=array('idnavigation'=>$idnavigation);
 		$this->model_siloupi->update($this->db->dbprefix('navigation'),$data,$clause);
@@ -312,7 +316,8 @@ class Menusettings extends CI_Controller {
 			'idnavigation'=>$this->input->post('idnavigation'),
 			'subnavigation'=>$this->input->post('subnavigation'),
 			'icon'=>$this->input->post('icon'),
-			'link'=>$this->input->post('link')
+			'link'=>$this->input->post('link'),
+			'short'=>$this->input->post('short')
 		);
 		$this->model_siloupi->simpandata($this->db->dbprefix('subnavigation'),$data);
 		$msg=array(	
@@ -331,7 +336,8 @@ class Menusettings extends CI_Controller {
 			'idnavigation'=>$this->input->post('idnavigation'),
 			'subnavigation'=>$this->input->post('subnavigation'),
 			'icon'=>$this->input->post('icon'),
-			'link'=>$this->input->post('link')
+			'link'=>$this->input->post('link'),
+			'short'=>$this->input->post('short')
 		);
 		$clause=array('idsubnavigation'=>$idsubnavigation);
 		$this->model_siloupi->update($this->db->dbprefix('subnavigation'),$data,$clause);

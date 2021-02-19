@@ -3,7 +3,7 @@
             <div class="site-width">
                 <nav class="navbar navbar-expand-lg  p-0">
                     <div class="navbar-header  h-100 h4 mb-0 align-self-center logo-bar text-left">
-                        <a href="index.html" class="horizontal-logo text-left">
+                        <a href="<?php echo base_url();?>" class="horizontal-logo text-left">
 							<img src="<?php echo base_url();?>assets/dist/images/logo-upi.svg" width="25" height="25" alt="Logo SILO" style="filter: invert(100%) sepia(0%) saturate(7241%) hue-rotate(333deg) brightness(113%) contrast(105%) opacity(80%)">
                             </svg> <span class="h4 font-weight-bold align-self-center mb-0 ml-auto"><?php echo lang('apps_name');?></span>
                         </a>

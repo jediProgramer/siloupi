@@ -74,13 +74,15 @@ class Entrydata extends CI_Controller {
 		$data['fullname'] = $this->session->userdata('fullname');
 		$data['idplo'] = "";
 		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
 		$data['profilepicture'] = $row->profilepicture;
+		$data['idinstitution'] = $row->idinstitution;
 		// End
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
+		$data['datacurriculum']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme',$data['idinstitution']);
 		$data['content'] = 'entrydata/addplo';
 		$data['meta'] = 'entrydata/meta';
 		$data['css'] = 'entrydata/css';
@@ -88,7 +90,7 @@ class Entrydata extends CI_Controller {
 		$this->load->view('template/template',$data);
 	}
 
-	public function addmappingplo()
+	public function addmappingplo($idcurriculum)
 	{
 		$data['menuname'] = "Tambah Pemetaan Data Learning Outcomes";
 		$data['idusers'] = $this->session->userdata('idusers');
@@ -113,9 +115,9 @@ class Entrydata extends CI_Controller {
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
 		//Tampilkan ID Curriculum
-		$queryc = $this->db->query("SELECT idcurriculum FROM ".$this->db->dbprefix('curriculum')." WHERE idprograme='".$data['idinstitution']."'");
-		$rowc = $queryc->row();
-		$data['idcurriculum'] = $rowc->idcurriculum;
+		//$queryc = $this->db->query("SELECT idcurriculum FROM ".$this->db->dbprefix('curriculumx')." WHERE idprograme='".$data['idinstitution']."'");
+		//$rowc = $queryc->row();
+		$data['idcurriculum'] = $idcurriculum;
 		//End
 		$data['datalo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('lo'),'idlo','idplo',$data['idplo']);
 
@@ -175,14 +177,16 @@ class Entrydata extends CI_Controller {
 		$data['idplo'] = $idplo;
 		$data['fullname'] = $this->session->userdata('fullname');
 		// Tampilkan Profile Picture
-		$queryimg = $this->db->query("SELECT profilepicture FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
+		$queryimg = $this->db->query("SELECT profilepicture, idinstitution FROM ".$this->db->dbprefix('users')." WHERE idusers='".$data['idusers']."'");
 		$row = $queryimg->row();
 		$data['profilepicture'] = $row->profilepicture;
+		$data['idinstitution'] = $row->idinstitution;
 		// End
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
 		$data['dataplo']=$this->model_siloupi->ambildataById($this->db->dbprefix('plo'),'idplo',$data['idplo']);
+		$data['datacurriculum']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('curriculum'),'idcurriculum','idprograme',$data['idinstitution']);
 		$data['content'] = 'entrydata/editplo';
 		$data['meta'] = 'entrydata/meta';
 		$data['css'] = 'entrydata/css';
@@ -247,6 +251,7 @@ class Entrydata extends CI_Controller {
 			'idusers'=>$idusers,
 			'plo'=>$this->input->post('plo'),
 			'idprograme'=>$this->input->post('idinstitution'),
+			'idcurriculum'=>$this->input->post('idcurriculum'),
 			'active'=>0
 		);
 		$this->model_siloupi->simpandata($this->db->dbprefix('plo'),$data);
@@ -349,7 +354,8 @@ class Entrydata extends CI_Controller {
     {
 		$idplo=$this->input->post('idplo');
 		$data=array(	
-			'plo'=>$this->input->post('plo')
+			'plo'=>$this->input->post('plo'),
+			'idcurriculum'=>$this->input->post('idcurriculum')
 		);
 		$clause=array('idplo'=>$idplo);
 		$this->model_siloupi->update($this->db->dbprefix('plo'),$data,$clause);

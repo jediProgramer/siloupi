@@ -47,6 +47,21 @@
 														}
 													?>
 													<div class="form-group row">
+														<label for="idcurriculum" class="col-sm-2 col-form-label"><?php echo lang('curriculum');?></label>
+														<div class="col-sm-10">
+															<select class="form-control" id="idcurriculum" name="idcurriculum">
+															<?php
+																foreach($datacurriculum as $dc)
+																{
+															?>
+															  <option value="<?php echo $dc["idcurriculum"];?>" <?php if($dc["idcurriculum"]==$d["idcurriculum"]){echo "selected";}?>><?php echo $dc["curriculum"];?></option>
+															<?php
+																}
+															?>  
+															</select>
+														</div>
+													</div>
+													<div class="form-group row">
 														<label for="menu" class="col-sm-2 col-form-label"><?php echo lang('plo');?></label>
 														<div class="col-sm-10">
 															<input type="text" class="form-control" name="plo" id="plo" placeholder="<?php echo lang('plo');?>" value="<?php echo $d["plo"];?>" required>

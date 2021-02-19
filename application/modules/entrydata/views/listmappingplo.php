@@ -42,6 +42,18 @@
 										$query = $this->db->query("SELECT level FROM ".$this->db->dbprefix('level')." WHERE idlevel='".$d['idlevel']."'");
 										$row = $query->row();
 										$level = $row->level;	
+										
+										//Tampilkan Total LO
+										$querylo = $this->db->query("SELECT COUNT(*)AS totallo FROM ".$this->db->dbprefix('lo')." a, ".$this->db->dbprefix('plo')." b WHERE a.idplo=b.idplo AND b.idcurriculum='".$d["idcurriculum"]."'");
+										$rowlo = $querylo->row();
+										$totallo = $rowlo->totallo;
+										// End
+
+										//Tampilkan Total Courses
+										$querycourses = $this->db->query("SELECT COUNT(*)AS totalcourses FROM ".$this->db->dbprefix('courses')." WHERE idcurriculum='".$d["idcurriculum"]."'");
+										$rowcourses = $querycourses->row();
+										$totalcourses = $rowcourses->totalcourses;
+										// End
 
 									$i++;
 									?>	
@@ -50,7 +62,7 @@
 									  <td><?php echo $level;?></td>
 									  <td><?php echo $d["curriculum"];?></td>
 									  <td style="text-align:center">
-									  <a <?php if($totalplo==0){ ?>class="btn disabled"<?php }else{ ?>class="btn btn-primary btn-sm"<?php } ?> href="<?php echo base_url()?>entrydata/addmappingplo/<?php echo $d["idcurriculum"];?>"><i class="fas fa-map">&nbsp;</i><?php echo lang('mapping');?></a> &nbsp; 
+									  <a <?php if(($totallo==0) && ($totalcourses==0)){ ?>class="btn disabled"<?php }else{ ?>class="btn btn-primary btn-sm"<?php } ?> href="<?php echo base_url()?>entrydata/addmappingplo/<?php echo $d["idcurriculum"];?>"><i class="fas fa-map">&nbsp;</i><?php echo lang('mapping');?></a> &nbsp; 
 									</tr>
 									
 								<?php

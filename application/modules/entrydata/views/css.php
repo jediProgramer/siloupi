@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/vendors/ionicons/css/ionicons.min.css">         
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/vendors/social-button/bootstrap-social.css"/>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/vendors/fontawesome/css/all.min.css">
+
+<!-- Select2 -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/select2/css/select2.min.css">
+<link rel="stylesheet" href="<?php echo base_url()?>assets/dist/vendors/select2/css/select2-bootstrap.min.css">
 <!-- END: Page CSS-->
 
 <!-- summernote -->

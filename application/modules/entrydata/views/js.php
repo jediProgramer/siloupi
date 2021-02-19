@@ -22,6 +22,8 @@
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.flash.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/vendors/datatable/buttons/js/buttons.print.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url()?>assets/dist/vendors/select2/js/select2.full.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- Summernote -->
@@ -71,6 +73,20 @@ $(document).ready(function () {
   });
 </script>
 
+<!--Initialize Select2 Elements -->
+<script type="text/javascript">
+(function ($) {
+    "use strict";
+   $('select').each(function () {
+    $(this).select2({
+      theme: 'bootstrap4',
+      width: 'style',
+      placeholder: $(this).attr('placeholder'),
+      allowClear: Boolean($(this).data('allow-clear')),
+    });
+  });
+})(jQuery);
+</script>
 
 <!-- Script jquery-validation -->
 <script type="text/javascript">
@@ -89,6 +105,7 @@ messages: {
 },
 submitHandler: function (form) {
 	var idinstitution = $('#idinstitution').val();
+	var idcurriculum = $('#idcurriculum').val();
 	var plo = $('#plo').val();
 	$.ajax({
 		type : "POST",
@@ -103,7 +120,7 @@ submitHandler: function (form) {
 					}
 					})      
 		},
-		data : {idinstitution:idinstitution, plo:plo},
+		data : {idinstitution:idinstitution, idcurriculum:idcurriculum, plo:plo},
 		success: function(value){
 			if (value.msg == 'true') {
 				swal({
@@ -222,6 +239,7 @@ messages: {
 },
 submitHandler: function (form) {
 	var idplo = $('#idplo').val();
+	var idcurriculum = $('#idcurriculum').val();
 	var plo = $('#plo').val();
 	$.ajax({
 		type : "POST",
@@ -236,7 +254,7 @@ submitHandler: function (form) {
 					}
 					})      
 		},
-		data : {idplo:idplo, plo:plo},
+		data : {idplo:idplo, idcurriculum:idcurriculum, plo:plo},
 		success: function(value){
 			if (value.msg == 'true') {
 				swal({

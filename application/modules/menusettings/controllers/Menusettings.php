@@ -217,6 +217,7 @@ class Menusettings extends CI_Controller {
 			'idusers'=>$idusers,
 			'menu'=>$this->input->post('menu'),
 			'icon'=>$this->input->post('icon'),
+			'link'=>$this->input->post('link'),
 			'short'=>$this->input->post('short')
 		);
 		$this->model_siloupi->simpandata($this->db->dbprefix('navcategory'),$data);
@@ -233,6 +234,7 @@ class Menusettings extends CI_Controller {
 		$data=array(	
 			'menu'=>$this->input->post('menu'),
 			'icon'=>$this->input->post('icon'),
+			'link'=>$this->input->post('link'),
 			'short'=>$this->input->post('short')
 		);
 		$clause=array('idnavcategory'=>$idnavcategory);

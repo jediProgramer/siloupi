@@ -11,6 +11,7 @@ $lang['remember_me'] = 'Simpan data Akun';
 $lang['dont_have_account'] = 'Belum memiliki akun?';
 $lang['create_account'] = 'Buat Akun';
 $lang['dashboard'] = 'Dashboard';
+$lang['home'] = 'Beranda';
 $lang['edit_profile'] = 'Ubah Profil';
 $lang['edit_profile_info'] = 'Jika ada yang salah dengan data <b>NIM</b> dan <b>Kode Dosen</b> Anda, silahkan hubungi admin sistem.';
 $lang['view_profile'] = 'Lihat Profil';
@@ -212,4 +213,19 @@ $lang['name'] = 'Nama';
 $lang['faculty'] = 'Fakultas';
 $lang['programe'] = 'Program Studi';
 $lang['status'] = 'Status';
+
+//======================== Dashboard ======================================
+$lang['msg_dashboard_header'] = 'Selamat Datang di Dashboard';
+$lang['msg_dashboard_content'] = '<p>Selamat Datang di Sistem Informasi Learning Outcomes UPI. Sistem Informasi ini  diharapkan dapat memonitor capaian pembelajaran oleh peserta didik setelah menyelesaikan suatu periode belajar.</p>';
+
+//======================== Param ======================================
+$lang['param_graduationperiod'] = 'Kelola Param Gel. Wisuda';
+$lang['param_graduationperiod_hallo'] = 'Menu untuk menggelola param gelombang wisuda';
+$lang['param_graduationperiod_add'] = 'Tambah Kelola Param Gel. Wisuda';
+$lang['param_graduationperiod_add_hallo'] = 'Menu untuk menambah param gelombang wisuda';
+$lang['param_graduationperiod_edit'] = 'Edit Kelola Param Gel. Wisuda';
+$lang['param_graduationperiod_edit_hallo'] = 'Menu untuk mengedit param gelombang wisuda';
+$lang['param_graduationperiod_delete'] = 'Hapus Kelola Param Gel. Wisuda';
+$lang['month_graduationperiod'] = 'Bulan Wisuda';
+$lang['graduate_name_error_msg'] = 'Isi periode wisuda';
 ?>

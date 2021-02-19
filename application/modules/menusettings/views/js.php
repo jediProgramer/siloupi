@@ -86,6 +86,7 @@ $('#addMenu').validate({
 	submitHandler: function (form) {
 		var menu = $('#menu').val();
 		var icon = $('#icon').val();
+		var link = $('#link').val();
 		var short = $('#short').val();
 		$.ajax({
 			type : "POST",
@@ -100,7 +101,7 @@ $('#addMenu').validate({
 						}
 					  })      
 			},
-			data : {menu:menu, icon:icon, short:short},
+			data : {menu:menu, link:link, icon:icon, short:short},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({
@@ -159,6 +160,7 @@ $('#editMenu').validate({
 	submitHandler: function (form) {
 		var menu = $('#menu').val();
 		var icon = $('#icon').val();
+		var link = $('#link').val();
 		var short = $('#short').val();
 		var idnavcategory = $('#idnavcategory').val();
 		$.ajax({
@@ -174,7 +176,7 @@ $('#editMenu').validate({
 						}
 					  })      
 			},
-			data : {menu:menu, icon:icon, short:short, idnavcategory:idnavcategory},
+			data : {menu:menu, icon:icon, link:link, short:short, idnavcategory:idnavcategory},
 			success: function(value){
 				if (value.msg == 'true') {
 					swal({

@@ -5,10 +5,10 @@
 		<div class="row">
 			<div class="col-12  align-self-center">
 				<div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
-					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang('menusettings_add_hallo');?></p></div>
+					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo $menuname;?></h4> <p><?php echo lang('param_graduationperiod_add_hallo');?></p></div>
 
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item"><a href="<?php echo base_url();?>menusettings/mainmenu"><?php echo lang('menusettings');?></a></li>
+						<li class="breadcrumb-item"><a href="<?php echo base_url();?>param/graduationperiod"><?php echo lang('param_graduationperiod');?></a></li>
 						<li class="breadcrumb-item active"><?php echo $menuname;?></li>
 					</ol>
 				</div>
@@ -28,29 +28,34 @@
                                 <div class="card-body">
                                     <div class="row">                                           
                                         <div class="col-12">
-                                            <form id="addMenu">
+                                            <form id="addGraduationPeriod">
 													<div class="form-group row">
-														<label for="menu" class="col-sm-2 col-form-label"><?php echo lang('menu_name');?></label>
+														<label for="years" class="col-sm-2 col-form-label"><?php echo lang('class_generation');?></label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="menu" id="menu" placeholder="<?php echo lang('menu_name');?>" required>
+															<select class="form-control" id="years" name="years">
+																<option value='0'><?php echo lang('chose_year');?></option>
+																<?php
+																	$now=date('Y');
+																	for ($a=2018;$a<=$now;$a++)
+																	{
+																?>
+																  <option value="<?php echo $a;?>"><?php echo $a;?></option>
+																<?php
+																	}
+																?>  
+																</select>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label for="icon" class="col-sm-2 col-form-label"><?php echo lang('icon');?></label>
+														<label for="graduate_name" class="col-sm-2 col-form-label"><?php echo lang('graduate_name');?></label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="icon" id="icon" placeholder="<?php echo lang('icon');?>" required>
+															<input type="text" class="form-control" name="graduate_name" id="graduate_name" placeholder="<?php echo lang('graduate_name');?>" required>
 														</div>
 													</div>	
 													<div class="form-group row">
-														<label for="link" class="col-sm-2 col-form-label"><?php echo lang('link');?></label>
+														<label for="month_graduationperiod" class="col-sm-2 col-form-label"><?php echo lang('month_graduationperiod');?></label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="link" id="link" placeholder="<?php echo lang('link');?>" >
-														</div>
-													</div>
-													<div class="form-group row">
-														<label for="short" class="col-sm-2 col-form-label"><?php echo lang('short');?></label>
-														<div class="col-sm-10">
-															<input type="number" class="form-control" name="short" id="short" placeholder="<?php echo lang('short');?>" required>
+															<input type="number" class="form-control" name="month_graduationperiod" id="month_graduationperiod" placeholder="<?php echo lang('month_graduationperiod');?>" required>
 														</div>
 													</div>											
                                                 <div class="form-group row">

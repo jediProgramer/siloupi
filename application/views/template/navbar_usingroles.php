@@ -3,7 +3,7 @@
             <div class="site-width">
                 <nav class="navbar navbar-expand-lg  p-0">
                     <div class="navbar-header  h-100 h4 mb-0 align-self-center logo-bar text-left">
-						<a href="<?php echo base_url();?>" class="horizontal-logo text-left">
+						<a href="<?php echo base_url();?>dashboard" class="horizontal-logo text-left">
 						<img src="<?php echo base_url();?>assets/dist/images/logo-upi.svg" width="25" height="25" alt="Logo SILO" style="filter: invert(100%) sepia(0%) saturate(7241%) hue-rotate(333deg) brightness(113%) contrast(105%) opacity(80%)">
                             </svg> <span class="h4 font-weight-bold align-self-center mb-0 ml-auto"><?php echo lang('apps_name');?></span>
                         </a>
@@ -47,12 +47,12 @@
                 <!-- START: Menu-->
                 <ul id="side-menu" class="sidebar-menu">
 					<?php 
-					$query1 = $this->db->query("SELECT DISTINCT a.idnavcategory, a.menu, a.icon, a.short FROM ".$this->db->dbprefix('navcategory')." a, ".$this->db->dbprefix('permissions')." b WHERE  a.idnavcategory=b.idnavcategory AND b.users_access=1 AND b.idroles=".$roles." ORDER BY a.short");
+					$query1 = $this->db->query("SELECT DISTINCT a.idnavcategory, a.menu, a.link, a.icon, a.short FROM ".$this->db->dbprefix('navcategory')." a, ".$this->db->dbprefix('permissions')." b WHERE  a.idnavcategory=b.idnavcategory AND b.users_access=1 AND b.idroles=".$roles." ORDER BY a.short");
 					$datanavcat=$query1->result(); 
 					foreach ($datanavcat as $dn)
 					{
 					?>
-						<li class="dropdown <?php if($dn->menu==$menuname){ echo "active";}?>"><a href="#">
+						<li class=" <?php if($dn->menu==$menuname){ echo "active";}?>"><a href="<?php if($dn->link!=""){echo base_url(); echo $dn->link;}else{echo "#";}?>">
 						<i class="<?php echo $dn->icon;?>"></i><?php echo $dn->menu;?></a>
 						
 						<?php

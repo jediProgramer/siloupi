@@ -33,13 +33,13 @@
 							<table id="data" class="display table dataTable table-striped table-bordered" >
 								<thead >
 									<tr>
-										<th><?php echo lang($namespace.'_nim');?></th>
-										<th><?php echo lang($namespace.'_idprograme');?></th>
-										<th><?php echo lang($namespace.'_name');?></th>
-										<th><?php echo lang($namespace.'_status');?></th>
-										<th><?php echo lang($namespace.'_class_generation');?></th>
-										<th><?php echo lang($namespace.'_idlevel');?></th>
-										<th><?php echo lang($namespace.'_idfaculty');?></th>
+										<th><?php echo lang('nim');?></th>
+										<th><?php echo lang('idprograme');?></th>
+										<th><?php echo lang('name');?></th>
+										<th><?php echo lang('status');?></th>
+										<th><?php echo lang('class_generation');?></th>
+										<th><?php echo lang('idlevel');?></th>
+										<th><?php echo lang('idfaculty');?></th>
 										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
 								</thead>

@@ -55,7 +55,7 @@
 									  <td><?php echo $d["idcoursescategory"];?></td>
 									  <td><?php echo $d["idcoursessubcategory"];?></td>
 									  <td><?php echo $d["idsemester"];?></td>
-									  <td><?php echo $d["courses"];?></td>
+									  <td><?php echo substr($d["courses"],0,25);?></td>
 									  <td><?php echo $d["credit"];?></td>
 									  <td style="text-align:center">
 									  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>

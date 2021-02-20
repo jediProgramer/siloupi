@@ -32,12 +32,11 @@
 							<table id="data" class="display table dataTable table-striped table-bordered" >
 								<thead >
 									<tr>
-										<th><?php echo lang($namespace.'_idcourses');?></th>
-										<th><?php echo lang($namespace.'_nim');?></th>
-										<th><?php echo lang($namespace.'_grade');?></th>
-										<th><?php echo lang($namespace.'_idprograme');?></th>
-										<th><?php echo lang($namespace.'_quality');?></th>
-										<th><?php echo lang($namespace.'_idcurriculum');?></th>
+										<th><?php echo lang('idcourses');?></th>
+										<th><?php echo lang('nim');?></th>
+										<th><?php echo lang('grade');?></th>
+										<th><?php echo lang('idprograme');?></th>
+										<th><?php echo lang('quality');?></th>
 										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
 								</thead>
@@ -54,7 +53,6 @@
 									  <td><?php echo $d["grade"];?></td>
 									  <td><?php echo $d["idprograme"];?></td>
 									  <td><?php echo $d["quality"];?></td>
-									  <td><?php echo $d["idcurriculum"];?></td>
 									  <td style="text-align:center">
 									  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
 									</tr>

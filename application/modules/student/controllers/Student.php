@@ -207,8 +207,8 @@ class Student extends CI_Controller {
 
 	function getapi(){
 		set_time_limit(0);
-		// $cmd = "java -jar ETLMahasiswa.jar";
-		$cmd = "java -jar Debug.jar 7";
+		$cmd = "java -jar ETLMahasiswa.jar";
+		// $cmd = "java -jar Debug.jar 7";
 
 		// CARA 1 (SERVER ONLY)
 			// $descriptorspec = array(

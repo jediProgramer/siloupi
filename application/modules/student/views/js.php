@@ -110,16 +110,15 @@ $(document).ready(function () {
 
 	$(".closeModal").click(function () {
 		let msg = $("#getapi").contents().find('*:contains("Program Berhasil")').text();
-		console.log(msg.length);
-		// if(msg.length > 0){
-		// 	window.location.href = baseUrl;
-		// }else{
-		// 	if (confirm('Hentikan Proses Ini ?')) {
-		// 		$("#modal-api").modal('hide');
-		// 	} else {
+		if(msg.length > 0){
+			window.location.href = baseUrl;
+		}else{
+			if (confirm('Hentikan Proses Ini ?')) {
+				$("#modal-api").modal('hide');
+			} else {
 	
-		// 	}
-		// }
+			}
+		}
 	});
   });
 </script>

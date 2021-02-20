@@ -211,22 +211,22 @@ class Student extends CI_Controller {
 		$cmd = "java -jar Debug.jar 7";
 
 		// CARA 1 (SERVER ONLY)
-			$descriptorspec = array(
-			   0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
-			   1 => array("pipe", "w"),   // stdout is a pipe that the child will write to
-			   2 => array("pipe", "w")    // stderr is a pipe that the child will write to
-			);
-			flush();
-			$process = proc_open($cmd, $descriptorspec, $pipes, realpath('./'), array());
-			echo "<pre>";
-			if (is_resource($process)) {
-				while ($s = fgets($pipes[1])) {
-					print $s;
-					flush();
-				}
-			}
-			echo "</pre>";
-			echo '<br><p id="success">Program Berhasil</p>';
+			// $descriptorspec = array(
+			//    0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
+			//    1 => array("pipe", "w"),   // stdout is a pipe that the child will write to
+			//    2 => array("pipe", "w")    // stderr is a pipe that the child will write to
+			// );
+			// flush();
+			// $process = proc_open($cmd, $descriptorspec, $pipes, realpath('./'), array());
+			// echo "<pre>";
+			// if (is_resource($process)) {
+			// 	while ($s = fgets($pipes[1])) {
+			// 		print $s;
+			// 		flush();
+			// 	}
+			// }
+			// echo "</pre>";
+			// echo '<br><p id="success">Program Berhasil</p>';
 		
 		// CARA 2
 			// while (@ ob_end_flush()); // end all output buffers if any
@@ -246,6 +246,31 @@ class Student extends CI_Controller {
 			// } else {
 				// echo '<br><p id="success">Program Tidak Berhasil</p>';
 			// }
+		// CARA 4
+			header("Content-type: text/plain");
+			// Turn off output buffering
+			ini_set('output_buffering', 'off');
+			// Turn off PHP output compression
+			ini_set('zlib.output_compression', false);
+			// Implicitly flush the buffer(s)
+			ini_set('implicit_flush', true);
+			ob_implicit_flush(true);
+			// Clear, and turn off output buffering
+			while (ob_get_level() > 0) {
+				// Get the curent level
+				$level = ob_get_level();
+				// End the buffering
+				ob_end_clean();
+				// If the current level has not changed, abort
+				if (ob_get_level() == $level) break;
+			}
+			// Disable apache output buffering/compression
+			if (function_exists('apache_setenv')) {
+				apache_setenv('no-gzip', '1');
+				apache_setenv('dont-vary', '1');
+			}
+			system($cmd);
+			echo '<br><p id="success">Program Berhasil</p>';
 
 	}
 

@@ -100,10 +100,10 @@
 			},
 			messages: {
 			  nip: {
-				required: "<?php echo lang('nip_error_msg');?>"
+				required: "<?php echo lang('entry_nip');?>"
 			  },
 			  password: {
-				required: "<?php echo lang('password_error_msg');?>"
+				required: "<?php echo lang('entry_password');?>"
 			  },
 			},
 			submitHandler: function (form) {

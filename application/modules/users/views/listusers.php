@@ -53,7 +53,7 @@
 									<tr>
 									  <td><?php echo $i;?></td>
 									  <td><?php echo $d["nip"];?></td>
-									  <td><?php echo $d["fullname"];?></td>
+									  <td><?php echo substr($d["fullname"],0,50);?></td>
 									  <td><?php echo $roles;?></td>
 									  <td><?php if($d["active"]=="1"){ echo lang('active'); }else{ echo lang('no'); }?></td>
 									  <td style="text-align:center">

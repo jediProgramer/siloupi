@@ -254,6 +254,7 @@ class Student extends CI_Controller {
 			ini_set('zlib.output_compression', false);
 			// Implicitly flush the buffer(s)
 			ini_set('implicit_flush', true);
+			ini_set('max_execution_time', 1800);
 			ob_implicit_flush(true);
 			// Clear, and turn off output buffering
 			while (ob_get_level() > 0) {

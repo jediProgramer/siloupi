@@ -109,15 +109,15 @@ $(document).ready(function () {
 	});
 
 	$(".closeModal").click(function () {
-		let msg = $("#getapi").contents().find('#success').text();
-		if(msg != "Program Berhasil"){
+		var msg = $('*:contains("Program Berhasil")');
+		if(msg.length > 0){
+			window.location.href = baseUrl;
+		}else{
 			if (confirm('Hentikan Proses Ini ?')) {
 				$("#modal-api").modal('hide');
 			} else {
 	
 			}
-		}else{
-			window.location.href = baseUrl;
 		}
 	});
   });

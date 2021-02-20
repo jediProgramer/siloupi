@@ -270,7 +270,7 @@ class Student extends CI_Controller {
 				apache_setenv('dont-vary', '1');
 			}
 			system($cmd);
-			echo '<br><p id="success">Program Berhasil</p>';
+			echo 'Program Berhasil';
 
 	}
 

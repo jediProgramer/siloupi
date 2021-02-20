@@ -270,7 +270,7 @@ class Student extends CI_Controller {
 				apache_setenv('no-gzip', '1');
 				apache_setenv('dont-vary', '1');
 			}
-			system($cmd);
+			shell_exec($cmd);
 			echo 'Program Berhasil';
 
 	}

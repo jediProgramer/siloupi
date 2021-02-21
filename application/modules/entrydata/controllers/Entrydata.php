@@ -92,6 +92,10 @@ class Entrydata extends CI_Controller {
 
 	public function addmappingplo($idcurriculum)
 	{
+		
+		//Tampilkan ID Curriculum
+		$data['idcurriculum'] = $idcurriculum;
+		//END
 		$data['menuname'] = "Tambah Pemetaan Data Learning Outcomes";
 		$data['idusers'] = $this->session->userdata('idusers');
 		$data['fullname'] = $this->session->userdata('fullname');
@@ -102,7 +106,7 @@ class Entrydata extends CI_Controller {
 		$data['idinstitution'] = $row->idinstitution;
 		// End
 		//Tampilkan PLO
-		$queryplo = $this->db->query("SELECT idplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND active=1");
+		$queryplo = $this->db->query("SELECT idplo FROM ".$this->db->dbprefix('plo')." WHERE idprograme='".$data['idinstitution']."' AND idcurriculum='".$data['idcurriculum']."' AND active=1");
 		$rowplo = $queryplo->row();
 		$data['idplo'] = $rowplo->idplo;
 		//End
@@ -114,10 +118,6 @@ class Entrydata extends CI_Controller {
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		//Tampilkan ID Curriculum
-		//$queryc = $this->db->query("SELECT idcurriculum FROM ".$this->db->dbprefix('curriculumx')." WHERE idprograme='".$data['idinstitution']."'");
-		//$rowc = $queryc->row();
-		$data['idcurriculum'] = $idcurriculum;
 		//End
 		$data['datalo']=$this->model_siloupi->ambildataOrderById($this->db->dbprefix('lo'),'idlo','idplo',$data['idplo']);
 

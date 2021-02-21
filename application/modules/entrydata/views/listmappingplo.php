@@ -44,7 +44,7 @@
 										$level = $row->level;	
 										
 										//Tampilkan Total LO
-										$querylo = $this->db->query("SELECT COUNT(*)AS totallo FROM ".$this->db->dbprefix('lo')." a, ".$this->db->dbprefix('plo')." b WHERE a.idplo=b.idplo AND b.idcurriculum='".$d["idcurriculum"]."'");
+										$querylo = $this->db->query("SELECT COUNT(*)AS totallo FROM ".$this->db->dbprefix('lo')." a, ".$this->db->dbprefix('plo')." b WHERE a.idplo=b.idplo AND b.idcurriculum='".$d["idcurriculum"]."' AND b.active=1");
 										$rowlo = $querylo->row();
 										$totallo = $rowlo->totallo;
 										//echo "total lo - ".$i." : ".$totallo."\n";

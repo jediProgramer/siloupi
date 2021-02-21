@@ -169,7 +169,7 @@ class Coursessubcategory extends CI_Controller {
 			}else{
 				$msg=array(	
 					'msg'=>'false',
-					'msg_error'=>lang('error_message_format')
+					'msg_error'=>lang('msg_error')
 				);
 			}
 

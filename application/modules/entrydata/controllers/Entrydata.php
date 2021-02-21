@@ -9,6 +9,11 @@ class Entrydata extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('auth'));
 		}
+		$this->autoloader_psr4->register();
+		$this->autoloader_psr4->addNamespace('Psr\SimpleCache', APPPATH . 'third_party/SimpleCache');
+		$this->autoloader_psr4->addNamespace('MyCLabs\Enum', APPPATH . 'third_party/MyCLabs');
+		$this->autoloader_psr4->addNamespace('ZipStream', APPPATH . 'third_party/ZipStream');
+		$this->autoloader_psr4->addNamespace('PhpOffice\PhpSpreadsheet', APPPATH . 'third_party/PhpSpreadsheet');
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
 		$this->load->helper('text');
@@ -277,44 +282,41 @@ class Entrydata extends CI_Controller {
 		echo json_encode($msg);		
 	}
 	
-	public function savelocsv()
-    {
-		$max_row_size = 4096; 
-		$separator = ';'; 
-		$file = $_FILES['filelo']['tmp_name'];
-		// Medapatkan ekstensi file csv yang akan diimport.
-		$ekstensi  = explode('.', $_FILES['filelo']['name']);
-
-		// Validasi apakah file yang diupload benar-benar file csv.
-		if (strtolower(end($ekstensi)) === 'csv' && $_FILES["filelo"]["size"] > 0) {
-
-			$i = 0;
-			$handle = fopen($file, "r");
-			while (($row = fgetcsv($handle, $max_row_size, $separator))) {
-				$i++;
-				if ($i == 1) continue;
-
-				$data=array(	
-					'idlo'=>$row[0],
-					'lo'=>$row[1],
-					'idplo'=>$this->input->post('idplo')
+	function savelocsv()
+	{
+		$file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		if(isset($_FILES['filelo']['name']) && in_array($_FILES['filelo']['type'], $file_mimes)) {
+			$arr_file = explode('.', $_FILES['filelo']['name']);
+			$extension = end($arr_file);
+			if('csv' == $extension){
+				$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+			} else {
+				$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+			}
+			$spreadsheet = $reader->load($_FILES['filelo']['tmp_name']);
+			$sheetData = $spreadsheet->getActiveSheet()->toArray();
+			
+			if($sheetData[0][0] == 'idlo'){
+				for ($i=1; $i < count($sheetData); $i++) { 
+					$data=array(	
+						'idlo' => $sheetData[$i][0],
+						'lo' => $sheetData[$i][1],
+						'idplo'=>$this->input->post('idplo')
+					);
+					$this->model_siloupi->simpandata($this->db->dbprefix('lo'),$data);
+				}
+				$msg=array(	
+					'msg'=>'true',
+					'msg_success'=>lang('success_message_save')
 				);
-				$this->model_siloupi->simpandata($this->db->dbprefix('lo'),$data);
+			}else{
+				$msg=array(	
+					'msg'=>'false',
+					'msg_error'=>lang('msg_error')
+				);
 			}
 
-			fclose($handle);
-			$msg=array(	
-				'msg'=>'true',
-				'msg_success'=>lang('success_message_save')
-			);
 			echo json_encode($msg);	
-
-		} else {
-			$msg=array(	
-				'msg'=>'false',
-				'msg_error'=>lang('error_message_csv')
-			);
-			echo json_encode($msg);
 		}
 	}
 

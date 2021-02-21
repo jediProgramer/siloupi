@@ -37,4 +37,20 @@ class Shell {
 						'output'       => str_replace("Exit status : " . $matches[0], '', $complete_output)
 					);
 	}
+
+	public function run_in_background($Command, $Priority = 0)
+	{
+		if($Priority)
+			$PID = shell_exec("nohup nice -n $Priority $Command 2> /dev/null & echo $!");
+		else
+			$PID = shell_exec("nohup $Command 2> /dev/null & echo $!");
+		return($PID);
+	}
+
+	function is_process_running($PID)
+	{
+		exec("ps $PID", $ProcessState);
+		return(count($ProcessState) >= 2);
+	}
+
 }

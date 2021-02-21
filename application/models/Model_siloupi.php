@@ -80,6 +80,17 @@
 			return $row;
 		}
 
+		public function ambildataByIdTwo($tabel,$id1,$isi1,$id2,$isi2)
+		{
+			$row=array();
+			$sql=$this->db->query("SELECT * FROM $tabel WHERE $id1='".$isi1."' AND $id2='".$isi2."'");
+			if($sql->num_rows()>0)
+			{
+				$row=$sql->result_array();
+			}
+			return $row;
+		}
+
 		public function ambildataOrderById($tabel,$order,$idfield,$isi)
 		{
 			$row=array();

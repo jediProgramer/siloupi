@@ -209,7 +209,7 @@ class Entrydata extends CI_Controller {
 		$data['nip'] = $this->session->userdata('nip');
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
-		$data['datalo']=$this->model_siloupi->ambildataById($this->db->dbprefix('lo'),'idlo',$data['idlo']);
+		$data['datalo']=$this->model_siloupi->ambildataByIdTwo($this->db->dbprefix('lo'),'idlo',$data['idlo'],'idplo',$data['idplo']);
 		$data['content'] = 'entrydata/editlo';
 		$data['meta'] = 'entrydata/meta';
 		$data['css'] = 'entrydata/css';
@@ -368,11 +368,12 @@ class Entrydata extends CI_Controller {
 
 	public function updatelo()
     {
+		$idplo=$this->input->post('idplo');
 		$idlo=$this->input->post('idlo');
 		$data=array(	
 			'lo'=>strip_tags($this->input->post('lo'))
 		);
-		$clause=array('idlo'=>$idlo);
+		$clause=array('idlo'=>$idlo,'idplo'=>$idplo);
 		$this->model_siloupi->update($this->db->dbprefix('lo'),$data,$clause);
 		$msg=array(	
 				'msg'=>'true',
@@ -417,8 +418,10 @@ class Entrydata extends CI_Controller {
 
 	function deletelo()
     {
-        $idlo=$this->input->post('idlo');
+        $idplo=$this->input->post('idplo');
+		$idlo=$this->input->post('idlo');
 		$this->db->where('idlo', $idlo);
+		$this->db->where('idplo', $idplo);
         $this->db->delete($this->db->dbprefix('lo'));
         $msg=array(	
 				'msg'=>'true',

@@ -415,7 +415,7 @@ $('.activePLO').on('click',function(){
 					}
 				  })      
 		},
-		data : {idlo:$(this).attr("data-id")},
+		data : {idplo:$(this).attr("data-id1"), idlo:$(this).attr("data-id2")},
 		success: function(value){
 			if (value.msg == 'true') {				
 				swal({

@@ -69,7 +69,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo lang('close');?></button>
-													<button type="button" class="btn btn-primary deleteLO" data-id="<?php echo $d["idlo"];?>"><?php echo lang('delete');?></button>
+													<button type="button" class="btn btn-primary deleteLO" data-id1="<?php echo $d["idplo"];?>" data-id2="<?php echo $d["idlo"];?>"><?php echo lang('delete');?></button>
 												</div>
 											</div>
 										</div>

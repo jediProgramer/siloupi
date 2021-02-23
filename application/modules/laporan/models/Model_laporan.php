@@ -11,7 +11,7 @@
 		
 		public function periode_wisuda_tahun()
 		{
-			$query=$this->db->query("select year_graduation from siloupi_graduation_period group by year_graduation");
+			$query=$this->db->query("select year_graduation from siloupi_graduation_period group by year_graduation order by year_graduation asc");
 			return $query;
 		}
 		

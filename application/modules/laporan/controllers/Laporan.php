@@ -33,7 +33,7 @@ class Laporan extends CI_Controller {
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
         $data['years'] = $this->graduation_year();
-        $data['lo']=$this->model_laporan->seluruh_lo_mhs()->result();
+        //$data['lo']=$this->model_laporan->seluruh_lo_mhs()->result();
 		$data['content'] = 'laporan/laporan';
 		$data['meta'] = 'laporan/meta';
 		$data['css'] = 'laporan/css';

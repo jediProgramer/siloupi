@@ -14,8 +14,14 @@
 										<th>IPK</th>
 										<?php 
 										$a=0;
+										$b= array();
 										foreach($show_lo as $d){ ?>
-										<th>LO <?php echo $d->idlo; ?></th>
+										<th>LO 
+										<?php 
+											array_push($b, $d->idlo);
+											echo $d->idlo; 
+										?>
+										</th>
 										<?php $a++; } ?>
 										<th>Posisi Akademik</th>
 									</tr>
@@ -35,27 +41,33 @@
 										<td><?php echo $d->gpa; ?></td>
 										<?php 
 										$nilai_lo = $this->model_laporan->nilai_lo($d->nim, $idcurricullum->idcurriculum)->result();
-										$j=0;
 										$jumlah_lo = 0;
 										$rata2 = array();
-										foreach($nilai_lo as $e){ 
+										$k = 0;
+										for($j=0 ; $a>$j; $j++){ 
 										?>
 										<td>
 											<?php
-												$nilai_lo = number_format($e->nilai_lo, 2, '.', '');
-												echo $nilai_lo;
+												$nilailo = 0;
+												//echo array_search("A1", $nilai_lo[$j]);
+												if(isset($nilai_lo[$k]->idlo)){
+													if($nilai_lo[$k]->idlo == $b[$j]){
+														$nilailo = number_format($nilai_lo[$k]->nilai_lo, 2, '.', '');
+														echo $nilailo;
+														$k++;
+													}
+												}
 												?>
 										</td>
 										<?php 
-											array_push($rata2, $nilai_lo);
-											$j++; 
+											array_push($rata2, $nilailo);
 										} 
 										
-										while($a > $j){
-											echo "<td></td>";
-											array_push($rata2, '0');
-											$j++;
-										}
+										// while($a > $j){
+										// 	echo "<td></td>";
+										// 	array_push($rata2, '0');
+										// 	$j++;
+										// }
 										?>
 										<td><?php
 											echo $this->model_laporan->hitung_quartil($d->id_grad,$d->nim, $idcurricullum->idcurriculum);
@@ -76,7 +88,7 @@
 											while($i < count($show_lo)){
 												$j = 0; $a = 0;
 												while($j < count($rata_tmp)){
-													$a = $a + $rata_tmp[$j][$i]." ";
+													$a = $a + $rata_tmp[$j][$i];
 													$j++;
 												}
 												if($a != 0){

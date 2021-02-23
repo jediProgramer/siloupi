@@ -37,19 +37,21 @@
 		public function show_lo()
 		{
 			$id_user = $this->session->userdata('idinstitution');
-			$query=$this->db->query("SELECT a.idlo from siloupi_lo a, siloupi_plo b where a.idplo = b.idplo and b.idprograme = '$id_user' order by idlo asc");
+			$idcurriculum = $this->session->userdata('idinstitution')."18";
+			$query=$this->db->query("SELECT a.idlo from siloupi_lo a, siloupi_plo b where a.idplo = b.idplo and b.idprograme = '$id_user' and b.idcurriculum = '$idcurriculum' order by idlo asc");
 			return $query;
 		}
 		
 		public function nilai_lo($nim, $idcurricullum)
 		{
 			$id_user = $this->session->userdata('idinstitution');
-			$query=$this->db->query("select idlo, ((avg(DISTINCT quality))*25) as nilai_lo from view_all_lo_crosstab_d055 where nim = '$nim' AND idprograme ='$id_user' AND idcurriculum = '$idcurricullum' GROUP BY idlo ORDER BY idlo asc ");
+			//$query=$this->db->query("select idlo, ((avg(DISTINCT quality))*25) as nilai_lo from view_all_lo_crosstab_d055 where nim = '$nim' AND idprograme ='$id_user' AND idcurriculum = '$idcurricullum' GROUP BY idlo ORDER BY idlo asc ");
+			$query=$this->db->query("select idlo, ((avg(DISTINCT quality))*25) as nilai_lo from view_all_lo_crosstab_d055 where nim = '$nim' AND idlo in (SELECT a.idlo from siloupi_lo a, siloupi_plo b where a.idplo = b.idplo and b.idprograme = '$id_user' and b.idcurriculum = '$idcurricullum' order by idlo asc) GROUP BY idlo ORDER BY idlo asc ");
 			return $query;
 		}
 
 		public function getcurriculum($idprogram){
-			$query=$this->db->query("select idcurriculum from siloupi_curriculum where idprograme = '$idprogram'");
+			$query=$this->db->query("select idcurriculum from siloupi_curriculum where idprograme = '$idprogram' ORDER BY idcurriculum DESC limit 1");
 			return $query;
 		}
 

@@ -38,7 +38,7 @@
 		{
 			$id_user = $this->session->userdata('idinstitution');
 			$idcurriculum = $this->session->userdata('idinstitution')."18";
-			$query=$this->db->query("SELECT a.idlo from siloupi_lo a, siloupi_plo b where a.idplo = b.idplo and b.idprograme = '$id_user' and b.idcurriculum = '$idcurriculum' order by idlo asc");
+			$query=$this->db->query("SELECT distinct a.idlo from siloupi_lo a join siloupi_plo b on a.idplo = b.idplo where b.idprograme = '$id_user' order by a.idlo asc");
 			return $query;
 		}
 		

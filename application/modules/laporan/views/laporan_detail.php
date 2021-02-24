@@ -70,7 +70,9 @@
 										// }
 										?>
 										<td><?php
-											echo $this->model_laporan->hitung_quartil($d->id_grad,$d->nim, $idcurricullum->idcurriculum);
+											if(isset($d->gpa)){
+												echo $this->model_laporan->hitung_quartil($d->id_grad,$d->nim, $idcurricullum->idcurriculum);
+											}
 											?></td>
 									</tr>
                                 <?php 

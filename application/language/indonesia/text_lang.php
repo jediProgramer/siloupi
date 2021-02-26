@@ -279,4 +279,12 @@ $lang['param_graduationperiod_edit_hallo'] = 'Menu untuk mengedit param gelomban
 $lang['param_graduationperiod_delete'] = 'Hapus Kelola Param Gel. Wisuda';
 $lang['month_graduationperiod'] = 'Bulan Wisuda';
 $lang['graduate_name_error_msg'] = 'Isi periode wisuda';
+
+//======================== 404 ======================================
+$lang['404_header'] = '404';
+$lang['404_header_bc'] = '404 Page';
+$lang['msg_404_header'] = '404 Page';
+$lang['404_alert'] = 'Mohon maaf, terjadi kesalahan';
+$lang['404_msg'] = 'Halaman yang Anda cari tidak ditemukan, coba lain kali atau silahkan kembali ke Dashboard';
+$lang['404_gd'] = 'Kembali Ke Dashboard';
 ?>

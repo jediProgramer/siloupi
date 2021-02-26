@@ -8,7 +8,6 @@
 					<div class="w-sm-100 mr-auto"><h4 class="mb-0"><?php echo lang('dashboard');?></h4> <p><?php echo lang('msg_dashboard_header');?></p></div>
 
 					<ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
-						<li class="breadcrumb-item"><a href="<?php echo base_url();?>"><?php echo lang('home');?></a></li>
 						<li class="breadcrumb-item active"><?php echo lang('dashboard');?></li>
 					</ol>
 				</div>

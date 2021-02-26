@@ -25,3 +25,21 @@
 <!-- START: Custom CSS-->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/main.css">
 <!-- END: Custom CSS-->
+
+<!-- START: Custom CSS Table Mapping-->
+<style>
+    .my-custom-scrollbar {
+    position: relative;
+    height: 900px;
+    overflow: auto;
+    }
+
+    .table-wrapper-scroll-x {
+    display: block;
+    }
+
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+</style>
+<!-- END: Custom CSS-->

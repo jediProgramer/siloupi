@@ -66,7 +66,22 @@ $(document).ready(function () {
 				  "previous": "<?php echo lang('previous');?>",
 				  "next": "<?php echo lang('next');?>",
 				}
-		 }	
+		 },
+		 "processing": true, 
+         "serverSide": true, 
+         "order": [], 
+            
+		"ajax": {
+			"url": "<?php echo site_url('contract/get_data_contract')?>",
+			"type": "POST"
+		},
+
+		"columnDefs": [
+		{ 
+			"targets": [ 0 ], 
+			"orderable": false, 
+		},
+		],	
 	});
   });
 </script>

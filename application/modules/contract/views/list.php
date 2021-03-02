@@ -24,7 +24,7 @@
 					<div class="card-header "> 
 						<div align="right">
 							<a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<a <?php if($roles!="1"){?>class="btn disabled"<?php }else{ ?>class="btn btn-secondary btn-sm"<?php } ?> href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
 						</div>	
 					</div>
                     <div class="card-body">
@@ -54,7 +54,7 @@
 									  <td><?php echo $d["idprograme"];?></td>
 									  <td><?php echo $d["quality"];?></td>
 									  <td style="text-align:center">
-									  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
+									  <a <?php if($roles!="1"){?>class="btn disabled"<?php }else{ ?>class="btn btn-danger btn-sm"<?php } ?> href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
 									</tr>
 
 									<!-- Modal -->

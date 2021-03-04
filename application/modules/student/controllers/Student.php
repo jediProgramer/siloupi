@@ -151,6 +151,37 @@ class Student extends CI_Controller {
         
         $writer->save('php://output');	// download file 
 	}
+
+	function get_data_student()
+	{
+		$data['idusers'] = $this->session->userdata('idusers');
+		$data['datauser'] = $this->model->getUserData($data['idusers']);
+		$prodi = $data['datauser'][0]['idinstitution'];
+		$clause=array('idprograme'=>$prodi);
+		$list = $this->model->get_datatables($clause);
+		$data = array();
+		foreach ($list as $field) {
+			$row = array();
+			$row[] = $field->nim;
+			$row[] = $field->idprograme;
+			$row[] = $field->name;
+			$row[] = $field->status;
+			$row[] = $field->class_generation;
+			$row[] = $field->idlevel;
+			$row[] = $field->idfaculty;
+
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model->count_all($clause),
+			"recordsFiltered" => $this->model->count_filtered($clause),
+			"data" => $data,
+		);
+		//output dalam format JSON
+		echo json_encode($output);
+	}
 	
 	function import(){
 		$file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

@@ -9,6 +9,12 @@ class Laporan extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('auth'));
 		}
+
+		$this->autoloader_psr4->register();
+		$this->autoloader_psr4->addNamespace('Psr\SimpleCache', APPPATH . 'third_party/SimpleCache');
+		$this->autoloader_psr4->addNamespace('MyCLabs\Enum', APPPATH . 'third_party/MyCLabs');
+		$this->autoloader_psr4->addNamespace('ZipStream', APPPATH . 'third_party/ZipStream');
+		$this->autoloader_psr4->addNamespace('PhpOffice\PhpSpreadsheet', APPPATH . 'third_party/PhpSpreadsheet');
 		
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
@@ -114,32 +120,16 @@ class Laporan extends CI_Controller {
 
 	function export($id_grad)
 	{
-		require_once APPPATH.'libraries/PHPExcel/Classes/PHPExcel.php';	
-		require_once APPPATH.'libraries/PHPExcel/Classes/PHPExcel/Writer/Excel2007.php';
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet(); // instantiate Spreadsheet
 
-		$objPHPExcel = new PHPExcel();
-		// Set properties
-		 $objPHPExcel->getProperties()
-			  ->setCreator("Universitas Pendidikan Indonesia") //creator
-				->setTitle("Laporan Learning Outcomes");  //file title 
-
-		$objset = $objPHPExcel->setActiveSheetIndex(0); //inisiasi set object
-		$objget = $objPHPExcel->getActiveSheet();  //inisiasi get object
+		$objset = $spreadsheet->setActiveSheetIndex(0); //inisiasi set object
+		$objget = $spreadsheet->getActiveSheet();  //inisiasi get object
 		$objget->setTitle('Laporan LO'); //sheet title
 		$style = array(
-			'alignment' => array(
-				'horizontal' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
-			),
 			'font' => array(
 				'bold'  => true,
 			)
 		);
-
-		$border_style= array(
-			'borders' => array(
-				'right' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THICK,'color' => array(
-	'argb' => '766f6e'),)));
 
 		$cols = array("A","B","C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
@@ -148,32 +138,32 @@ class Laporan extends CI_Controller {
 		//$val = array("No ","NIS","Nama","Kelas","Mata Pelajaran","Nilai");
 
 		$objset->setCellValue("A3", "No");
-		$objPHPExcel->getActiveSheet()->getStyle('A3')->applyFromArray($style);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(6);
+		$objget->getStyle('A3')->applyFromArray($style);
+		$objget->getColumnDimension('A')->setWidth(6);
 		$objset->setCellValue("B3", "NIM");
-		$objPHPExcel->getActiveSheet()->getStyle('B3')->applyFromArray($style);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$objget->getStyle('B3')->applyFromArray($style);
+		$objget->getColumnDimension('B')->setWidth(20);
 		$objset->setCellValue("C3", "Nama");
-		$objPHPExcel->getActiveSheet()->getStyle('C3')->applyFromArray($style);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+		$objget->getStyle('C3')->applyFromArray($style);
+		$objget->getColumnDimension('C')->setWidth(40);
 		$objset->setCellValue("D3", "Periode Wisuda");
-		$objPHPExcel->getActiveSheet()->getStyle('D3')->applyFromArray($style);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+		$objget->getStyle('D3')->applyFromArray($style);
+		$objget->getColumnDimension('D')->setWidth(30);
 		$objset->setCellValue("E3", "IPK");
-		$objPHPExcel->getActiveSheet()->getStyle('E3')->applyFromArray($style);
+		$objget->getStyle('E3')->applyFromArray($style);
 
 		$a = 5;
 		$b_arr= array();
 		foreach($val as $value){
 			array_push($b_arr, $value->idlo);
-			$objset->setCellValue($cols[$a].'3', $value->idlo);
-			$objPHPExcel->getActiveSheet()->getStyle($cols[$a].'3')->applyFromArray($style);
+			$objset->setCellValue($cols[$a].'3', "LO_".$value->idlo);
+			$objget->getStyle($cols[$a].'3')->applyFromArray($style);
 			$a++; 
 		}
 
 		$objset->setCellValue($cols[$a].'3', "Posisi Akademik");
-		$objPHPExcel->getActiveSheet()->getStyle($cols[$a].'3')->applyFromArray($style);
-		$objPHPExcel->getActiveSheet()->getColumnDimension($cols[$a])->setWidth(30);
+		$objget->getStyle($cols[$a].'3')->applyFromArray($style);
+		$objget->getColumnDimension($cols[$a])->setWidth(30);
 
 		
 		$rata_tmp = array();
@@ -225,12 +215,12 @@ class Laporan extends CI_Controller {
 		//judul
 		$datawisuda = $this->model_laporan->periode_wisuda_by_id($id_grad)->row();
 		$objset->setCellValue("A1", "Data LO Tahun ".$datawisuda->year_graduation." ".$datawisuda->graduation_name); 
-		$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:'.$cols[$b].'1');
-		$objPHPExcel->getActiveSheet()->getStyle('A1')->applyFromArray($style);
+		$objset->mergeCells('A1:'.$cols[$b].'1');
+		$objget->getStyle('A1')->applyFromArray($style);
 		
 		$objset->setCellValue("A".$baris, "Rata-Rata LO"); 
-		$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$baris.':E'.$baris);
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($style);
+		$objset->mergeCells('A'.$baris.':E'.$baris);
+		$objget->getStyle('A'.$baris)->applyFromArray($style);
 
 		$p=0;
 		while($p < count($val)){
@@ -242,17 +232,18 @@ class Laporan extends CI_Controller {
 			if($a != 0){
 				array_push($rata_arr, number_format($a/$q, 2, '.', ''));
 				$objset->setCellValue($cols[$p+5].$baris, number_format($a/$q, 2, '.', '')); 
+				$objget->getStyle($cols[$p+5].$baris)->applyFromArray($style);
 			}else{
-				$objset->setCellValue($cols[$p+6].$baris, ""); 
+				$objget->getStyle($cols[$p+5].$baris)->applyFromArray($style);
 			}
 			$p++;
 		}
 
 		
-		$objPHPExcel->getActiveSheet()->setTitle('Laporan LO');
+		$objget->setTitle('Laporan LO');
 		
-		$objPHPExcel->setActiveSheetIndex(0);  
-		$filename = "LO_.xlsx";
+		$objset;  
+		$filename = "LO_".$datawisuda->year_graduation."_".$datawisuda->graduation_name.".xlsx";
 		
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -264,10 +255,12 @@ class Laporan extends CI_Controller {
 		header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
 		header('Cache-Control: max-age=0'); //no cache
 
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 //		ob_end_clean();                
 		$objWriter->save('php://output');
 
 	}
+
+	
 
 }

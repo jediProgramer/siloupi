@@ -23,8 +23,8 @@
                 <div class="card">
 					<div class="card-header "> 
 						<div align="right">
-							<a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
+							<!-- <a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a> -->
+							<!-- <a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a> -->
 						</div>	
 					</div>
                     <div class="card-body">

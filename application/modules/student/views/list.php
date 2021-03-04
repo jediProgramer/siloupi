@@ -23,9 +23,9 @@
                 <div class="card">
 					<div class="card-header "> 
 						<div align="right">
-							<a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a>
-							<a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a>
-							<a class="btn btn-info btn-sm" data-toggle="modal" href="#modal-api" data-backdrop="static" data-keyboard="false"><i class="fas fa-file-import">&nbsp;</i><?php echo lang($namespace.'_api');?></a>
+							<!-- <a class="btn btn-success btn-sm" href="<?php echo base_url($namespace.'/export')?>"><i class="fas fa-print">&nbsp;</i><?php echo lang('export');?></a> -->
+							<!-- <a class="btn btn-secondary btn-sm" href="<?php echo base_url($namespace.'/addcsv')?>"><i class="fas fa-file">&nbsp;</i><?php echo lang('add_csv');?></a> -->
+							<!-- <a class="btn btn-info btn-sm" data-toggle="modal" href="#modal-api" data-backdrop="static" data-keyboard="false"><i class="fas fa-file-import">&nbsp;</i><?php echo lang($namespace.'_api');?></a> -->
 						</div>	
 					</div>
                     <div class="card-body">

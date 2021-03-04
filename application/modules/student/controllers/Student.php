@@ -116,11 +116,11 @@ class Student extends CI_Controller {
 			$i++;
 		}
         
-        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
+        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet, 'Excel2007'); // instantiate Xlsx
  
         $filename = $this->namespace; // set filename for excel file to be exported
  
-        header('Content-Type: application/excel'); // generate excel file
+		header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
         header('Cache-Control: max-age=0');
         

@@ -72,14 +72,7 @@
 											</div>
 										</div>
 									</div>		
-								</tbody>
-							</table>
-						</div>
-                    </div>
-				</div>	
-            </div>
 
-		</div>
 		<!-- END: Card DATA-->
 	</div>
 </main>

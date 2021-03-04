@@ -48,7 +48,7 @@ class Student extends CI_Controller {
 		
 		$prodi = $data['datauser'][0]['idinstitution'];
 
-		//$data['data'] = $this->model->getAllDataByProdi($prodi);
+		$data['data'] = $this->model->getAllDataByProdi($prodi);
 		$data['content'] = $this->namespace.'/list';
 		$data['meta'] = $this->namespace.'/meta';
 		$data['css'] = $this->namespace.'/css';
@@ -116,11 +116,11 @@ class Student extends CI_Controller {
 			$i++;
 		}
         
-        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet, 'Excel2007'); // instantiate Xlsx
+        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); // instantiate Xlsx
  
         $filename = $this->namespace; // set filename for excel file to be exported
  
-		header('Content-Type: application/vnd.ms-excel');
+        header('Content-Type: application/excel'); // generate excel file
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
         header('Cache-Control: max-age=0');
         
@@ -279,36 +279,5 @@ class Student extends CI_Controller {
 
 	function phpini(){
 		phpinfo();
-	}
-
-	function get_data_student()
-	{
-		$data['idusers'] = $this->session->userdata('idusers');
-		$data['datauser'] = $this->model->getUserData($data['idusers']);
-		$prodi = $data['datauser'][0]['idinstitution'];
-		$clause=array('idprograme'=>$prodi);
-		$list = $this->model->get_datatables($clause);
-		$data = array();
-		foreach ($list as $field) {
-			$row = array();
-			$row[] = $field->nim;
-			$row[] = $field->idprograme;
-			$row[] = $field->name;
-			$row[] = $field->status;
-			$row[] = $field->class_generation;
-			$row[] = $field->idlevel;
-			$row[] = $field->idfaculty;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->model->count_all($clause),
-			"recordsFiltered" => $this->model->count_filtered($clause),
-			"data" => $data,
-		);
-		//output dalam format JSON
-		echo json_encode($output);
 	}
 }

@@ -69,6 +69,21 @@ $(document).ready(function () {
 				"next": "<?php echo lang('next');?>",
 			}
 		},
+		"processing": true, 
+         "serverSide": true, 
+         "order": [], 
+            
+		"ajax": {
+			"url": "<?php echo site_url('student/get_data_student')?>",
+			"type": "POST"
+		},
+
+		"columnDefs": [
+		{ 
+			"targets": [ 0 ], 
+			"orderable": false, 
+		},
+		],	
 		// processing: true,
 		// serverSide: true,
 		// ajax: 'kondisi-jalan/json',

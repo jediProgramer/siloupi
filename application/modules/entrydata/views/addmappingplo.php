@@ -84,7 +84,7 @@
 																<?php	
 																$querymp = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcourses='".$dcourses->idcourses."' AND idcurriculum='".$idcurriculum."' AND idlo='".$dlo["idlo"]."'");
 																?>
-																<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcourses->idcourses;?>-<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
+																<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcourses->idcourses;?>_<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
 																</td>
 															<?php
 																}
@@ -164,7 +164,7 @@
 																<?php	
 																$querymp = $this->db->query("SELECT * FROM ".$this->db->dbprefix('mappingplo')." WHERE idcourses='".$dcoursessc->idcourses."' AND idcurriculum='".$idcurriculum."' AND idlo='".$dlo["idlo"]."'");
 																?>
-																<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcoursessc->idcourses;?>-<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
+																<input type="checkbox" class="lo" id="lo[]" name="lo[]" value="<?php echo $dcoursessc->idcourses;?>_<?php echo $dlo["idlo"];?>" <?php if ($querymp->num_rows() >= 1){ echo "checked";}?>>
 																</td>
 															<?php
 																}

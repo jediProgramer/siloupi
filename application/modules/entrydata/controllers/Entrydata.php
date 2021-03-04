@@ -337,7 +337,7 @@ class Entrydata extends CI_Controller {
 		$datalo=$this->input->post("lo");
 		foreach ($datalo as $dlo)
 		{
-			$pieces= explode("-",$dlo);
+			$pieces= explode("_",$dlo);
 				$data=array(	
 					'idcourses'=>$pieces[0],
 					'idlo'=>$pieces[1],

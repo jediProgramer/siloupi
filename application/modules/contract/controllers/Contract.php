@@ -48,7 +48,7 @@ class Contract extends CI_Controller {
 		
 		$prodi = $data['datauser'][0]['idinstitution'];
 
-		$data['data'] = $this->model->getAllDataByProdi($prodi);
+		//$data['data'] = $this->model->getAllDataByProdi($prodi);
 		$data['content'] = $this->namespace.'/list';
 		$data['meta'] = $this->namespace.'/meta';
 		$data['css'] = $this->namespace.'/css';
@@ -197,5 +197,34 @@ class Contract extends CI_Controller {
 			
 
 		}
+	}
+
+	function get_data_contract()
+	{
+		$data['idusers'] = $this->session->userdata('idusers');
+		$data['datauser'] = $this->model->getUserData($data['idusers']);
+		$prodi = $data['datauser'][0]['idinstitution'];
+		$clause=array('idprograme'=>$prodi);
+		$list = $this->model->get_datatables($clause);
+		$data = array();
+		foreach ($list as $field) {
+			$row = array();
+			$row[] = $field->idcourses;
+			$row[] = $field->nim;
+			$row[] = $field->grade;
+			$row[] = $field->idprograme;
+			$row[] = $field->quality;
+
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model->count_all($clause),
+			"recordsFiltered" => $this->model->count_filtered($clause),
+			"data" => $data,
+		);
+		//output dalam format JSON
+		echo json_encode($output);
 	}
 }

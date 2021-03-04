@@ -15,6 +15,12 @@
 			return $query;
 		}
 		
+		public function periode_wisuda_by_id($id)
+		{
+			$query=$this->db->query("select * from siloupi_graduation_period where idgraduation = '$id'");
+			return $query;
+		}
+		
 		public function periode_wisuda($year)
 		{
 			$query=$this->db->query("select * from siloupi_graduation_period where year_graduation = '$year' order by graduation_name asc");
@@ -55,34 +61,18 @@
 			return $query;
 		}
 
-		function hitung_quartil($date, $nim, $idcurricullum){
-			$count_lo = $this->model_laporan->show_lo()->num_rows();
+		function hitung_quartil($date, $nim){
 			$lo = $this->model_laporan->seluruh_lo_mhs_by_date($date)->result();
 			$rataarr = array();
 			$i = 0;
 			foreach($lo as $d){
-				$jumlahlo = 0;
-				$j = 0;
-				$nilailo = $this->model_laporan->nilai_lo($d->nim, $idcurricullum)->result();
-				$rata2lo = array();
-				foreach($nilailo as $e){ 
-					$nilai_lo = number_format($e->nilai_lo, 2, '.', '');
-					$jumlahlo = $jumlahlo + $nilai_lo;
-					$j++;
-				}
-				
-				$rata2lo = number_format($jumlahlo / $count_lo, 2, '.', '');
-				if($d->nim == $nim){
-					$ratarata = array($rata2lo, $i, $nim);
-				}else{
-					$ratarata = array($rata2lo, $i, 0);
-				}
+				$ratarata = array($d->gpa, $i, $d->nim);
 				array_push($rataarr, $ratarata);
 				$i++;
 			}
 
 			sort($rataarr);
-
+			
 			if(count($rataarr) % 2 == 0){
 				$q1 = 0.25 * (count($rataarr)+2);
 				$q2 = 0.5 * ((count($rataarr)/2)+ ((count($rataarr)/2)+1));
@@ -102,12 +92,14 @@
 					array_push($rataarr[$a], "Q3");
 				}
 			}
+
 			$hasil = 0;
 			foreach($rataarr as $r){
 				if($r[2] == $nim){
 					$hasil = $r[3];
 				}
 			}
+
 			return $hasil;
 		}
 	}

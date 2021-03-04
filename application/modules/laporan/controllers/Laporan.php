@@ -9,6 +9,7 @@ class Laporan extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('auth'));
 		}
+		
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
 		$this->load->helper('text');
@@ -94,13 +95,15 @@ class Laporan extends CI_Controller {
 		$data['roles'] = $this->session->userdata('roles');
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
 		$data['show_lo']=$this->model_laporan->show_lo()->result();
-        $date = $this->input->post('graduation_name');
+        $date['idgrad'] = $this->input->post('graduation_name');
+        $data['idgrad'] = $this->input->post('graduation_name');
+		$data['datawisuda'] = $this->model_laporan->periode_wisuda_by_id($date['idgrad'])->row();
         $data['years'] = $this->graduation_year();
         if($date == 0 || $date == ""){
 			$this->session->set_flashdata('message', 'Pilih tahun dan periode wisuda terlebih dahulu!');
             redirect(site_url("laporan"));
         }else{
-            $data['lo']=$this->model_laporan->seluruh_lo_mhs_by_date($date)->result();
+            $data['lo']=$this->model_laporan->seluruh_lo_mhs_by_date($date['idgrad'])->result();
         }
 		$data['content'] = 'laporan/periode_wisuda';
 		$data['meta'] = 'laporan/meta';
@@ -109,59 +112,162 @@ class Laporan extends CI_Controller {
 		$this->load->view('template/template',$data);
 	}
 
-	function hitung_quartil($date, $nim){
-		$count_lo = $this->model_laporan->show_lo()->num_rows();
-		$lo = $this->model_laporan->seluruh_lo_mhs_by_date($date)->result();
-		$rataarr = array();
-		$i = 0;
+	function export($id_grad)
+	{
+		require_once APPPATH.'libraries/PHPExcel/Classes/PHPExcel.php';	
+		require_once APPPATH.'libraries/PHPExcel/Classes/PHPExcel/Writer/Excel2007.php';
+
+		$objPHPExcel = new PHPExcel();
+		// Set properties
+		 $objPHPExcel->getProperties()
+			  ->setCreator("Universitas Pendidikan Indonesia") //creator
+				->setTitle("Laporan Learning Outcomes");  //file title 
+
+		$objset = $objPHPExcel->setActiveSheetIndex(0); //inisiasi set object
+		$objget = $objPHPExcel->getActiveSheet();  //inisiasi get object
+		$objget->setTitle('Laporan LO'); //sheet title
+		$style = array(
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+			),
+			'font' => array(
+				'bold'  => true,
+			)
+		);
+
+		$border_style= array(
+			'borders' => array(
+				'right' => array(
+					'style' => PHPExcel_Style_Border::BORDER_THICK,'color' => array(
+	'argb' => '766f6e'),)));
+
+		$cols = array("A","B","C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+
+
+		$val = $this->model_laporan->show_lo()->result();
+		//$val = array("No ","NIS","Nama","Kelas","Mata Pelajaran","Nilai");
+
+		$objset->setCellValue("A3", "No");
+		$objPHPExcel->getActiveSheet()->getStyle('A3')->applyFromArray($style);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(6);
+		$objset->setCellValue("B3", "NIM");
+		$objPHPExcel->getActiveSheet()->getStyle('B3')->applyFromArray($style);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$objset->setCellValue("C3", "Nama");
+		$objPHPExcel->getActiveSheet()->getStyle('C3')->applyFromArray($style);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+		$objset->setCellValue("D3", "Periode Wisuda");
+		$objPHPExcel->getActiveSheet()->getStyle('D3')->applyFromArray($style);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+		$objset->setCellValue("E3", "IPK");
+		$objPHPExcel->getActiveSheet()->getStyle('E3')->applyFromArray($style);
+
+		$a = 5;
+		$b_arr= array();
+		foreach($val as $value){
+			array_push($b_arr, $value->idlo);
+			$objset->setCellValue($cols[$a].'3', $value->idlo);
+			$objPHPExcel->getActiveSheet()->getStyle($cols[$a].'3')->applyFromArray($style);
+			$a++; 
+		}
+
+		$objset->setCellValue($cols[$a].'3', "Posisi Akademik");
+		$objPHPExcel->getActiveSheet()->getStyle($cols[$a].'3')->applyFromArray($style);
+		$objPHPExcel->getActiveSheet()->getColumnDimension($cols[$a])->setWidth(30);
+
+		
+		$rata_tmp = array();
+		$rata_arr = array();
+		$idcurricullum 	= $this->model_laporan->getcurriculum($this->session->userdata('idinstitution'))->row();
+		$lo				= $this->model_laporan->seluruh_lo_mhs_by_date($id_grad)->result();
+		$baris = 4;
 		foreach($lo as $d){
-			$jumlahlo = 0;
-			$j = 0;
-			$nilailo = $this->model_laporan->nilai_lo($d->nim)->result();
-			$rata2lo = array();
-			foreach($nilailo as $e){ 
-				$nilai_lo = number_format($e->nilai_lo, 2, '.', '');
-				$jumlahlo = $jumlahlo + $nilai_lo;
-				$j++;
+			$b = 0;
+			$objset->setCellValue($cols[$b].$baris, $baris-3);
+			$b++;
+			$objset->setCellValue($cols[$b].$baris, $d->nim);
+			$b++;
+			$objset->setCellValue($cols[$b].$baris, $d->name);
+			$b++;
+			$objset->setCellValue($cols[$b].$baris, $d->graduation_name);
+			$b++;
+			$objset->setCellValue($cols[$b].$baris, $d->gpa);
+			$b++;
+			$nilai_lo = $this->model_laporan->nilai_lo($d->nim, $idcurricullum->idcurriculum)->result();
+			$jumlah_lo = 0;
+			$rata2 = array();
+			$k=0;
+			for($j=0 ; $a-5>$j; $j++){ 
+				$nilailo = 0;
+				
+				if(isset($nilai_lo[$k]->idlo)){
+					if($nilai_lo[$k]->idlo == $b_arr[$j]){
+						$nilailo = number_format($nilai_lo[$k]->nilai_lo, 2, '.', '');
+						$objset->setCellValue($cols[$b].$baris, $nilailo);
+						$b++;
+						$k++;
+					}
+				}
+				array_push($rata2, $nilailo);
 			}
 			
-			$rata2lo = number_format($jumlahlo / $count_lo, 2, '.', '');
-			if($d->nim == $nim){
-				$ratarata = array($rata2lo, $i, $nim);
+			if(isset($d->gpa)){
+				$kuartil = $this->model_laporan->hitung_quartil($d->id_grad,$d->nim);
+				$objset->setCellValue($cols[$b].$baris, $kuartil);
+			}
+
+			//$objPHPExcel->getActiveSheet()->getStyle("A".$)->applyFromArray($style);
+			array_push($rata_tmp, $rata2);
+			$baris++;
+		}
+
+
+		//judul
+		$datawisuda = $this->model_laporan->periode_wisuda_by_id($id_grad)->row();
+		$objset->setCellValue("A1", "Data LO Tahun ".$datawisuda->year_graduation." ".$datawisuda->graduation_name); 
+		$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:'.$cols[$b].'1');
+		$objPHPExcel->getActiveSheet()->getStyle('A1')->applyFromArray($style);
+		
+		$objset->setCellValue("A".$baris, "Rata-Rata LO"); 
+		$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$baris.':E'.$baris);
+		$objPHPExcel->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($style);
+
+		$p=0;
+		while($p < count($val)){
+			$q = 0; $a = 0;
+			while($q < count($rata_tmp)){
+				$a = $a + $rata_tmp[$q][$p];
+				$q++;
+			}
+			if($a != 0){
+				array_push($rata_arr, number_format($a/$q, 2, '.', ''));
+				$objset->setCellValue($cols[$p+5].$baris, number_format($a/$q, 2, '.', '')); 
 			}else{
-				$ratarata = array($rata2lo, $i, 0);
+				$objset->setCellValue($cols[$p+6].$baris, ""); 
 			}
-			array_push($rataarr, $ratarata);
-			$i++;
+			$p++;
 		}
 
-		sort($rataarr);
+		
+		$objPHPExcel->getActiveSheet()->setTitle('Laporan LO');
+		
+		$objPHPExcel->setActiveSheetIndex(0);  
+		$filename = "LO_.xlsx";
+		
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+		header("Cache-Control: no-store, no-cache, must-revalidate");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		//header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-type: application/vnd.ms-excel');
+		//header('Content-Type: application/vnd.ms-excel'); //mime type
+		header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+		header('Cache-Control: max-age=0'); //no cache
 
-		if(count($rataarr) % 2 == 0){
-			$q1 = 0.25 * (count($rataarr)+2);
-			$q2 = 0.5 * ((count($rataarr)/2)+ ((count($rataarr)/2)+1));
-			$q3 = 0.75 * ((count($rataarr)+2)-1);
-		}else{
-			$q1 = 0.25 * (count($rataarr)+1);
-			$q2 = ((count($rataarr)+1)/2);
-			$q3 = 0.75 * (count($rataarr)+1);
-		}
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+//		ob_end_clean();                
+		$objWriter->save('php://output');
 
-		for($a = 0; $a < count($rataarr) ; $a++){
-			if($a <= $q1-1){
-				array_push($rataarr[$a], "Q1");
-			}else if($a<$q3-1 && $a>$q1-1){
-				array_push($rataarr[$a], "Q2");
-			}else{
-				array_push($rataarr[$a], "Q3");
-			}
-		}
-		$hasil = 0;
-		foreach($rataarr as $r){
-			if($r[2] == $nim){
-				$hasil = $r[3];
-			}
-		}
-		return $hasil;
 	}
+
 }

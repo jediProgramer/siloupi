@@ -40,18 +40,51 @@
 										<th><?php echo lang('class_generation');?></th>
 										<th><?php echo lang('idlevel');?></th>
 										<th><?php echo lang('idfaculty');?></th>
+										<th style="text-align:center"><?php echo lang('action');?></th>
 									</tr>
 								</thead>
 								<tbody>
+								<?php
+									$i = 0;										
+									foreach($data as $d)
+									{ 
+									$i++;
+								?>	
 									<tr>
-										<td><?php echo lang('nim');?></td>
-										<td><?php echo lang('idprograme');?></td>
-										<td><?php echo lang('name');?></td>
-										<td><?php echo lang('status');?></td>
-										<td><?php echo lang('class_generation');?></td>
-										<td><?php echo lang('idlevel');?></td>
-										<td><?php echo lang('idfaculty');?></td>
+									  <td><?php echo $d["nim"];?></td>
+									  <td><?php echo $d["idprograme"];?></td>
+									  <td><?php echo $d["name"];?></td>
+									  <td><?php echo $d["status"];?></td>
+									  <td><?php echo $d["class_generation"];?></td>
+									  <td><?php echo $d["idlevel"];?></td>
+									  <td><?php echo $d["idfaculty"];?></td>
+									  <td style="text-align:center">
+									  <a <?php if($roles!="1"){?>class="btn disabled"<?php }else{ ?>class="btn btn-danger btn-sm"<?php } ?> href="#" data-toggle="modal" data-target="#modal-delete-<?php echo $i;?>"><i class="fa fa-trash">&nbsp;</i><?php echo lang('delete');?></a></td>
 									</tr>
+
+									<!-- Modal -->
+									<div class="modal fade" id="modal-delete-<?php echo $i;?>" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+										<form id="deleteRoles<?php echo $i;?>">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="modalDelete"><?php echo lang('delete_menu');?></h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<?php echo lang('delete_info');?>, <?php echo $d["nim"];?> - <?php echo strip_tags($d["name"]);?> <?php echo lang('riddle');?>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo lang('close');?></button>
+													<button type="button" class="btn btn-primary delete" data-id="<?php echo $d["nim"];?>"><?php echo lang('delete');?></button>
+												</div>
+											</div>
+										</div>
+										</form>
+									</div>		
+
 									<div class="modal fade" id="modal-api" tabindex="-1" role="dialog" aria-labelledby="modalApi" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
 											<div class="modal-content">
@@ -72,6 +105,10 @@
 											</div>
 										</div>
 									</div>		
+
+								<?php
+									}
+								?>
 								</tbody>
 							</table>
 						</div>

@@ -3,7 +3,7 @@
 			<div class="col-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-						<h5 class="float-left"><?php echo $datawisuda->graduation_name." Tahun ".$datawisuda->year_graduation; ?></h5>
+						<h5 class="float-left"><?php echo $datawisuda; ?></h5>
 						<a class="btn btn-success float-right" style="margin-bottom:10px;" href="<?php echo site_url('laporan/export/'.$idgrad); ?>"><i class="fas fa-print"></i> Export XLS</a>
                     </div>
                     <div class="card-body">

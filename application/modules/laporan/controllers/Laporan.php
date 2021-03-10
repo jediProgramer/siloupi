@@ -10,11 +10,11 @@ class Laporan extends CI_Controller {
 			redirect(base_url('auth'));
 		}
 
-		$this->autoloader_psr4->register();
-		$this->autoloader_psr4->addNamespace('Psr\SimpleCache', APPPATH . 'third_party/SimpleCache');
-		$this->autoloader_psr4->addNamespace('MyCLabs\Enum', APPPATH . 'third_party/MyCLabs');
-		$this->autoloader_psr4->addNamespace('ZipStream', APPPATH . 'third_party/ZipStream');
-		$this->autoloader_psr4->addNamespace('PhpOffice\PhpSpreadsheet', APPPATH . 'third_party/PhpSpreadsheet');
+		// $this->autoloader_psr4->register();
+		// $this->autoloader_psr4->addNamespace('Psr\SimpleCache', APPPATH . 'third_party/SimpleCache');
+		// $this->autoloader_psr4->addNamespace('MyCLabs\Enum', APPPATH . 'third_party/MyCLabs');
+		// $this->autoloader_psr4->addNamespace('ZipStream', APPPATH . 'third_party/ZipStream');
+		// $this->autoloader_psr4->addNamespace('PhpOffice\PhpSpreadsheet', APPPATH . 'third_party/PhpSpreadsheet');
 		
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->helper(array('form','url'));
@@ -69,8 +69,9 @@ class Laporan extends CI_Controller {
 		$show.="<option value='0'>".lang('graduate_name')."</option>";
 		foreach($graduation_date as $d)
 		{
-            $show.="<option value='$d->idgraduation'>$d->graduation_name</option>";
+			$show.="<option value='$d->idgraduation'>$d->graduation_name</option>";
 		}
+		$show.="<option value='0'>Seluruh Periode Wisuda</option>";
 		$show.="</select>";	
 		echo $show;
     }
@@ -102,15 +103,20 @@ class Laporan extends CI_Controller {
 		$data['datauser']=$this->model_siloupi->ambildataById($this->db->dbprefix('users'),'idusers',$data['idusers']);
 		$data['show_lo']=$this->model_laporan->show_lo()->result();
         $date['idgrad'] = $this->input->post('graduation_name');
+        $date['dategrad'] = $this->input->post('graduation_date');
         $data['idgrad'] = $this->input->post('graduation_name');
-		$data['datawisuda'] = $this->model_laporan->periode_wisuda_by_id($date['idgrad'])->row();
         $data['years'] = $this->graduation_year();
-        if($date == 0 || $date == ""){
+        if($date['dategrad'] == 0 || $date['dategrad'] == ""){
 			$this->session->set_flashdata('message', 'Pilih tahun dan periode wisuda terlebih dahulu!');
             redirect(site_url("laporan"));
+        }else if($date['idgrad'] == 0 || $date['idgrad'] == "") {
+			$data['datawisuda'] = "Wisuda Seluruh Gelombang Tahun ".$date['dategrad'];
+			$data['lo']=$this->model_laporan->seluruh_lo_mhs_by_year($date['dategrad'])->result();
         }else{
-            $data['lo']=$this->model_laporan->seluruh_lo_mhs_by_date($date['idgrad'])->result();
-        }
+			$datawisuda = $this->model_laporan->periode_wisuda_by_id($date['idgrad'])->row();
+			$data['datawisuda'] = $datawisuda->graduation_name." Tahun ".$datawisuda->year_graduation;
+            $data['lo']=$this->model_laporan->seluruh_lo_mhs_by_id($date['idgrad'])->result();
+		}
 		$data['content'] = 'laporan/periode_wisuda';
 		$data['meta'] = 'laporan/meta';
 		$data['css'] = 'laporan/css';

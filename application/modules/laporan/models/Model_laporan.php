@@ -33,10 +33,17 @@
 			return $query;
 		}
 
-		public function seluruh_lo_mhs_by_date($id_grad)
+		public function seluruh_lo_mhs_by_id($id_grad)
 		{
 			$id_user = $this->session->userdata('idinstitution');
 			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where a.id_grad = '$id_grad' and a.id_grad = b.idgraduation and idprograme = '$id_user'");
+			return $query;
+		}
+
+		public function seluruh_lo_mhs_by_year($year)
+		{
+			$id_user = $this->session->userdata('idinstitution');
+			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where b.year_graduation = '$year' and a.id_grad = b.idgraduation and idprograme = '$id_user'");
 			return $query;
 		}
 		

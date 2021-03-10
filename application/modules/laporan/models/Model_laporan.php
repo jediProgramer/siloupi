@@ -36,14 +36,14 @@
 		public function seluruh_lo_mhs_by_id($id_grad)
 		{
 			$id_user = $this->session->userdata('idinstitution');
-			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where a.id_grad = '$id_grad' and a.id_grad = b.idgraduation and idprograme = '$id_user'");
+			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where a.id_grad = '$id_grad' and a.id_grad = b.idgraduation and idprograme = '$id_user' ORDER BY a.gpa DESC");
 			return $query;
 		}
 
 		public function seluruh_lo_mhs_by_year($year)
 		{
 			$id_user = $this->session->userdata('idinstitution');
-			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where b.year_graduation = '$year' and a.id_grad = b.idgraduation and idprograme = '$id_user'");
+			$query=$this->db->query("select a.*,b.graduation_name  from siloupi_student a, siloupi_graduation_period b where b.year_graduation = '$year' and a.id_grad = b.idgraduation and idprograme = '$id_user' ORDER BY a.gpa DESC");
 			return $query;
 		}
 		
@@ -69,7 +69,7 @@
 		}
 
 		function hitung_quartil($date, $nim){
-			$lo = $this->model_laporan->seluruh_lo_mhs_by_date($date)->result();
+			$lo = $this->model_laporan->seluruh_lo_mhs_by_id($date)->result();
 			$rataarr = array();
 			$i = 0;
 			foreach($lo as $d){
@@ -79,31 +79,51 @@
 			}
 
 			sort($rataarr);
+
+			$arrlength = count($rataarr);
+			$rank = 1;
+			$prev_rank = $rank;
 			
-			if(count($rataarr) % 2 == 0){
-				$q1 = 0.25 * (count($rataarr)+2);
-				$q2 = 0.5 * ((count($rataarr)/2)+ ((count($rataarr)/2)+1));
-				$q3 = 0.75 * ((count($rataarr)+2)-1);
+			if($arrlength % 2 == 0){
+				$q1 = 0.25 * ($arrlength + 2);
+				$q2 = 0.5 * (($arrlength / 2)+ (($arrlength / 2) + 1));
+				$q3 = 0.75 * (($arrlength +2) - 1 );
 			}else{
-				$q1 = 0.25 * (count($rataarr)+1);
-				$q2 = ((count($rataarr)+1)/2);
-				$q3 = 0.75 * (count($rataarr)+1);
+				$q1 = 0.25 * (count($rataarr) + 1);
+				$q2 = (($arrlength+1)/2);
+				$q3 = 0.75 * ($arrlength + 1);
 			}
 
-			for($a = 0; $a < count($rataarr) ; $a++){
-				if($a <= $q1-1){
-					array_push($rataarr[$a], "Q1");
-				}else if($a<$q3-1 && $a>$q1-1){
-					array_push($rataarr[$a], "Q2");
+			for($a = 0; $a < $arrlength ; $a++){
+				if($a > $q3-1){
+					array_push($rataarr[$a], "R4 (".$rataarr[floor($q3)][0]." - 4)");
+				}else if($a<=$q3-1 && $a>$q2-1){
+					array_push($rataarr[$a], "R3 (".$rataarr[floor($q2)][0]." - ".$rataarr[floor($q3)][0].")");
+				}else if($a<=$q2-1 && $a>$q1-1){
+					array_push($rataarr[$a], "R2 (".$rataarr[floor($q1)][0]." - ".$rataarr[floor($q2)][0].")");
 				}else{
-					array_push($rataarr[$a], "Q3");
+					array_push($rataarr[$a], "R1 (0 - ".$rataarr[floor($q1)][0].")");
 				}
 			}
 
-			$hasil = 0;
+			rsort($rataarr);
+			
+			for($x = 0; $x < $arrlength; $x++) {
+				if ($x==0) {
+					array_push($rataarr[$x], ($rank) ."/". $arrlength);
+				}else if ($rataarr[$x][0] != $rataarr[$x-1][0]) {
+					$rank++;
+					$prev_rank = $rank;
+					array_push($rataarr[$x], ($rank) ."/". $arrlength);
+				}else{
+					array_push($rataarr[$x], ($rank) ."/". $arrlength);
+				}
+			}
+
+			$hasil = array();
 			foreach($rataarr as $r){
 				if($r[2] == $nim){
-					$hasil = $r[3];
+					array_push($hasil, $r[3], $r[4]);
 				}
 			}
 

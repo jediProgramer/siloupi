@@ -4,7 +4,11 @@
                 <div class="card">
                     <div class="card-header">
 						<h5 class="float-left"><?php echo $datawisuda; ?></h5>
+						<?php if($jenis == 'periode'){ ?>
 						<a class="btn btn-success float-right" style="margin-bottom:10px;" href="<?php echo site_url('laporan/export/'.$idgrad); ?>"><i class="fas fa-print"></i> Export XLS</a>
+						<?php }else{ ?>
+						<a class="btn btn-success float-right" style="margin-bottom:10px;" href="<?php echo site_url('laporan/export_seluruh/'.$dategrad); ?>"><i class="fas fa-print"></i> Export XLS</a>
+						<?php } ?>
                     </div>
                     <div class="card-body">
 						
@@ -25,10 +29,11 @@
 										<?php 
 											array_push($b, $d->idlo);
 											echo $d->idlo; 
-										?>
+											?>
 										</th>
 										<?php $a++; } ?>
 										<th>Posisi Akademik</th>
+										<th>Ranking</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -43,7 +48,12 @@
 										<td><?php echo $d->nim; ?></td>
 										<td><?php echo $d->name; ?></td>
 										<td><?php echo $d->graduation_name; ?></td>
-										<td><?php echo $d->gpa; ?></td>
+										<td>
+											<?php
+												$ipk = $d->gpa;  
+												echo $d->gpa; 
+											?>
+										</td>
 										<?php 
 										$nilai_lo = $this->model_laporan->nilai_lo($d->nim, $idcurricullum->idcurriculum)->result();
 										$jumlah_lo = 0;
@@ -74,11 +84,21 @@
 										// 	$j++;
 										// }
 										?>
-										<td><?php
-											if(isset($d->gpa)){
-												echo $this->model_laporan->hitung_quartil($d->id_grad,$d->nim);
-											}
-											?></td>
+										<td>
+											<?php
+												if(isset($d->gpa)){
+													$kuartil_rank = $this->model_laporan->hitung_quartil($d->id_grad,$d->nim);
+													echo $kuartil_rank[0];
+												}
+												?>
+										</td>
+										<td>
+											<?php
+												if(isset($d->gpa)){
+													echo $kuartil_rank[1];
+												}
+											?>
+										</td>
 									</tr>
                                 <?php 
 								array_push($rata_tmp, $rata2);

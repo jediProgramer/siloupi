@@ -34,7 +34,7 @@
 												<?php
 												//Query Courses Category
 												$i=0;
-												$querycc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursescategory')." WHERE idcurriculum='".$idcurriculum."' ORDER BY idcurriculum");
+												$querycc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursescategory')." WHERE idcurriculum='".$idcurriculum."' ORDER BY weigth ASC");
 												$datacc=$querycc->result();
 												foreach ($datacc as $dcc)
 												{
@@ -113,7 +113,7 @@
 													</tr> 
 												<?php
 													//Cek Sub Category
-													$querycsc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursessubcategory')." WHERE idcoursescategory='$dcc->idcoursescategory' AND idcurriculum='".$idcurriculum."' ORDER BY idcoursessubcategory");
+													$querycsc = $this->db->query("SELECT * FROM ".$this->db->dbprefix('coursessubcategory')." WHERE idcoursescategory='$dcc->idcoursescategory' AND idcurriculum='".$idcurriculum."' ORDER BY weigth");
 													if ($querycsc->num_rows() >= 1)
 													{
 														//Query Sub Category

@@ -72,11 +72,9 @@
 														$k++;
 													}else{
 														echo 0;
-														$k++;
 													}
 												}else{
 													echo 0;
-													$k++;
 												}
 												?>
 										</td>

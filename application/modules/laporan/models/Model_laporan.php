@@ -83,26 +83,33 @@
 			$arrlength = count($rataarr);
 			$rank = 1;
 			$prev_rank = $rank;
-			
-			if($arrlength % 2 == 0){
-				$q1 = 0.25 * ($arrlength + 2);
-				$q2 = 0.5 * (($arrlength / 2)+ (($arrlength / 2) + 1));
-				$q3 = 0.75 * (($arrlength +2) - 1 );
-			}else{
-				$q1 = 0.25 * (count($rataarr) + 1);
-				$q2 = (($arrlength+1)/2);
-				$q3 = 0.75 * ($arrlength + 1);
-			}
 
-			for($a = 0; $a < $arrlength ; $a++){
-				if($a > $q3-1){
-					array_push($rataarr[$a], "R4 (".$rataarr[floor($q3)][0]." - 4)");
-				}else if($a<=$q3-1 && $a>$q2-1){
-					array_push($rataarr[$a], "R3 (".$rataarr[floor($q2)][0]." - ".$rataarr[floor($q3)][0].")");
-				}else if($a<=$q2-1 && $a>$q1-1){
-					array_push($rataarr[$a], "R2 (".$rataarr[floor($q1)][0]." - ".$rataarr[floor($q2)][0].")");
+			// Mengganti Fungsi Jika > 4, Jika < 4, tidak hitung kuartil
+			if($arrlength > 4){
+				if($arrlength % 2 == 0){
+					$q1 = 0.25 * ($arrlength + 2);
+					$q2 = 0.5 * (($arrlength / 2)+ (($arrlength / 2) + 1));
+					$q3 = 0.75 * (($arrlength +2) - 1 );
 				}else{
-					array_push($rataarr[$a], "R1 (0 - ".$rataarr[floor($q1)][0].")");
+					$q1 = 0.25 * (count($rataarr) + 1);
+					$q2 = (($arrlength+1)/2);
+					$q3 = 0.75 * ($arrlength + 1);
+				}
+	
+				for($a = 0; $a < $arrlength ; $a++){
+					if($a > $q3-1){
+						array_push($rataarr[$a], "R4 (".$rataarr[floor($q3)][0]." - 4)");
+					}else if($a<=$q3-1 && $a>$q2-1){
+						array_push($rataarr[$a], "R3 (".$rataarr[floor($q2)][0]." - ".$rataarr[floor($q3)][0].")");
+					}else if($a<=$q2-1 && $a>$q1-1){
+						array_push($rataarr[$a], "R2 (".$rataarr[floor($q1)][0]." - ".$rataarr[floor($q2)][0].")");
+					}else{
+						array_push($rataarr[$a], "R1 (0 - ".$rataarr[floor($q1)][0].")");
+					}
+				}
+			}else{
+				for($a = 0; $a < $arrlength ; $a++){
+					array_push($rataarr[$a], "R (0 - 4)");
 				}
 			}
 

@@ -71,6 +71,8 @@
 														echo $nilailo;
 														$k++;
 													}
+												}else{
+													echo 0;
 												}
 												?>
 										</td>

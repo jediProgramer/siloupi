@@ -2,11 +2,20 @@
 //Indonesia
 $lang['apps_name'] = 'SILO';
 $lang['website_name'] = 'Sistem Informasi Learning Outcomes UPI';
+$lang['website_title_hallo'] = 'Selamat Datang di Sistem Informasi Learning Outcomes FPMIPA UPI. Sistem Informasi ini diharapkan dapat memonitor capaian pembelajaran oleh peserta didik setelah menyelesaikan suatu periode belajar.';
+$lang['about'] = 'Tentang';
+$lang['about_apps'] = 'Sistem Informasi Learning Outcomes UPI, adalah Sistem Informasi yang dirancang untuk memonitoring capaian pembelajaran Mahasiswa di Program Studi tertentu. Berdasarkan pemetaan Learning Outcomes terhadap Kurikulum.';
+$lang['faq'] = 'FAQ';
+$lang['faq_apps'] = 'Hubungi Kami Melalui';
+$lang['helpdesk1'] = 'Helpdesk 1';
+$lang['helpdesk2'] = 'Helpdesk 2';
+$lang['no_helpdesk1'] = '6281321397362';
+$lang['no_helpdesk2'] = '6283821949586';
 $lang['nip'] = 'NIP';
 $lang['password'] = 'Password';
 $lang['entry_nip'] = 'Masukan NIP';
 $lang['entry_password'] = 'Masukan password';
-$lang['login'] = 'Masuk';
+$lang['login'] = 'Login';
 $lang['remember_me'] = 'Simpan data Akun';
 $lang['dont_have_account'] = 'Belum memiliki akun?';
 $lang['create_account'] = 'Buat Akun';

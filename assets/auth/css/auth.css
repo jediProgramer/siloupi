@@ -1,0 +1,49 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* || Navbar */
+.nav-item {
+  font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.btn-siloupi {
+    background-color: #283079;
+    border-color: transparent;
+    color: #fff;
+}
+
+.btn-siloupi:hover, .btn-siloupi:focus, .btn-siloupi:active {
+    background-color: #3b45a8;
+    border-color: transparent;
+    color: #fff;
+}
+
+.required-label:after { 
+   content:"*";
+   color:red;
+}
+
+/* || Jumbotron */
+@media screen and (min-width: 992px) {
+  .jumbotron {
+    margin-bottom: 0;
+    height: calc(100vh - 57.69px);
+    display: flex;
+    align-items: center;
+    background-image: url(../img/jumbotron-bg.png);
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .jumbotron h1 {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-top: 2rem;
+  }
+}

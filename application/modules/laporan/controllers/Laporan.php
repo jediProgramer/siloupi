@@ -212,6 +212,8 @@ class Laporan extends CI_Controller {
 					}
 				}else{
 					$objset->setCellValue($cols[$b].$baris, 0);
+					$b++;
+					$k++;
 				}
 				array_push($rata2, $nilailo);
 			}
@@ -362,6 +364,8 @@ class Laporan extends CI_Controller {
 					}
 				}else{
 					$objset->setCellValue($cols[$b].$baris, 0);
+					$b++;
+					$k++;
 				}
 				array_push($rata2, $nilailo);
 			}

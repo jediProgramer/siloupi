@@ -70,6 +70,9 @@
 														$nilailo = number_format($nilai_lo[$k]->nilai_lo, 2, '.', '');
 														echo $nilailo;
 														$k++;
+													}else{
+														echo 0;
+														$k++;
 													}
 												}else{
 													echo 0;

@@ -149,7 +149,7 @@
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> <?php echo lang('remember_me');?></label>
     </div>
-    <button type="submit" class="btn btn-siloupi font-weight-bold px-3 py-2 btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> <?php echo lang('login');?></button>
+    <button type="submit" class="btn btn-siloupi btn-lg font-weight-bold px-3 py-2 btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> <?php echo lang('login');?></button>
   </form>  
           </div>
         </div>

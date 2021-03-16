@@ -209,6 +209,10 @@ class Laporan extends CI_Controller {
 						$objset->setCellValue($cols[$b].$baris, $nilailo);
 						$b++;
 						$k++;
+					}else{
+						$objset->setCellValue($cols[$b].$baris, 0);
+						$b++;
+						$k++;
 					}
 				}else{
 					$objset->setCellValue($cols[$b].$baris, 0);
@@ -359,6 +363,10 @@ class Laporan extends CI_Controller {
 					if($nilai_lo[$k]->idlo == $b_arr[$j]){
 						$nilailo = number_format($nilai_lo[$k]->nilai_lo, 2, '.', '');
 						$objset->setCellValue($cols[$b].$baris, $nilailo);
+						$b++;
+						$k++;
+					}else{
+						$objset->setCellValue($cols[$b].$baris, 0);
 						$b++;
 						$k++;
 					}

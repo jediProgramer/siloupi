@@ -65,6 +65,9 @@
 									  <td><?php echo $d["curriculum"];?></td>
 									  <td style="text-align:center">
 									  <a <?php if(($totallo!=0) && ($totalcourses!=0)){ ?>class="btn btn-primary btn-sm"<?php }else{ ?>class="btn disabled"<?php } ?> href="<?php echo base_url()?>entrydata/addmappingplo/<?php echo $d["idcurriculum"];?>"><i class="fas fa-map">&nbsp;</i><?php echo lang('mapping');?></a> &nbsp; 
+									  <!-- export xls  -->
+									<a class="btn btn-success btn-sm float-right" style="margin-bottom:10px;" href="<?php echo site_url('entrydata/export_mappingplo/'. $d["idcurriculum"]); ?>"><i class="fas fa-print"></i> Export XLS</a>  
+									<!-- title  -->
 									</tr>
 									
 								<?php

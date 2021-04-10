@@ -18,10 +18,12 @@
 
 		<!-- START: Card Data-->
 		<div class="row">
-			
 			<div class="col-12 mt-3">
-                        <div class="card">
-                            <div class="card-header">                               
+						<div class="card">
+						<div class="card-header">
+								<!-- export xls  -->
+								<a class="btn btn-success float-right" style="margin-bottom:10px;" href="<?php echo site_url('entrydata/export_mappingplo/'.$idcurriculum); ?>"><i class="fas fa-print"></i> Export XLS</a>  
+								<!-- title  -->
                                 <h4 class="card-title"><?php echo $menuname;?></h4>                                
                             </div>
                             <div class="card-content">
